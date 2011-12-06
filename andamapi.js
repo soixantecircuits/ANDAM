@@ -1,4 +1,4 @@
-// Soixante circuits 2011
+//(c) Soixante circuits 2011
 
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
@@ -17,7 +17,7 @@ $(function(){
     // Reference to this collection's model.
     model: Tweet,
 
-    url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=ANDAMaward&count=5",
+    url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=ANDAMaward&count=20",
     
     sync: function(method, model, options){  
         options.timeout = 10000;  
@@ -45,7 +45,49 @@ $(function(){
 
     // Re-render the contents of the todo item.
     render: function() {
-      $(this.el).html(this.template.tmpl(this.model.toJSON()));
+      Handlebars.registerHelper('prettydate', function(date) {
+            if (date) {
+              //var date = block.contexts[0].getPath(path);
+              //var attrs = block.hash;
+              var format = "%c";
+
+              // if a format is provided, use it.
+              //if (attrs && attrs.format) {
+                //format = attrs.format;
+              //}
+              var oDate =  moment(date);
+              moment.lang('fr');
+              return moment(oDate).format("D MMM");
+              // make sure the date is of type SC.DateTime
+              /*
+              if (date && SC.kindOf(date,SC.DateTime)) {
+                return date.toFormattedString(format);
+              } else if (SC.none(date)) {
+                console.log('date helper is expecting a SC.DateTime object, Null or undefined');
+              } else {
+                console.log('date helper is expecting a SC.DateTime object', date);
+              }
+              */
+            }
+            return "";
+      });
+
+ 
+      var srctmpl =  "<div class='tweet'>\
+                        <div class='date'>\
+                          {{prettydate created_at}}\
+                        </div>\
+                        <div class='username'>\
+                             {{retweeted_status.user.screen_name}}\
+                             {{^retweeted_status.user.screen_name}}\
+                                {{user.screen_name}}\
+                             {{/retweeted_status.user.screen_name}}\
+                        </div>\
+                        <div class='message'>{{text}}</div>\
+                        <div class='url'>{{#entities.urls}}{{url}}{{/entities.urls}}</div>\
+                      </div>";
+      var templateTw = Handlebars.compile(srctmpl);
+      $(this.el).html(templateTw(this.model.toJSON()));
       return this;
     }
 
