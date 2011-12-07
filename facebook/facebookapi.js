@@ -6,9 +6,9 @@ $(function(){
   // Setup
     
   moment.lang('fr');
-  Handlebars.registerHelper('prettydate', function(date) {
+  Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
-              return moment(moment(date)).format("D MMM");
+              return moment(moment(date)).format("dddd d MMMM, HH:mm");
             }
             return "";
   });
@@ -16,57 +16,59 @@ $(function(){
   // Template
   // --------
   
-  var srctmpl =  "<div class='tweet'>\
+  var srctmpl =  "<div class='post'>\
                         <div class='date'>\
-                          {{prettydate created_at}}\
+                          {{prettydatefb created_time}}\
                         </div>\
-                        <div class='username'>\
-                             {{retweeted_status.user.screen_name}}\
-                             {{^retweeted_status.user.screen_name}}\
-                                {{user.screen_name}}\
-                             {{/retweeted_status.user.screen_name}}\
+                        <div class='story'>\
+                             {{story}}\
                         </div>\
-                        <div class='message'>{{text}}</div>\
-                        <div class='url'>{{#entities.urls}}{{url}}{{/entities.urls}}</div>\
+                        <div class='link'>{{caption}}</div>\
+                        <div class='title'>{{name}}</div>\
+                        <div class='description'>{{description}}</div>\
+                        <div class='likes'>{{#likes.data}}{{name}}, {{/likes.data}} aiment &ccedil;a</div>\
+                        <div class='action'>J\'aime * Commenter</div>\
                       </div>";
-  window.tmplTwitter = Handlebars.compile(srctmpl);
+  window.tmplFacebook = Handlebars.compile(srctmpl);
      
   
   //  Model
   // ----------
 
-  window.Tweet = Backbone.Model.extend({
+  window.Post = Backbone.Model.extend({
   });
 
   //  Collection
   // ---------------
 
-  window.Timeline = Backbone.Collection.extend({
+  window.Feed = Backbone.Collection.extend({
 
-    model: Tweet,
+    model: Post,
 
-    url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=ANDAMaward&count=20",
+    url: "https://graph.facebook.com/ANDAMFashionAwards/feed?access_token=AAAEPx4ZBt6T4BAPVb4u61KVfDoLuiIX5oSCeTaEeama22clBLxZBA2gHyHwPI1KeaZBTedDf8Il7g15huwbl01DF2CMOvAV4ZC0lUfLvSwZDZD",
     
     sync: function(method, model, options){  
         options.timeout = 10000;  
         options.dataType = "jsonp";  
         return Backbone.sync(method, model, options);  
+    },
+    parse: function(response) {
+      return response.data;
     }
-
   });
 
   // View
   // --------------
 
   // The DOM element for a todo item...
-  window.TweetView = Backbone.View.extend({
+  window.PostView = Backbone.View.extend({
 
     initialize: function() {
       this.model.bind('change', this.render, this);
     },
 
     render: function() {
-      $(this.el).html(window.tmplTwitter(this.model.toJSON()));
+      $(this.el).html(window.tmplFacebook(this.model.toJSON()));
       return this;
     }
 
@@ -76,7 +78,7 @@ $(function(){
   // ---------------
 
   // Create our global collection.
-  window.timeline = new Timeline;
+  window.feed = new Feed;
   
   // Our overall **AppView** is the top-level piece of UI.
   window.AppView = Backbone.View.extend({
@@ -86,21 +88,21 @@ $(function(){
     el: $("#andamapp"),
 
     initialize: function() {
-      timeline.bind('add',   this.addOne, this);
-      timeline.bind('all',   this.addAll, this);
-      timeline.fetch();
+      feed.bind('add',   this.addOne, this);
+      feed.bind('all',   this.addAll, this);
+      feed.fetch();
     },
 
     // Add a single tweet item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
-    addOne: function(tweet) {
-      var view = new TweetView({model: tweet});
+    addOne: function(post) {
+      var view = new PostView({model: post});
       this.$("#facebook").append(view.render().el);
     },
 
     // Add all items in the collection at once.
     addAll: function() {
-      timeline.each(this.addOne);
+      feed.each(this.addOne);
     }
 
   });
