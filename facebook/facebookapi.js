@@ -26,6 +26,7 @@ $(function(){
                         <div class='link'>{{caption}}</div>\
                         <div class='title'>{{name}}</div>\
                         <div class='description'>{{description}}</div>\
+                        <img class='bg' alt='' src='{{picture}}'>\
                         <div class='likes'>{{#likes.data}}{{name}}, {{/likes.data}} aiment &ccedil;a</div>\
                         <div class='action'>J\'aime * Commenter</div>\
                       </div>";
