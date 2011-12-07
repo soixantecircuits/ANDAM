@@ -1,0 +1,65 @@
+<? global $wp_media_access;?>
+<h4>Indiquez les références du produit :</h4>
+<div class="meta-content">
+ 
+<?php while($mb->have_fields_and_multi('blocs')): ?>
+<?php $mb->the_group_open(); ?>
+
+<!-- choisir l'image -->	
+	<? $mb->the_field('image');?>
+	<? $wp_media_access->setGroupName('img-n'. $mb->get_the_index())->setInsertButtonLabel('Inserer')->setTab('library'); ?>
+	<!-- vignette preview -->
+	
+	<div class="block" style="height:80px; margin:0 0 10px 0">
+	<div style="clear:both; float:left" class="preview">
+		<?
+		$file_id = $mb->get_the_value();
+	$image_thumbnail = @wp_get_attachment_image_src( $file_id, 'thumbnail', true );
+	$image_thumbnail = @$image_thumbnail[0];
+	$image_html = "<img src='$image_thumbnail' style='overflow:hidden' width='80' height='80' alt='' />";
+	echo @$image_html;
+	?>
+	</div>
+	<!-- champ texte contenant l'id de l'image-->
+	<div class="block" style="display:none">
+		<? echo $wp_media_access->getField(array('name'=> $mb->get_the_name(), 'value'=> $mb->get_the_value())); ?>
+	</div>
+	<!-- bouton ajouter image -->	
+	<? echo $wp_media_access->getButton(array('text'=> 'Choisir une image')); ?>
+	<!-- nom de l'image -->
+	<p>
+	<span id="pic_name"><em><? if(!empty($file_id)) echo get_the_title($mb->get_the_value());?></em></span>
+	</p>
+	</div>
+
+<!-- selectbox contenant les termes de taxonomies de couleur -->
+	<?php $mb->the_field('my_categorie'); ?>
+	<div class="block"><strong>Catégorie</strong>
+<select name='<?php $mb->the_name(); ?>'>
+    <?php 
+        $couleurs = get_terms('catprojet', 'hide_empty=0');
+        ?>
+        <option class='cat-option' value='' 
+        <?php if (!count($couleurs)) echo "selected";?>>None</option>
+        <?php
+	foreach ($couleurs as $couleur) {
+		
+		if ($mb->is_value($couleur->term_id)) {
+			echo "<option class='theme-option' value='" . $couleur->term_id . "' selected>" . $couleur->name . "</option>\n"; 
+		} else {
+			echo "<option class='theme-option' value='" . $couleur->term_id . "'>" . $couleur->name . "</option>\n"; 
+		}
+	}
+   ?>
+</select>		
+	</div>		
+
+	<div class="block"><a href="#" class="dodelete button">Supprimer</a></div>
+
+ 	<hr>
+ 	
+<?php $mb->the_group_close(); ?>
+<?php endwhile; ?>
+ 
+<p><a href="#" class="docopy-blocs button">Ajouter une Référence</a></p>
+</div>

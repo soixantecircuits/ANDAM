@@ -1,0 +1,10 @@
+#simple-fields-post-edit-side-field-settings, .update-nag {
+	display: none;
+}
+
+#adminmenu {position:fixed;}
+#side-info-column {position:fixed; right: 15px;}
+
+#toplevel_page_ws-plugin--qcache-options, tr.post_excerpt, #tarification-adder, .wp-menu-separator, #toplevel_page_edit-post_type-products-lang-fr, #toplevel_page_edit-post_type-products-lang-en, .category-tabs, #typestore-adder, #sources-adder,#labels-adder, #typologies-adder, #postimagediv, h2 a[href='post-new.php?post_type=page'], #edButtonHTML, #ed_toolbar, #screen-options-wrap, label[for='parent'], select#parent, .media-upload-form .image-size, .media-upload-form .url, .media-upload-form .image_alt, .media-upload-form .post_content, .media-upload-form .align,.row-actions span.inline, .page #submitdelete, #screen-options-link-wrap, #titlediv, #misc-publishing-actions, #dashboard_recent_comments, #dashboard_right_now, #dashboard_quick_press, #dashboard_primary, #dashboard_secondary, #dashboard_recent_drafts,#dashboard_incoming_links, #postcustom, #commentstatusdiv, #authordiv, #revisionsdiv, #commentsdiv, #pageparentdiv, #simple-fields-post-edit-side-field-settings,#media-buttons, #edButtonPreview, #contextual-help-link-wrap, #favorite-first, #favorite-toggle, #visibility, #delete-action{
+	display: none;
+}

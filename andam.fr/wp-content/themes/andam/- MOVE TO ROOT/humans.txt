@@ -1,0 +1,32 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+	Web Design: vacuumRandom (M. Fournier & G. Samson)
+	Site: vacuumrandom.com
+	Contact: contact [at] vacuumrandom.com
+	Twitter: @vacuumrandom
+	Location: Brussels, Belgium
+
+/* THANKS */
+	Paul Irish (html5boilerplate.com)
+
+/* SITE */
+	Standards: HTML5, CSS3, JavaScript
+	Components: WordPress, Modernizr, jQuery
+	Software: TextMate
+	Font : 
+  
+
+                                                                     MMMMMMM:                               MMM                          
+                                                                     MMMMMMMMM                              MMM                          
+                                                                     MMM   MMM                              MMM                          
+                                                                     MMM   MMM                              MMM                          
+ ,MM     MMMMMMMMMM     MMMMM  MMM   MMM  MMM  MMM   MMMMMM MMMMMM   MMMMMMMM     MMMMMM   MMMMMMMM    MMMMMMMM   MMMMMMMMMM:MMMMM:MMMMMM
+  MMM    MM       MM8  MMM     MMM   MMM  MMM  MMM  MMMMMMMMMMMMMM~  MMMMMMMMM        MMM  MMMMMMMMM  MMMMMMMMM  MMMMMMMMMMMMMMMMMMMMMMMM
+   MMM  MMM MMMMMMMMM  MMO     MMM   MMM  MMM  MMM  MMM   MMM   MM7  MMM   MMM   MMMMMMMM  MMM   MMM  MMM   MMM  MMM   MMM  MMM  MMM   MM
+    MMMMMM  MM   8MMM  MMM    MMMM   MMM  MMM  MMM, MMM   MMM   MMM  MMM   MMM   MM   MMM  MMM   MMM  MMM   MMM  MMM   MMM  MMM  MMM   MM
+    ,MMMM   8MMMMMMMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMMMMM   MMM   MMMMMMMM   :MMMMMMMMMMMMMMMMMM   MMMMMMMMMMMMMMMMMMMMMMMM   MMM  MMM   MM
+      O7      8MMM   MO  MMMM    DMMM$  MO  MMMM   MMMM   MMM     MMMMMM     IMMMMMMMMM  IMMMM     MMMO ?MMMMMMMO  NMMMI    MMM  MMM   MM
+                                                                                                                                         
+     ================== WEBDESIGN FOCUSED ON ART AND CULTURAL PROJECTS | FIND US AT WWW[dot]VACUUMRANDOM[dot]COM ========================

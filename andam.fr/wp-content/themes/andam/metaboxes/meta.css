@@ -1,0 +1,83 @@
+.my_meta_control .description
+{ display:none; }
+ 
+.my_meta_control label
+{ display:block; font-weight:bold; margin:6px; margin-bottom:0; margin-top:12px; }
+ 
+.my_meta_control label span
+{ display:inline; font-weight:normal; }
+ 
+.my_meta_control span
+{ color:#999; display:block; }
+ 
+.my_meta_control textarea, .my_meta_control input[type='text']
+{ margin-bottom:3px; width:99%; }
+ 
+.my_meta_control h4
+{ color:#999; font-size:1em; margin:15px 6px; text-transform:uppercase; }
+
+/* custom editor styles */
+ 
+.my_meta_control .customEditor
+{ border:1px solid #ccc; }
+ 
+.my_meta_control .customEditor textarea
+{ border:0; }
+ 
+#post-body .my_meta_control .customEditor .mceStatusbar a.mceResize
+{ top:-2px; }
+ 
+/* extra styles used in other WPAlchemy meta boxes */
+ 
+.my_meta_control .description
+{ display:none; }
+ 
+.my_meta_control label
+{ display:block; font-weight:bold; margin:6px; margin-bottom:0; margin-top:12px; }
+ 
+.my_meta_control label span
+{ display:inline; font-weight:normal; }
+ 
+.my_meta_control span
+{ color:#999; }
+ 
+.my_meta_control textarea, .my_meta_control input[type='text']
+{ margin-bottom:3px; width:99%; }
+ 
+.my_meta_control h4
+{ color:#999; font-size:1em; margin:15px 6px; text-transform:uppercase; }
+/* CUSTOM */
+.wpa_group {
+	background-color: #f9f9f9;
+}
+.meta-content div.block, hr{
+	clear:both;
+	margin:6px 0 6px 0;
+}
+
+.meta-content {
+	padding: 5px;
+}
+
+.preview {
+	display: block;
+	margin: 0 6px 10px 0;
+}
+
+hr {
+  border: 0 #ccc solid;
+  border-top-width: 1px;
+  clear: both;
+  margin: 18px 0 18px 0;
+  height: 0;
+}
+
+a.dodelete {
+	float: right;
+	margin-bottom: 10px;
+}
+
+#editor_en {
+	display: none;
+}
+
