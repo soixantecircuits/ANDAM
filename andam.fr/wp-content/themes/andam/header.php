@@ -28,17 +28,16 @@
     <?php wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true ); ?> 
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
-		<header role="banner">
+<body id="<? echo $post->post_name; ?>" <?php body_class(); ?>>
+	<header role="banner">
 		<div id="head_content">	
 			<div id="uberalles">
 				<div id="logo" class="clearfix">			
-					<h1>ANDAM<br />FASHION AWARDS<br />2012</h1>			
+					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION AWARDS</span><br /><span id="mot3">2012</span></h1>			
 				</div>
 				<? echo get_sidebar(); ?>
 			</div>	
 		</div>			
 	</header>
 	
-<div id="main">
-		
+<div class="<? echo $post->post_name; ?> main">

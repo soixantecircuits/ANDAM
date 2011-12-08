@@ -16,23 +16,21 @@ $(function(){
   // Template
   // --------
   
-  var srctmpl =  "<div class='post'>\
-                        <div class='date'>\
+  var srctmpl =  "<time datetime='2010-01-20' pubdate>\
                           {{prettydatefb created_time}}\
-                        </div>\
+                        </time>\
                         <div class='story'>\
                              {{story}}\
                         </div>\
-                        <div class='link'>{{caption}}</div>\
-                        <div class='title'>{{name}}</div>\
-                        <div class='description'>{{description}}</div>\
+                        <a class='link'>{{caption}}</a>\
+                        <h1>{{name}}</h1>\
+                        <p>{{description}}</p>\
                         <img class='bg' style='display:none;' alt='' src='{{picture}}'>\
                         <div class='likes'>{{#likes.data}}{{name}}, {{/likes.data}} aiment &ccedil;a</div>\
                         <div class='action'>J\'aime * Commenter</div>\
                       </div>";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
-  
   //  Model
   // ----------
 
@@ -63,6 +61,7 @@ $(function(){
 
   // The DOM element for a todo item...
   window.PostView = Backbone.View.extend({
+	tagName:  "article",
 
     initialize: function() {
       this.model.bind('change', this.render, this);
@@ -83,10 +82,9 @@ $(function(){
   
   // Our overall **AppView** is the top-level piece of UI.
   window.AppView = Backbone.View.extend({
-
     // Instead of generating a new element, bind to the existing skeleton of
     // the App already present in the HTML.
-    el: $("#andamapp"),
+    el: $(".main"),
 
     initialize: function() {
       feed.bind('add',   this.addOne, this);
@@ -100,7 +98,7 @@ $(function(){
         $.backstretch(post.get('picture'), {speed: 350});
       }
       var view = new PostView({model: post});
-      this.$("#facebook").append(view.render().el);
+      this.$(".main").append(view.render().el);
     },
 
     // Add all items in the collection at once.
