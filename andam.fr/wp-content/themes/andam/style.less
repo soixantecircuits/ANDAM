@@ -299,7 +299,10 @@ td { vertical-align: top; }
 
 
 /* GENERIQUES */
-
+ * html body{
+  overflow:hidden;
+ }
+ 
 nav#main_menu ul li a { 
 letter-spacing: 0.1em;
 line-height: @unit;
@@ -339,13 +342,11 @@ max-width: 960px;
 z-index:99;
 }
 
-
-
 #main_menu {
 position: absolute;
 right:0;
 width: 50%;
-padding: @unit*10 0 0 0;
+padding: @unit*8 0 0 0;
 }
 
 ul#langues {
@@ -390,14 +391,17 @@ letter-spacing: 0.1em;
 }
 
 /*-------MAIN CONTAINER------*/
-#main {position:relative; max-width: 960px; margin:0 auto;}
+#main {
+position:relative;
+max-width: 960px;
+margin:0 auto;
+padding: 0 30% 0 20%;
+}
 p { margin:0; padding:0; }
 
 /*------ CONTAINER -------*/
 article {
-padding: 0 30% 0 10%;
 margin: 0 0 @unit*2 0; 
-text-decoration: underline;
 }
 
 article h1 {

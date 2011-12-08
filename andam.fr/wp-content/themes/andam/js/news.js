@@ -5,7 +5,7 @@ $(function(){
 
   // Setup
     
-  moment.lang(my_vars.mylang);
+  moment.lang(my_vars.mylang.toString());
   Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
               return moment(moment(date)).format("dddd d MMMM, HH:mm");
