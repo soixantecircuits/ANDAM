@@ -35,10 +35,10 @@
 				<div id="logo" class="clearfix">			
 					<h1>ANDAM<br />FASHION AWARDS<br />2012</h1>			
 				</div>
-				
+				<? echo get_sidebar(); ?>
 			</div>	
 		</div>			
 	</header>
 	
 <div id="main">
-	<? echo get_sidebar(); ?>	
+		

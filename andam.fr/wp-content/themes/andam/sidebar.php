@@ -8,7 +8,6 @@
  */
 ?>
 <nav id="main_menu">
-<div id="container_menu">
 	<ul>
 <?php wp_list_pages('sort_column=menu_order&exclude=6,8&&title_li='); ?>
 	</ul>	
@@ -25,5 +24,4 @@
 		}} ?>
 		</li>
 	</ul>
-</div>
 </nav>

@@ -300,13 +300,13 @@ td { vertical-align: top; }
 
 /* GENERIQUES */
 
-nav#main_menu #container_menu ul li a { 
+nav#main_menu ul li a { 
 letter-spacing: 0.1em;
 line-height: @unit;
 text-transform: uppercase;
 }
 
-nav#main_menu #container_menu ul li{
+nav#main_menu ul li{
 margin: 0 0 @unit 0;
 }
 
@@ -331,7 +331,7 @@ top:0;
 width:100%;
 }
 
-#head_content, #main_menu {
+#head_content {
 position: relative;
 width: 100%;
 margin: 0 auto;
@@ -339,14 +339,21 @@ max-width: 960px;
 z-index:99;
 }
 
-#main_menu #container_menu {
+
+
+#main_menu {
 position: absolute;
-right:1em;
-width: 20%;
+right:0;
+width: 50%;
+padding: @unit*10 0 0 0;
 }
 
 ul#langues {
 margin: @unit*3 0 0 0;
+}
+
+nav#main_menu #container_menu ul#langues li a{
+text-transform: lowercase;
 }
 
 #uberalles {
@@ -375,7 +382,7 @@ top: 0;
 #logo {
 float:right;
 text-align: center;
-padding: @unit; 
+//padding: @unit; 
 }
 #logo h1 {
 font-weight: normal;
