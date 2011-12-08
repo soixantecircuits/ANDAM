@@ -15,22 +15,38 @@ $(function(){
 
   // Template
   // --------
-  
-  var srctmpl =  "<div class='tweet'>\
-                        <div class='date'>\
+/*
+var srctmpl = "<article id='container tweet'>\
+					<time datetime='2010-01-20' pubdate>\
+					{{prettydate created_at}}\
+					</time>\
+					<span rel='author'>\
+					     {{retweeted_status.user.screen_name}}\
+					     {{^retweeted_status.user.screen_name}}\
+					     {{user.screen_name}}\
+					</span>\
+					<h1 id='message'>{{text}}</h1>\
+					<a href='#'>\
+						{{#entities.urls}}{{url}}{{/entities.urls}}\
+					</a>\
+			    </article>";
+*/
+					  
+  var srctmpl =  "<time datetime='2010-01-20' pubdate>\
                           {{prettydate created_at}}\
-                        </div>\
-                        <div class='username'>\
-                             {{retweeted_status.user.screen_name}}\
-                             {{^retweeted_status.user.screen_name}}\
-                                {{user.screen_name}}\
-                             {{/retweeted_status.user.screen_name}}\
-                        </div>\
-                        <div class='message'>{{text}}</div>\
-                        <div class='url'>{{#entities.urls}}{{url}}{{/entities.urls}}</div>\
-                      </div>";
+                  </time>\
+                  <span id='author' rel='author'>\
+                       {{retweeted_status.user.screen_name}}\
+                       {{^retweeted_status.user.screen_name}}\
+                       {{user.screen_name}}\
+                       {{/retweeted_status.user.screen_name}}\
+                  </span>\
+                  <h1>{{text}}</h1>\
+                  <a href='#'>{{#entities.urls}}{{url}}{{/entities.urls}}</a>";
+
   window.tmplTwitter = Handlebars.compile(srctmpl);
-     
+ 
+ 
   
   //  Model
   // ----------
@@ -61,6 +77,8 @@ $(function(){
   // The DOM element for a todo item...
   window.TweetView = Backbone.View.extend({
 
+	tagName:  "article",
+	
     initialize: function() {
       this.model.bind('change', this.render, this);
     },
@@ -83,7 +101,7 @@ $(function(){
 
     // Instead of generating a new element, bind to the existing skeleton of
     // the App already present in the HTML.
-    el: $("#andamapp"),
+    el: $("#main"),
 
     initialize: function() {
       timeline.bind('add',   this.addOne, this);
@@ -95,7 +113,7 @@ $(function(){
     // appending its element to the `<ul>`.
     addOne: function(tweet) {
       var view = new TweetView({model: tweet});
-      this.$("#tweets").append(view.render().el);
+      this.$("#main").append(view.render().el);
     },
 
     // Add all items in the collection at once.

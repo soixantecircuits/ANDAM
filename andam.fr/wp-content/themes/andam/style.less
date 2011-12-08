@@ -9,6 +9,18 @@ License: GNU General Public License
 License URI: license.txt
 Tags: dark, light, white, black, gray, one-column, two-columns, left-sidebar, right-sidebar, fixed-width, flexible-width, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-image-header, featured-images, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 */
+/*
+*Important number
+*/
+@font-size: 14;
+@line: 18;
+@em:@font-size*1em;
+@unit:@line/@em;
+@txt:#1A1A1A; /* texte */
+@main:#1A1A1A; /* couleur principale */
+@color2:#ffa4d4;
+@color3:#fffac1;
+@color4:#d5d3fe;
 /* 
  * HTML5 ✰ Boilerplate
  *
@@ -43,7 +55,8 @@ audio:not([controls]) { display: none; }
 
 html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 
-body { margin: 0; font-size: 13px; line-height: 1.231; }
+/*body { margin: 0; font-size: 14px; line-height: 1.231; }*/
+body { margin: 0; font-size:@font-size/16*1em; line-height: @unit;}
 
 body, button, input, select, textarea { font-family: "AndFRegular", "Helvetica", Arial, sans-serif;  color: #222; }
 
@@ -61,9 +74,9 @@ body, button, input, select, textarea { font-family: "AndFRegular", "Helvetica",
    Links
    ========================================================================== */
 
-a { color: #00e; }
-a:visited { color: #551a8b; }
-a:hover { color: #06e; }
+a { color: @txt; text-decoration: none;}
+a:visited { color: @txt}
+a:hover { color: @txt; text-decoration: underline;}
 a:focus { outline: thin dotted; }
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
@@ -73,6 +86,8 @@ a:hover, a:active { outline: 0; }
 /* =============================================================================
    Typography
    ========================================================================== */
+
+h1,h2,h3,h4,h5,h6 { font-weight:normal; margin: 0; line-height: @unit; }
 
 abbr[title] { border-bottom: 1px dotted; }
 
@@ -218,25 +233,6 @@ table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }
 
 
-/* ==|== primary styles =====================================================
-   Author: 
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
    ========================================================================== */
@@ -301,25 +297,28 @@ td { vertical-align: top; }
   h2, h3 { page-break-after: avoid; }
 }
 
-/*
-*Important number
-*/
-@font-size: 12;
-@line: 18;
-@em:@font-size*1em;
-@unit:@line/@em;
-@txt:#444; /* texte */
-@main:#ff9999; /* couleur principale */
-@color2:#ffa4d4;
-@color3:#fffac1;
-@color4:#d5d3fe;
 
 /* GENERIQUES */
-/*-------MAIN CONTAINER------*/
-#main {position:relative; max-width: 960px; margin:0 auto;}
-p { margin:0; padding:0; }
 
-/*------ HEADER -------*/
+nav#main_menu #container_menu ul li a { 
+letter-spacing: 0.1em;
+line-height: @unit;
+text-transform: uppercase;
+}
+
+nav#main_menu #container_menu ul li{
+margin: 0 0 @unit 0;
+}
+
+nav#main_menu #container_menu ul li.current_page_item a{
+text-decoration: underline;
+}
+
+#backstretch {
+opacity: 0.3;
+}
+
+/*------ HEADER & SIDEBAR-------*/
 
 body{
   margin:0;
@@ -332,11 +331,22 @@ top:0;
 width:100%;
 }
 
-#head_content {
+#head_content, #main_menu {
 position: relative;
+width: 100%;
 margin: 0 auto;
 max-width: 960px;
 z-index:99;
+}
+
+#main_menu #container_menu {
+position: absolute;
+right:1em;
+width: 20%;
+}
+
+ul#langues {
+margin: @unit*3 0 0 0;
 }
 
 #uberalles {
@@ -348,7 +358,10 @@ top: 0;
 @media screen{
   body>header{
   position:fixed;
-}
+  }
+  body>div#main nav#main_menu{
+  position:fixed;
+  }
 
  }
  * html body{
@@ -362,92 +375,31 @@ top: 0;
 #logo {
 float:right;
 text-align: center;
+padding: @unit; 
 }
 #logo h1 {
 font-weight: normal;
+letter-spacing: 0.1em;
 }
 
-/*------ SIDEBAR -------*/
-
-
-#col_right {
-clear: right;
-float: right;
-width: 20%;
-z-index: 99;
-
-}
-
-#col_left{
-float:left;
-width: 20%;
-background-color: @color3;
-}
+/*-------MAIN CONTAINER------*/
+#main {position:relative; max-width: 960px; margin:0 auto;}
+p { margin:0; padding:0; }
 
 /*------ CONTAINER -------*/
-#container {
-padding: 0 20%;
+article {
+padding: 0 30% 0 10%;
+margin: 0 0 @unit*2 0; 
+text-decoration: underline;
 }
+
+article h1 {
+font-size: 2em;
+}
+
+span#author {
+margin: 0 0 0 0;
+}
+
 
 /* CUSTOM */
-#andamapp {
-  width: 480px;
-  margin: 0 auto 40px;
-  background: white;
-  padding: 20px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-  -o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-}
- #andamapp h1 {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    padding: 20px 0 30px 0;
-    line-height: 1;
-}
-
-#tweet-list {
-  margin-top: 10px;
-}
-  #tweet-list li {
-    padding: 12px 20px 11px 0;
-    position: relative;
-    font-size: 24px;
-    line-height: 1.1em;
-    border-bottom: 1px solid #cccccc;
-  }
-    #tweet-list li:after {
-      content: "\0020";
-      display: block;
-      height: 0;
-      clear: both;
-      overflow: hidden;
-      visibility: hidden;
-    }
-
-#twitterContent {
-	color: white; background-color: #333333;}
-#twitterContent .item{
-  height: 100%;
-  border: 0.5px black solid;
-}
-#twitterContent .item .update {
-  height: 55px;
-}
-
-#twitterContent .item .update .photo {
-  height: 100%;
-  float: left;
-}
-#twitterContent .item .update .message {
-  height: 100%;
-  padding: 2px 0;
-}
-#twitterContent .item .source {
-  height: 17px;
-  font-size:8pt;
-  padding: 2px 2px 2px 2px;
-  color: #999999
-}

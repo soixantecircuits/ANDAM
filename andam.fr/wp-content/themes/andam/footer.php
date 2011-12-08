@@ -9,7 +9,6 @@
 * @since ANDAM 1.0
 */
 ?>
-	
 </div><!-- main container -->
 
 <? 

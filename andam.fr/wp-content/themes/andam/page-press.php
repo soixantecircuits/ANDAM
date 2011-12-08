@@ -6,11 +6,10 @@
  */
 get_header(); ?>
 
-<article id="container">
-  <!-- ANDAM API Interface -->
-  <div class="content">
-    <div id="tweets">
-    </div>
-  </div>
-</article>			
+<article class="tweets">
+	<time datetime="2010-01-20" pubdate></time><span id="author" rel="author"></span>
+	<h1 id="message"></h1>
+	<a href="#"></a>
+</article>	
+	
 <?php get_footer(); ?>
