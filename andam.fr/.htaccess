@@ -1,12 +1,13 @@
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /andam.rf/
+RewriteBase /ANDAM/andam.fr/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /andam.rf/index.php [L]
+RewriteRule . /ANDAM/andam.fr/index.php [L]
 </IfModule>
 
 # END WordPress
+
+
