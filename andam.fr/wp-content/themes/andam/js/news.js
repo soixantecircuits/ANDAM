@@ -94,9 +94,11 @@ $(function(){
       feed.fetch();
     },
 
-    // Add a single tweet item to the list by creating a view for it, and
-    // appending its element to the `<ul>`.
     addOne: function(post) {
+      if (window.firsttime == undefined){
+        window.firsttime = true;
+        $.backstretch(post.get('picture'), {speed: 350});
+      }
       var view = new PostView({model: post});
       this.$("#facebook").append(view.render().el);
     },
