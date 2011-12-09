@@ -18,7 +18,7 @@ $(function(){
 
   //  Collection
   // ---------------
-
+  var my_lang = my_vars.mylang;
   window.Timeline = Backbone.Collection.extend({
 
     model: Tweet,

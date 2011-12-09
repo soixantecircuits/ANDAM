@@ -467,6 +467,18 @@ td {
 * html body {
   overflow: hidden;
 }
+h1 {
+  font-size: 2em;
+}
+h1, h2, h3 {
+  margin: 0 0 0.4285714285714286em 0;
+}
+article {
+  letter-spacing: 0.1em;
+}
+article {
+  margin: 0 0 3.8571428571428577em 0;
+}
 nav#main_menu ul li a {
   letter-spacing: 0.1em;
   line-height: 1.2857142857142858em;
@@ -558,26 +570,15 @@ p {
   margin: 0;
   padding: 0;
 }
-/*------ CONTAINER -------*/
-article {
-  letter-spacing: 0.1em;
-}
-article {
-  margin: 0 0 3.8571428571428577em 0;
-}
-/* press */
-.press article h1 {
-  font-size: 2em;
-}
-.press span#author {
+/* ------------- PRESS ------------- */
+#press span#author {
   margin: 0 0 0 0;
 }
-/* news */
-.news article h1 {
-  font-size: 2em;
+/*-------------- NEWS -------------- */
+#news article h1 {
   margin: 0.32142857142857145em 0 0.32142857142857145em 0;
 }
-/* contest */
+/*-------------- CONTEST -------------- */
 #contest article p {
   margin: 0 0 1.2857142857142858em 0;
 }
@@ -597,4 +598,44 @@ section#partenaires ul li a {
 section#partenaires ul li img {
   clear: both;
   float: left;
+}
+/*-------------- ASSOCIATION -------------*/
+#association {
+  letter-spacing: 0.1em;
+}
+#association b {
+  font-weight: normal;
+}
+#association ul, #association ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#association .editsection {
+  display: none;
+}
+#association p,
+#association table,
+#association ul,
+#association div.references-small {
+  margin: 0 0 1.2857142857142858em 0;
+}
+#association table ul {
+  margin: 0;
+}
+#association h2 {
+  font-size: 2em;
+}
+#association h3 {
+  font-size: 1.5em;
+}
+/*-------------- 20-years-of-fashion -------------*/
+#twenty-years-of-fashion #facebook-text p {
+  margin: 0 0 6.428571428571429em 0;
+}
+#twenty-years-of-fashion h3 {
+  margin: 0;
+}
+#twenty-years-of-fashion p {
+  margin: 0 0 1.2857142857142858em 0;
 }
