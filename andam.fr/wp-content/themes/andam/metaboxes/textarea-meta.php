@@ -44,6 +44,28 @@ function my_admin_print_footer_scripts()
 ?>
 
 <div class="my_meta_control">
+	
+	<label>texte facebook (français)</label>
+		<?php $mb->the_field('facebook_fr'); ?>
+		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+	<label>texte facebook (english)</label>
+		<?php $mb->the_field('facebook_en'); ?>
+		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+
+	<label>intro (français)</label>
+		<?php $mb->the_field('intro_fr'); ?>
+		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+	<label>intro (english)</label>
+		<?php $mb->the_field('intro_en'); ?>
+		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+
+	<label>chapeau (français)</label>
+		<?php $mb->the_field('chapeau_fr'); ?>
+		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+	<label>chapeau (english)</label>
+		<?php $mb->the_field('chapeau_en'); ?>
+		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
+
 	<label>Titre (français)</label>
 		<?php $mb->the_field('titre_fr'); ?>
 		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
@@ -51,6 +73,7 @@ function my_admin_print_footer_scripts()
 		<?php $mb->the_field('titre_en'); ?>
 		<input type="text" name="<?php $mb->the_name(); ?>" value="<?php $mb->the_value(); ?>"/>
 	<label>Texte<span>(optional)</span></label>
+	
 <div id="editor-toolbar"><a id="my_english" class="edButton">English</a><a id="my_french" class="edButton active">Français</a></div>	
 	<?php $mb->the_field('extra_content_fr'); ?>
 	
