@@ -34,6 +34,7 @@ wp_localize_script (  "$post->post_name" , 'my_vars' , $tab_vars);
 <script src="<?= get_template_directory_uri(); ?>/js/libs/underscore-1.2.2.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/libs/backbone.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/libs/moment.min.js"></script>
+<script src="<?= get_template_directory_uri(); ?>/js/libs/wiky.js"></script>
 <!-- scripts concatenated and minified via ant build script-->
 <script src="<?= get_template_directory_uri(); ?>/js/plugins.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/script.js"></script>
