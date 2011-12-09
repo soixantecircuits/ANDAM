@@ -3,36 +3,9 @@
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
 
-  // Setup
-    
-  moment.lang('fr');
-  Handlebars.registerHelper('wiki', function(content) {
-            if (content) {
-              return wiky.process(content);
-            }
-            return "";
-  });
-
   // Template
   // --------
-/*
-var srctmpl = "<article id='container tweet'>\
-					<time datetime='2010-01-20' pubdate>\
-					{{prettydate created_at}}\
-					</time>\
-					<span rel='author'>\
-					     {{retweeted_status.user.screen_name}}\
-					     {{^retweeted_status.user.screen_name}}\
-					     {{user.screen_name}}\
-					</span>\
-					<h1 id='message'>{{text}}</h1>\
-					<a href='#'>\
-						{{#entities.urls}}{{url}}{{/entities.urls}}\
-					</a>\
-			    </article>";
-*/
-					  
-  var srctmpl =  "{{{wiki content}}}";
+  var srctmpl =  "{{{content}}}";
   window.tmplWiki = Handlebars.compile(srctmpl);
  
  
@@ -50,15 +23,17 @@ var srctmpl = "<article id='container tweet'>\
 
     model: Tweet,
 
-    url:"http://fr.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&pageids=3051354&format=json",
-    
+    //url:"http://fr.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&pageids=3051354&format=json",
+    url:"http://fr.wikipedia.org/w/api.php?action=parse&page=Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode&format=json",    
+
     sync: function(method, model, options){  
         options.timeout = 10000;  
         options.dataType = "jsonp";  
         return Backbone.sync(method, model, options);  
     },
     parse: function(response) {
-      return response.query.pages['3051354'].revisions;
+      //return response.query.pages['3051354'].revisions;
+      return response.parse.text;
     }
 
   });
@@ -69,7 +44,7 @@ var srctmpl = "<article id='container tweet'>\
   // The DOM element for a todo item...
   window.TweetView = Backbone.View.extend({
 
-	tagName:  "article",
+	tagName:  "div",
 	
     initialize: function() {
       this.model.bind('change', this.render, this);
