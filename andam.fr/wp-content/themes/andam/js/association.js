@@ -8,7 +8,7 @@ $(function(){
   moment.lang('fr');
   Handlebars.registerHelper('wiki', function(content) {
             if (content) {
-              return wiky.process(content);
+              return content.wiki2html();
             }
             return "";
   });
@@ -50,15 +50,17 @@ var srctmpl = "<article id='container tweet'>\
 
     model: Tweet,
 
-    url:"http://fr.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&pageids=3051354&format=json",
-    
+    //url:"http://fr.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&pageids=3051354&format=json",
+    url:"http://fr.wikipedia.org/w/api.php?action=parse&page=Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode&format=json",    
+
     sync: function(method, model, options){  
         options.timeout = 10000;  
         options.dataType = "jsonp";  
         return Backbone.sync(method, model, options);  
     },
     parse: function(response) {
-      return response.query.pages['3051354'].revisions;
+      //return response.query.pages['3051354'].revisions;
+      return response.parse.text;
     }
 
   });
