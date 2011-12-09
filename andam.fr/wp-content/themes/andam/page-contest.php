@@ -6,8 +6,10 @@
 */
 get_header(); ?>
 
-<article id="contest" class="grid_16">
-	page
+<article>
+
+<? echo wpautop($post->post_content); ?>
+
 </article>
 			
 <?php get_footer(); ?>

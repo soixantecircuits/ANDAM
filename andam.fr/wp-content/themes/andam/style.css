@@ -577,3 +577,7 @@ article {
   font-size: 2em;
   margin: 0.32142857142857145em 0 0.32142857142857145em 0;
 }
+/* contest */
+#contest article p {
+  margin: 0 0 1.2857142857142858em 0;
+}
