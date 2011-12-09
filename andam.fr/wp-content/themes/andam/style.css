@@ -581,3 +581,20 @@ article {
 #contest article p {
   margin: 0 0 1.2857142857142858em 0;
 }
+section#partenaires ul {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+section#partenaires ul li {
+  margin: 0 0 0.6428571428571429em 0;
+}
+section#partenaires ul li a {
+  display: block;
+  padding: 0 0 0 2.5714285714285716em;
+}
+section#partenaires ul li img {
+  clear: both;
+  float: left;
+}
