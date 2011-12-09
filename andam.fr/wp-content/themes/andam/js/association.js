@@ -94,7 +94,7 @@ var srctmpl = "<article id='container tweet'>\
 
     // Instead of generating a new element, bind to the existing skeleton of
     // the App already present in the HTML.
-    el: $("#main"),
+    el: $(".main"),
 
     initialize: function() {
       timeline.bind('add',   this.addOne, this);
@@ -106,7 +106,7 @@ var srctmpl = "<article id='container tweet'>\
     // appending its element to the `<ul>`.
     addOne: function(tweet) {
       var view = new TweetView({model: tweet});
-      this.$("#main").append(view.render().el);
+      this.$(".main").append(view.render().el);
     },
 
     // Add all items in the collection at once.
