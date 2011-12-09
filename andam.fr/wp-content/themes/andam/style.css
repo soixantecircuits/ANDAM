@@ -464,6 +464,9 @@ td {
   }
 }
 /* GENERIQUES */
+* html body {
+  overflow: hidden;
+}
 nav#main_menu ul li a {
   letter-spacing: 0.1em;
   line-height: 1.2857142857142858em;
@@ -499,7 +502,7 @@ header {
   position: absolute;
   right: 0;
   width: 50%;
-  padding: 12.857142857142858em 0 0 0;
+  padding: 10.285714285714286em 0 0 0;
 }
 ul#langues {
   margin: 3.8571428571428577em 0 0 0;
@@ -540,6 +543,7 @@ nav#main_menu #container_menu ul#langues li a {
   position: relative;
   max-width: 960px;
   margin: 0 auto;
+  padding: 0 30% 0 20%;
 }
 p {
   margin: 0;
@@ -547,9 +551,7 @@ p {
 }
 /*------ CONTAINER -------*/
 article {
-  padding: 0 30% 0 10%;
   margin: 0 0 2.5714285714285716em 0;
-  text-decoration: underline;
 }
 article h1 {
   font-size: 2em;
