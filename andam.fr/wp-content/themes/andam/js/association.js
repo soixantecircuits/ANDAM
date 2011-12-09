@@ -3,36 +3,9 @@
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
 
-  // Setup
-    
-  moment.lang('fr');
-  Handlebars.registerHelper('wiki', function(content) {
-            if (content) {
-              return content.wiki2html();
-            }
-            return "";
-  });
-
   // Template
   // --------
-/*
-var srctmpl = "<article id='container tweet'>\
-					<time datetime='2010-01-20' pubdate>\
-					{{prettydate created_at}}\
-					</time>\
-					<span rel='author'>\
-					     {{retweeted_status.user.screen_name}}\
-					     {{^retweeted_status.user.screen_name}}\
-					     {{user.screen_name}}\
-					</span>\
-					<h1 id='message'>{{text}}</h1>\
-					<a href='#'>\
-						{{#entities.urls}}{{url}}{{/entities.urls}}\
-					</a>\
-			    </article>";
-*/
-					  
-  var srctmpl =  "{{{wiki content}}}";
+  var srctmpl =  "{{{content}}}";
   window.tmplWiki = Handlebars.compile(srctmpl);
  
  
@@ -71,7 +44,7 @@ var srctmpl = "<article id='container tweet'>\
   // The DOM element for a todo item...
   window.TweetView = Backbone.View.extend({
 
-	tagName:  "article",
+	tagName:  "div",
 	
     initialize: function() {
       this.model.bind('change', this.render, this);
