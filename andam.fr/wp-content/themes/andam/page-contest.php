@@ -8,17 +8,24 @@ get_header(); ?>
 
 <article>
 
+<?
+$postid = get_the_ID();
+$inscript = simple_fields_get_post_group_values($postid, "inscription", true, 2);
+$inscriptfile = wp_get_attachment_url($inscript[0]['fichier']);
+?>
+<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? _e('[:fr]Télécharger le dossier d\'inscription[:en]Download registration file'); ?></a></p>
 <? echo wpautop($post->post_content); ?>
-
 	<section id="partenaires">
 		<ul>
 			<? 
-				$postid = get_the_ID();
+				
 				$tabinfos = simple_fields_get_post_group_values($postid, "partenaires", true, 2);
+				
+				
 				foreach ($tabinfos as $cle=>$value) {
-					$imageinfos = wp_get_attachment_image_src($value['logo'], 'thumbnail');
+					$imageurl = $value['logo'];
 				?>
-				<li><img src="<? echo $imageinfos[0]?>" width="<? echo $imageinfos[1]; ?>" height="<? echo $imageinfos[2]; ?>" /><a><span><? echo $value['nom']; ?></span></a></li>
+				<li><img src="<? echo $imageurl; ?>" width="16"/><a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a></li>
 					
 				<? };
 			?>
