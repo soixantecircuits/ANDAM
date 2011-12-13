@@ -25,7 +25,10 @@
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
 	<?php $mycat = $post->post_name;?>
-    <?php wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true ); ?> 
+    <?php 
+    if ($mycat != "contest") 
+    	wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true );
+    ?> 
 	<?php wp_head(); ?>
 </head>
 <body id="<? echo $post->post_name; ?>" <?php body_class(); ?>>

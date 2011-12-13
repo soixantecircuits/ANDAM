@@ -99,14 +99,14 @@ textarea {
    ========================================================================== */
 a {
   color: #1a1a1a;
-  text-decoration: none;
+  text-decoration: underline;
 }
 a:visited {
   color: #1a1a1a;
 }
 a:hover {
   color: #1a1a1a;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -483,6 +483,10 @@ nav#main_menu ul li a {
   letter-spacing: 0.1em;
   line-height: 1.2857142857142858em;
   text-transform: uppercase;
+  text-decoration: none;
+}
+nav#main_menu ul li a:hover, nav#main_menu ul#langues li a:hover {
+  text-decoration: underline;
 }
 nav#main_menu ul li {
   margin: 0 0 1.2857142857142858em 0;
@@ -521,6 +525,7 @@ ul#langues {
 }
 nav#main_menu ul#langues li a {
   text-transform: lowercase;
+  text-decoration: none;
 }
 #uberalles {
   position: absolute;
@@ -581,6 +586,9 @@ p {
 /*-------------- CONTEST -------------- */
 #contest article p {
   margin: 0 0 1.2857142857142858em 0;
+}
+section#partenaires {
+  margin: 2.5714285714285716em 0 0 0;
 }
 section#partenaires ul {
   list-style: none;

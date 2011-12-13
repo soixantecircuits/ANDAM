@@ -28,6 +28,7 @@ function trad_customfield2 ($tab, $field) {
 // ajout de metaboxes //
 include_once 'metaboxes/setup.php';
 include_once 'metaboxes/textarea-spec.php';
+//include_once 'metaboxes/gallery-spec.php';
 
 
 add_action( 'after_setup_theme', 'wpse3882_after_setup_theme' );
