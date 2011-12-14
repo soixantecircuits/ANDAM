@@ -15,23 +15,6 @@ $(function(){
 
   // Template
   // --------
-/*
-var srctmpl = "<article id='container tweet'>\
-					<time datetime='2010-01-20' pubdate>\
-					{{prettydate created_at}}\
-					</time>\
-					<span rel='author'>\
-					     {{retweeted_status.user.screen_name}}\
-					     {{^retweeted_status.user.screen_name}}\
-					     {{user.screen_name}}\
-					</span>\
-					<h1 id='message'>{{text}}</h1>\
-					<a href='#'>\
-						{{#entities.urls}}{{url}}{{/entities.urls}}\
-					</a>\
-			    </article>";
-*/
-					  
   var srctmpl =  "<time datetime='2010-01-20' pubdate>\
                           {{prettydate created_at}}\
                   </time>\
