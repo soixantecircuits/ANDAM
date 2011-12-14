@@ -406,9 +406,6 @@ td {
    These override the primary ('mobile first') styles
    Modify as content requires.
    ========================================================================== */
-@media only screen and (min-width: 480px) {
-  /* Style adjustments for viewports 480px and over go here */
-}
 @media only screen and (min-width: 768px) {
   /* Style adjustments for viewports 768px and over go here */
 }
@@ -479,28 +476,13 @@ article {
 article {
   margin: 0 0 3.8571428571428577em 0;
 }
-nav#main_menu ul li a {
-  letter-spacing: 0.1em;
-  line-height: 1.2857142857142858em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-nav#main_menu ul li a:hover, nav#main_menu ul#langues li a:hover {
-  text-decoration: underline;
-}
-nav#main_menu ul li {
-  margin: 0 0 1.2857142857142858em 0;
-}
-nav#main_menu ul li.current_page_item a {
-  text-decoration: underline;
-}
 #backstretch {
   opacity: 0.3;
 }
 /*------ HEADER & SIDEBAR-------*/
 body {
   margin: 0;
-  padding: 10em 0 0 0;
+  padding: 11.571428571428573em 0 0 0;
 }
 header {
   position: absolute;
@@ -517,8 +499,9 @@ header {
 #main_menu {
   position: absolute;
   right: 0;
+  top: 11.571428571428573em;
   width: 50%;
-  padding: 10.285714285714286em 0 0 0;
+  padding: 0;
 }
 ul#langues {
   margin: 3.8571428571428577em 0 0 0;
@@ -526,6 +509,21 @@ ul#langues {
 nav#main_menu ul#langues li a {
   text-transform: lowercase;
   text-decoration: none;
+}
+nav#main_menu ul li a {
+  letter-spacing: 0.1em;
+  line-height: 1.2857142857142858em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+nav#main_menu ul li a:hover, nav#main_menu ul#langues li a:hover {
+  text-decoration: underline;
+}
+nav#main_menu ul li {
+  margin: 0 0 1.2857142857142858em 0;
+}
+nav#main_menu ul li.current_page_item a {
+  text-decoration: underline;
 }
 #uberalles {
   position: absolute;
@@ -550,6 +548,7 @@ nav#main_menu ul#langues li a {
 #logo {
   float: right;
   text-align: center;
+  padding: 1.2857142857142858em 0 1.2857142857142858em 0;
 }
 #logo h1 {
   font-weight: normal;
@@ -646,4 +645,27 @@ section#partenaires ul li img {
 }
 #twenty-years-of-fashion p {
   margin: 0 0 1.2857142857142858em 0;
+}
+@media screen and (min-width: 200px) and (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+  #logo {
+    float: none;
+  }
+  #uberalles {
+    width: 100%;
+  }
+  #main_menu {
+    width: auto;
+  }
+  /* Style adjustments for viewports 480px and over go here */
+  .main {
+    position: relative;
+    float: left;
+    /*margin:0 auto;*/
+  
+    width: 50%;
+    padding: 0;
+  }
 }
