@@ -33,6 +33,7 @@
 	<?php wp_head(); ?>
 </head>
 <body id="<? echo $post->post_name; ?>" <?php body_class(); ?>>
+	<div id="opacite"></div>
 	<header role="banner">
 		<div id="head_content">
 				<div id="logo">		

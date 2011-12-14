@@ -464,6 +464,15 @@ td {
 * html body {
   overflow: hidden;
 }
+#opacite {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: url('images/alpha.png');
+}
 h1 {
   font-size: 2em;
 }
@@ -477,7 +486,7 @@ article {
   margin: 0 0 3.8571428571428577em 0;
 }
 #backstretch {
-  opacity: 0.3;
+  opacity: 1;
 }
 /*------ HEADER & SIDEBAR-------*/
 body {
@@ -544,19 +553,8 @@ nav#main_menu ul li {
 nav#main_menu ul li.current_page_item a {
   text-decoration: underline;
 }
-#uberalles {
-  /*
-position: absolute;
-right: 0;
-top: 0;
-*/
-
-}
 @media screen {
   body > header {
-    position: fixed;
-  }
-  body > div.main nav#main_menu {
     position: fixed;
   }
 }
