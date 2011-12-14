@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/webfont/stylesheet.css" />
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
-	<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>
+	<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>!-->
 	<?php $mycat = $post->post_name;?>
     <?php 
     if ($mycat != "contest") 

@@ -665,19 +665,26 @@ section#partenaires ul li img {
 #twenty-years-of-fashion p {
   margin: 0 0 1.2857142857142858em 0;
 }
+/*-------------- Archives -------------*/
+#archives h2 {
+  margin: 1.2857142857142858em 0 0 0;
+}
+#archives h2 {
+  font-size: 2em;
+}
 @media screen and (min-width: 200px) and (max-width: 480px) {
   body {
     font-size: 13px;
   }
-  #uberalles {
-    width: auto;
+  #logo {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    float: none;
   }
   /* Style adjustments for viewports 480px and over go here */
   .main {
-    position: relative;
-    float: left;
-    /*margin:0 auto;*/
-  
+    margin: 0;
     width: 50%;
     padding: 0;
   }

@@ -17,9 +17,10 @@ $(function(){
   // Template
   // --------
 					  
-  var srctmpl = "<year>{{onetime year}}</year>\
+  var srctmpl = "<h2 class='year'>{{onetime year}}</h2>\
                  <a href='http://www.flickr.com/photos/" + window.flickruser 
-                 + "/sets/{{id}}/' target='_blank'>{{artist}}</a>";
+                 + "/sets/{{id}}/' target='_blank'>{{artist}}</a>\
+                 ";
   window.tmplFlickrChrono = Handlebars.compile(srctmpl);
   srctmpl = "<a href='http://www.flickr.com/photos/" + window.flickruser
             + "/sets/{{id}}/' target='_blank'>{{artist}}, {{year}}</a>";
@@ -97,7 +98,7 @@ $(function(){
     //el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<preambule>Liste des laur&eacute;ats depuis 1989 par ann&eacute;e </preambule>(voir par <div id='sortToggle'>ordre alphab&eacute;tique</div>)<div id='laureats'></div>");
+      $(".main").append("<p>Liste des laur&eacute;ats depuis 1989 par ann&eacute;e<br />(voir par <a href='#' id='sortToggle'>ordre alphab&eacute;tique</a>)</p><div id='laureats'></div>");
       sets.bind('add',   this.addOne, this);
       sets.bind('all',   this.addAll, this);
       sets.fetch();
