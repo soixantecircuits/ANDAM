@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/webfont/stylesheet.css" />
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
+	<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>
 	<?php $mycat = $post->post_name;?>
     <?php 
     if ($mycat != "contest") 
@@ -33,13 +34,17 @@
 </head>
 <body id="<? echo $post->post_name; ?>" <?php body_class(); ?>>
 	<header role="banner">
-		<div id="head_content">	
-			<div id="uberalles">
-				<div id="logo" class="clearfix">			
-					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION AWARDS</span><br /><span id="mot3">2012</span></h1>			
+		<div id="head_content">
+				<div id="logo">		
+					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3">2012</span></h1>			
+					<? echo get_sidebar(); ?>
 				</div>
-				<? echo get_sidebar(); ?>
-			</div>	
+					
+				<!--
+				<div id="logo">			
+					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3">2012</span></h1>			
+				</div>
+				!-->		
 		</div>			
 	</header>
 	

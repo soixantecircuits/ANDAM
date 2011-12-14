@@ -323,7 +323,7 @@ opacity: 0.3;
 
 body{
   margin:0;
-  padding:@unit*9 0 0 0;
+  padding:@unit*10 0 0 0;
 }
  
 header {
@@ -338,14 +338,32 @@ width: 100%;
 margin: 0 auto;
 max-width: 960px;
 z-index:99;
+//overflow:auto;
+}
+
+#logo {
+/*
+position:relative;
+clear:both;
+float:right;
+width: 50%;
+padding: @unit 0 @unit 0;
+*/
+position: absolute;
+right:@unit;
+top: @unit;
 }
 
 #main_menu {
 position: absolute;
-right:0;
+right:0px;
+width:50%;
 top: @unit*9;
+/*
+position: relative;
 width: 50%;
-padding:0;
+float:right;
+*/
 }
 
 ul#langues {
@@ -355,6 +373,7 @@ margin: @unit*3 0 0 0;
 nav#main_menu ul#langues li a{
 text-transform: lowercase;
 text-decoration: none;
+word-wrap: break-word;
 }
 
 nav#main_menu ul li a { 
@@ -377,9 +396,11 @@ text-decoration: underline;
 }
 
 #uberalles {
+/*
 position: absolute;
 right: 0;
 top: 0;
+*/
 }
 
 @media screen{
@@ -399,26 +420,25 @@ top: 0;
   overflow:auto;
  }
 
-#logo {
-float:right;
-text-align: center;
-padding: @unit 0 @unit 0; 
-}
 
 #logo h1 {
 font-weight: normal;
+text-align:center;
 letter-spacing: 0.1em;
 }
 
 #logo h1 #mot1{
+  word-wrap:normal;
 letter-spacing: 0.5em;
 }
 
 #logo h1 #mot2{
+ word-break:keep-all;
 letter-spacing: 0.1em;
 }
 
 #logo h1 #mot3{
+  word-wrap:normal;
 letter-spacing: 0.5em;
 }
 
@@ -524,14 +544,14 @@ body {
 font-size: 13px;
 }
 #logo {
-float:none;
+//float:none;
 }
 #uberalles {
-width: 100%;
+width: auto;
 }
 
 #main_menu {
-width: auto;
+//width: auto;
 
 }
   /* Style adjustments for viewports 480px and over go here */

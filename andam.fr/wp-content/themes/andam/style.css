@@ -482,7 +482,7 @@ article {
 /*------ HEADER & SIDEBAR-------*/
 body {
   margin: 0;
-  padding: 11.571428571428573em 0 0 0;
+  padding: 12.857142857142858em 0 0 0;
 }
 header {
   position: absolute;
@@ -496,12 +496,30 @@ header {
   max-width: 960px;
   z-index: 99;
 }
+#logo {
+  /*
+position:relative;
+clear:both;
+float:right;
+width: 50%;
+padding: @unit 0 @unit 0;
+*/
+
+  position: absolute;
+  right: 1.2857142857142858em;
+  top: 1.2857142857142858em;
+}
 #main_menu {
   position: absolute;
-  right: 0;
-  top: 11.571428571428573em;
+  right: 0px;
   width: 50%;
-  padding: 0;
+  top: 11.571428571428573em;
+  /*
+position: relative;
+width: 50%;
+float:right;
+*/
+
 }
 ul#langues {
   margin: 3.8571428571428577em 0 0 0;
@@ -509,6 +527,7 @@ ul#langues {
 nav#main_menu ul#langues li a {
   text-transform: lowercase;
   text-decoration: none;
+  word-wrap: break-word;
 }
 nav#main_menu ul li a {
   letter-spacing: 0.1em;
@@ -526,9 +545,12 @@ nav#main_menu ul li.current_page_item a {
   text-decoration: underline;
 }
 #uberalles {
-  position: absolute;
-  right: 0;
-  top: 0;
+  /*
+position: absolute;
+right: 0;
+top: 0;
+*/
+
 }
 @media screen {
   body > header {
@@ -545,22 +567,21 @@ nav#main_menu ul li.current_page_item a {
   height: 100%;
   overflow: auto;
 }
-#logo {
-  float: right;
-  text-align: center;
-  padding: 1.2857142857142858em 0 1.2857142857142858em 0;
-}
 #logo h1 {
   font-weight: normal;
+  text-align: center;
   letter-spacing: 0.1em;
 }
 #logo h1 #mot1 {
+  word-wrap: normal;
   letter-spacing: 0.5em;
 }
 #logo h1 #mot2 {
+  word-break: keep-all;
   letter-spacing: 0.1em;
 }
 #logo h1 #mot3 {
+  word-wrap: normal;
   letter-spacing: 0.5em;
 }
 /*-------MAIN CONTAINER------*/
@@ -650,13 +671,7 @@ section#partenaires ul li img {
   body {
     font-size: 13px;
   }
-  #logo {
-    float: none;
-  }
   #uberalles {
-    width: 100%;
-  }
-  #main_menu {
     width: auto;
   }
   /* Style adjustments for viewports 480px and over go here */
