@@ -36,16 +36,11 @@
 	<div id="opacite"></div>
 	<header role="banner">
 		<div id="head_content">
-				<div id="logo">		
-					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3">2012</span></h1>			
+				<div id="logo">	
+					<? if ($post->post_name == "archives" || $post->post_name == "twenty-years-of-fashion") { $subtitle = "paris"; } else {$subtitle = date("Y");}?>	
+					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3"><? echo $subtitle; ?></span></h1>			
 					<? echo get_sidebar(); ?>
-				</div>
-					
-				<!--
-				<div id="logo">			
-					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3">2012</span></h1>			
-				</div>
-				!-->		
+				</div>		
 		</div>			
 	</header>
 	

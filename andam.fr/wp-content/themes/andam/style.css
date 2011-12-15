@@ -485,6 +485,9 @@ article {
 article {
   margin: 0 0 3.8571428571428577em 0;
 }
+#contact {
+  margin-top: 3.8571428571428577em;
+}
 #backstretch {
   opacity: 1;
 }
@@ -566,6 +569,7 @@ nav#main_menu ul li.current_page_item a {
   overflow: auto;
 }
 #logo h1 {
+  text-transform: uppercase;
   font-weight: normal;
   text-align: center;
   letter-spacing: 0.1em;
@@ -632,27 +636,27 @@ section#partenaires ul li img {
 #association b {
   font-weight: normal;
 }
-#association ul, #association ol {
+#association .main ul, #association .main ol {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-#association .editsection {
+#association .main .editsection {
   display: none;
 }
-#association p,
-#association table,
-#association ul,
-#association div.references-small {
+#association .main p,
+#association .main table,
+#association .main ul,
+#association .main div.references-small {
   margin: 0 0 1.2857142857142858em 0;
 }
-#association table ul {
+#association .main table ul {
   margin: 0;
 }
-#association h2 {
+#association .main h2 {
   font-size: 2em;
 }
-#association h3 {
+#association .main h3 {
   font-size: 1.5em;
 }
 /*-------------- 20-years-of-fashion -------------*/

@@ -24,4 +24,9 @@
 		}} ?>
 		</li>
 	</ul>
+	<? if($post->post_name == "association") {?>
+	<aside id="contact">
+		<? echo wpautop($post->post_content);?>
+	</aside>
+	<? } ?>
 </nav>
