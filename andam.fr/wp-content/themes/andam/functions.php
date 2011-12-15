@@ -11,6 +11,33 @@ function complete_version_removal() {
 add_filter('the_generator', 'complete_version_removal');
 add_filter('show_admin_bar','__return_false');
 
+// ajoute un shortcode pour l'ajout du bouton like
+function fb_like( $atts, $content=null ){
+/* Author: Nicholas P. Iler
+ * URL: http://www.ilertech.com/2011/06/add-facebook-like-button-to-wordpress-3-0-with-a-simple-shortcode/
+ */
+    extract(shortcode_atts(array(
+            'send' => 'false',
+            'layout' => 'button_count',
+            'show_faces' => 'true',
+            'width' => '100px',
+            'action' => 'like',
+            'font' => '',
+            'colorscheme' => 'light',
+            'ref' => '',
+            'locale' => 'fr_FR',
+            'appId' => '168284213234217' // Put your AppId here is you have one
+    ), $atts));
+ 
+    $fb_like_code = <<<HTML
+        <div id="fb-root"></div><script src="http://connect.facebook.net/$locale/all.js#appId=$appId&amp;xfbml=1"></script>
+        <fb:like ref="$ref" href="$content" layout="$layout" colorscheme="$colorscheme" action="$action" send="$send" width="$width" show_faces="$show_faces" font="$font"></fb:like>
+HTML;
+ 
+    return $fb_like_code;
+}
+add_shortcode('fb', 'fb_like');
+
 // fonction de traduction des metadonnées //
 function trad_customfield2 ($tab, $field) {
 	$lang = qtrans_getLanguage();	

@@ -7,6 +7,7 @@
 get_header(); ?>
 
 <article>
+	<?php $my_fblb = do_shortcode("[fb Locale=".__('[:fr]fr_FR[:en]en_US')."]"); ?>
 	<section id="infos">
 	<?
 	$postid = get_the_ID();
@@ -16,11 +17,11 @@ get_header(); ?>
 	$textsupp = $textarea_mb->the_meta();
 	$inscript = simple_fields_get_post_group_values($postid, "inscription", true, 2);
 	$inscriptfile = wp_get_attachment_url($inscript[0]['fichier']);
+	// inserer fb button //
+	$lecontenu = str_replace("[fb]", $my_fblb, $post->post_content);
 	?>
 		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? _e('[:fr]Télécharger le dossier d\'inscription[:en]Download registration file'); ?></a></p>
-	<? echo wpautop($post->post_content); ?>
-	<p>	<iframe id="facebook-like" src="http://www.facebook.com/plugins/like.php?locale=<? _e("[:fr]fr_FR[:en]en_US"); ?>&amp;app_id=168284213234217&amp;href=<? echo get_permalink($postid); ?>&amp;send=false&amp;layout=button_count&amp;width=91&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=verdana" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:91px; height:21px; vertical-align:bottom;" allowTransparency="true"></iframe>
-	</p>
+	<? echo wpautop($lecontenu); ?>
 	</section>
 	
 	<section id="partenaires">
