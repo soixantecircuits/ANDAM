@@ -537,13 +537,33 @@ margin: 0 0 @unit 0;
 }
 
 /*-------------- Archives -------------*/
-#archives h2 {
+#archives .main h2 {
+margin: 0;
+}
+
+#archives .main h2 {
+font-size: 2em;
+}
+
+#archives .main ul {
+list-style: none;
+margin: @unit 0 0 0;
+padding: 0;
+}
+
+#archives .main span {
+display:block;
+}
+
+#archives .main .alpha:first-letter {
+font-size: 2em;
+line-height: @unit;
+}
+
+#archives .main .alpha {
 margin: @unit 0 0 0;
 }
 
-#archives h2 {
-font-size: 2em;
-}
 
 @media screen and (min-width: 200px) and (max-width: 480px) {
 body {

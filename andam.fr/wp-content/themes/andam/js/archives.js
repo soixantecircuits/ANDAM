@@ -24,7 +24,7 @@ $(function(){
                  {{/laureats}}";
   window.tmplFlickrChrono = Handlebars.compile(srctmpl);
   srctmpl = "<a href='http://www.flickr.com/photos/" + window.flickruser
-            + "/sets/{{id}}/' target='_blank'>{{artist}}, {{year}}</a>";
+            + "/sets/{{id}}/' target='_blank'><span class='alpha'>{{artist}}, {{year}}</span></a>";
   window.tmplFlickrAlpha = Handlebars.compile(srctmpl);
  
  

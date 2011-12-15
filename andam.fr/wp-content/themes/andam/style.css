@@ -666,11 +666,26 @@ section#partenaires ul li img {
   margin: 0 0 1.2857142857142858em 0;
 }
 /*-------------- Archives -------------*/
-#archives h2 {
-  margin: 1.2857142857142858em 0 0 0;
+#archives .main h2 {
+  margin: 0;
 }
-#archives h2 {
+#archives .main h2 {
   font-size: 2em;
+}
+#archives .main ul {
+  list-style: none;
+  margin: 1.2857142857142858em 0 0 0;
+  padding: 0;
+}
+#archives .main span {
+  display: block;
+}
+#archives .main .alpha:first-letter {
+  font-size: 2em;
+  line-height: 1.2857142857142858em;
+}
+#archives .main .alpha {
+  margin: 1.2857142857142858em 0 0 0;
 }
 @media screen and (min-width: 200px) and (max-width: 480px) {
   body {
