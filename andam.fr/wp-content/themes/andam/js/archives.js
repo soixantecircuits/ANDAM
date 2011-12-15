@@ -9,7 +9,7 @@ $(function(){
   Handlebars.registerHelper('onetime', function(year) {
             if (year!= window.year) {
               window.year = year;
-              return year;
+              return "<h2 class='year'>"+year+"</h2>";
             }
             return "";
   });
@@ -17,10 +17,11 @@ $(function(){
   // Template
   // --------
 					  
-  var srctmpl = "<h2 class='year'>{{onetime year}}</h2>\
-                 <a href='http://www.flickr.com/photos/" + window.flickruser 
-                 + "/sets/{{id}}/' target='_blank'>{{artist}}</a>\
-                 ";
+  var srctmpl = "{{#laureats}}\
+                 {{{onetime year}}}\
+                 <li><a href='http://www.flickr.com/photos/" + window.flickruser 
+                 + "/sets/{{id}}/' target='_blank'>{{artist}}</a></li>\
+                 {{/laureats}}";
   window.tmplFlickrChrono = Handlebars.compile(srctmpl);
   srctmpl = "<a href='http://www.flickr.com/photos/" + window.flickruser
             + "/sets/{{id}}/' target='_blank'>{{artist}}, {{year}}</a>";
@@ -38,6 +39,8 @@ $(function(){
         return Backbone.Model.prototype.set.call(this, attributes,options);
     }
   });
+
+  window.Year = Backbone.Model.extend({});
 
   //  Collection
   // ---------------
@@ -59,9 +62,17 @@ $(function(){
         return response.photosets.photoset;
     },
     comparator: function(set){
-        return -set.get('year');
+        return set.get('artist');
     }
 
+  });
+
+  window.Years = Backbone.Collection.extend({
+    model: Year,
+    parse: function(response){
+      return _.groupBy(response,'year');
+      return response;
+    } 
   });
 
   // View
@@ -81,14 +92,27 @@ $(function(){
       $(this.el).html(window.tmplFlickr(this.model.toJSON()));
       return this;
     }
-
   });
 
+  window.YearView = Backbone.View.extend({
+ 
+    tagName: "ul",
+  
+    initialize: function(){
+      this.model.bind('change', this.render, this);
+    },
+
+    render: function(){
+      $(this.el).html(window.tmplFlickrChrono(this.model.toJSON()));
+      return this;
+    }
+   });
   // The Application
   // ---------------
 
   // Create our global collection.
   window.sets = new Sets;
+  window.years = new Years;
   
   // Our overall **AppView** is the top-level piece of UI.
   window.AppView = Backbone.View.extend({
@@ -102,6 +126,8 @@ $(function(){
       sets.bind('add',   this.addOne, this);
       sets.bind('all',   this.addAll, this);
       sets.fetch();
+      years.parse(sets.toJSON());
+      this.sortToggle();
     },
 
     // Add a single tweet item to the list by creating a view for it, and
@@ -116,23 +142,38 @@ $(function(){
       sets.each(this.addOne);
     },
 
+    // Add a single tweet item to the list by creating a view for it, and
+    // appending its element to the `<ul>`.
+    addOneYear: function(year) {
+      var view = new YearView({model: year});
+      this.$("#laureats").append(view.render().el);
+    },
+
+    // Add all items in the collection at once.
+    addAllYears: function() {
+      years.add(_.map(_.toArray(_.groupBy(sets.toJSON(),'year')), function(e){return {laureats:e}}));
+      years.each(this.addOneYear);
+    },
+
     sortToggle: function(){
+      $("#laureats").empty();
       if (window.alphabetical){
         $("#sortToggle").html('ordre alphab&eacute;tique');
         window.alphabetical = false;
-        sets.comparator = function(set){
-            return -set.get('year');
-        };
+        //sets.comparator = function(set){
+        //    return -set.get('year');
+        //};
+        this.addAllYears();
       }else{
         $("#sortToggle").html('ordre chronologique');
         window.alphabetical = true;
-        sets.comparator = function(set){
-            return set.get('artist');
-        };
+        //sets.comparator = function(set){
+        //    return set.get('artist');
+        //};
+        this.addAll();
       }
-      sets.sort();
-      $("#laureats").empty();
-      this.addAll();
+      //sets.sort();
+      //this.addAll();
     },
   });
 
