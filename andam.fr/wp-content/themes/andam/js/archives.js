@@ -81,7 +81,7 @@ $(function(){
   // The DOM element for a todo item...
   window.SetView = Backbone.View.extend({
 
-    tagName:  "div",
+    tagName:  "li",
 	
     initialize: function() {
       this.model.bind('change', this.render, this);
@@ -134,11 +134,12 @@ $(function(){
     // appending its element to the `<ul>`.
     addOne: function(set) {
       var view = new SetView({model: set});
-      this.$("#laureats").append(view.render().el);
+      this.$("#alpha").append(view.render().el);
     },
 
     // Add all items in the collection at once.
     addAll: function() {
+      $("#laureats").append("<ul id='alpha'></ul>");
       sets.each(this.addOne);
     },
 
