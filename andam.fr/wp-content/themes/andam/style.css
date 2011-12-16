@@ -494,7 +494,7 @@ article {
 /*------ HEADER & SIDEBAR-------*/
 body {
   margin: 0;
-  padding: 12.857142857142858em 0 0 0;
+  padding: 0 0 0 0;
 }
 header {
   position: absolute;
@@ -583,7 +583,7 @@ nav#main_menu ul li.current_page_item a {
   position: relative;
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 30% 0 20%;
+  padding: 12.857142857142858em 30% 0 20%;
 }
 p {
   margin: 0;
@@ -695,11 +695,14 @@ section#partenaires ul li img {
   margin: 1.2857142857142858em 0 0 0;
 }
 /** iOS vertical **/
-@media only screen and (min-width: 480px), 
+@media only screen and (min-width: 479px), 
 only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
   
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 481px) {
+  #opacite, #backstretch {
+    display: none;
+  }
   body {
     font-size: 13px;
   }
@@ -707,21 +710,37 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
     position: relative;
     padding: 0;
     margin: 0;
+    right: 0;
     float: none;
   }
-  /*
-  #main_menu ul li {
-  float: left;
+  nav#main_menu {
+    font-size: 0.9em;
+    position: relative;
+    padding-top: 2.5714285714285716em;
+    margin: 0;
+    top: 0;
+    width: auto;
   }
-  
-  #main_menu {
-  width: 100%;
+  nav#main_menu ul {
+    text-align: center;
   }
-  */
+  nav#main_menu ul li {
+    display: inline-block;
+    padding: 0 0 0 0;
+  }
+  nav#main_menu ul li a {
+    padding: 0 0.6428571428571429em;
+  }
+  nav#main_menu ul#langues {
+    margin-top: 1.2857142857142858em;
+  }
+  body > header {
+    position: relative;
+  }
   /* Style adjustments for viewports 480px and over go here */
   .main {
     margin: 0;
     width: 100%;
-    padding: 0;
+    padding: 3.8571428571428577em 0 0 0;
   }
 }

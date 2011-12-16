@@ -24,17 +24,19 @@
 	<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/webfont/stylesheet.css" />
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
+
 	<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>!-->
 	<?php $mycat = $post->post_name;?>
     <?php 
-    if ($mycat != "contest") 
+    if ($mycat != "contest" && $mycat != "twenty-years-of-fashion") {
     	wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true );
+	}   
     ?> 
 	<?php wp_head(); ?>
 </head>
 <body id="<? echo $post->post_name; ?>" <?php body_class(); ?>>
 	<div id="opacite"></div>
-	<header role="banner">
+	<header id="header" role="banner">
 		<div id="head_content">
 				<div id="logo">	
 					<? if ($post->post_name == "archives" || $post->post_name == "twenty-years-of-fashion") { $subtitle = "paris"; } else {$subtitle = date("Y");}?>	
