@@ -578,8 +578,14 @@ line-height: @unit;
 margin: @unit 0 0 0;
 }
 
+/** iOS vertical **/
+@media 
+only screen and (min-width: 480px), 
+only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
 
-@media screen and (min-width: 200px) and (max-width: 480px) {
+}
+@media
+only screen and (max-width: 480px) {
 body {
 font-size: 13px;
 }
@@ -589,15 +595,20 @@ padding: 0;
 margin:0;
 float:none;
 }
+/*
+#main_menu ul li {
+float: left;
+}
 
 #main_menu {
-//width: auto;
-
+width: 100%;
 }
+*/
+
   /* Style adjustments for viewports 480px and over go here */
   .main {
 	margin:0;
-	width: 50%;
+	width: 100%;
 	padding: 0;
 	}
 }
