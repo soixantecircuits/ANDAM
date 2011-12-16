@@ -505,18 +505,11 @@ header {
   position: relative;
   width: 100%;
   margin: 0 auto;
+  padding: 0;
   max-width: 960px;
   z-index: 99;
 }
 #logo {
-  /*
-position:relative;
-clear:both;
-float:right;
-width: 50%;
-padding: @unit 0 @unit 0;
-*/
-
   position: absolute;
   right: 1.2857142857142858em;
   top: 1.2857142857142858em;
@@ -526,12 +519,6 @@ padding: @unit 0 @unit 0;
   right: 0px;
   width: 50%;
   top: 11.571428571428573em;
-  /*
-position: relative;
-width: 50%;
-float:right;
-*/
-
 }
 ul#langues {
   margin: 3.8571428571428577em 0 0 0;
@@ -543,7 +530,7 @@ nav#main_menu ul#langues li a {
 }
 nav#main_menu ul li a {
   letter-spacing: 0.1em;
-  line-height: 1.2857142857142858em;
+  line-height: 0.6428571428571429em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -574,6 +561,10 @@ nav#main_menu ul li.current_page_item a {
   text-align: center;
   letter-spacing: 0.1em;
 }
+#logo h1 a {
+  display: block;
+  text-decoration: none;
+}
 #logo h1 #mot1 {
   word-wrap: normal;
   letter-spacing: 0.5em;
@@ -585,6 +576,7 @@ nav#main_menu ul li.current_page_item a {
 #logo h1 #mot3 {
   word-wrap: normal;
   letter-spacing: 0.5em;
+  margin: 0;
 }
 /*-------MAIN CONTAINER------*/
 .main {
@@ -623,7 +615,11 @@ section#partenaires ul li {
 }
 section#partenaires ul li a {
   display: block;
+  text-decoration: none;
   padding: 0 0 0 2.5714285714285716em;
+}
+section#partenaires ul li a:hover {
+  text-decoration: underline;
 }
 section#partenaires ul li img {
   clear: both;
@@ -654,6 +650,7 @@ section#partenaires ul li img {
   margin: 0;
 }
 #association .main h2 {
+  margin-top: 1.2857142857142858em;
   font-size: 2em;
 }
 #association .main h3 {
@@ -680,6 +677,12 @@ section#partenaires ul li img {
   list-style: none;
   margin: 1.2857142857142858em 0 0 0;
   padding: 0;
+}
+#archives .main ul a {
+  text-decoration: none;
+}
+#archives .main ul a:hover {
+  text-decoration: underline;
 }
 #archives .main span {
   display: block;

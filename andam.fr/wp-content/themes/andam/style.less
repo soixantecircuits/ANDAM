@@ -350,19 +350,13 @@ width:100%;
 position: relative;
 width: 100%;
 margin: 0 auto;
+padding:0;
 max-width: 960px;
 z-index:99;
 //overflow:auto;
 }
 
 #logo {
-/*
-position:relative;
-clear:both;
-float:right;
-width: 50%;
-padding: @unit 0 @unit 0;
-*/
 position: absolute;
 right:@unit;
 top: @unit;
@@ -373,11 +367,6 @@ position: absolute;
 right:0px;
 width:50%;
 top: @unit*9;
-/*
-position: relative;
-width: 50%;
-float:right;
-*/
 }
 
 ul#langues {
@@ -392,7 +381,7 @@ word-wrap: break-word;
 
 nav#main_menu ul li a { 
 letter-spacing: 0.1em;
-line-height: @unit;
+line-height: @unit/2;
 text-transform: uppercase;
 text-decoration: none;
 }
@@ -430,6 +419,11 @@ text-align:center;
 letter-spacing: 0.1em;
 }
 
+#logo h1 a{
+display:block;
+text-decoration:none;
+}
+
 #logo h1 #mot1{
   word-wrap:normal;
 letter-spacing: 0.5em;
@@ -443,6 +437,7 @@ letter-spacing: 0.1em;
 #logo h1 #mot3{
   word-wrap:normal;
 letter-spacing: 0.5em;
+margin:0;
 }
 
 
@@ -486,7 +481,12 @@ margin: 0 0 @unit/2 0;
 
 section#partenaires ul li a {
 display: block;
+text-decoration: none;
 padding: 0 0 0 @unit*2;
+}
+
+section#partenaires ul li a:hover {
+text-decoration: underline;
 }
 
 section#partenaires ul li img{
@@ -522,6 +522,7 @@ margin: 0;
 }
 
 #association .main h2{
+margin-top: @unit;
 font-size: 2em;
 }
 #association .main h3{
@@ -554,6 +555,14 @@ font-size: 2em;
 list-style: none;
 margin: @unit 0 0 0;
 padding: 0;
+}
+
+#archives .main ul a {
+text-decoration: none;
+}
+
+#archives .main ul a:hover {
+text-decoration: underline;
 }
 
 #archives .main span {

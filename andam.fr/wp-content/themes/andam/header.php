@@ -38,7 +38,7 @@
 		<div id="head_content">
 				<div id="logo">	
 					<? if ($post->post_name == "archives" || $post->post_name == "twenty-years-of-fashion") { $subtitle = "paris"; } else {$subtitle = date("Y");}?>	
-					<h1><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3"><? echo $subtitle; ?></span></h1>			
+					<h1><a href="<? echo get_home_url();?>"><span id="mot1">ANDAM</span><br /><span id="mot2">FASHION&nbsp;AWARDS</span><br /><span id="mot3"><? echo $subtitle; ?></span></a></h1>			
 					<? echo get_sidebar(); ?>
 				</div>		
 		</div>			
