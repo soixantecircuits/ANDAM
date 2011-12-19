@@ -8,11 +8,22 @@ $(function(){
   moment.lang(my_vars.mylang.toString());
   Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
-              return moment(moment(date)).format("dddd d MMMM, HH:mm");
+              return moment(moment(date)).format("dddd D MMMM, HH:mm");
             }
             return "";
   });
-
+  Handlebars.registerHelper('likers', function(likers) {
+    if (likers.length == 1){
+      return likers[0].name + ' aime &ccedil;a';
+    } else if (likers.length == 2){
+      return likers[0].name +' et ' + likers[1].name + ' aiment &ccedil;a';
+    } else if (likers.length == 3){
+      return likers[0].name + ', ' + likers[1].name + ' et ' + likers[2].name + ' aiment &ccedil;a';
+    } else if (likers.length > 3){
+      return likers[0].name + ', ' + likers[1].name + ' et ' + (likers.length - 2) + ' aiment &ccedila;a';
+    }
+    return '';
+  });
   // Template
   // --------
   
@@ -22,12 +33,11 @@ $(function(){
                         <div class='story'>\
                              {{story}}\
                         </div>\
-                        <a class='link'>{{caption}}</a>\
                         <h1>{{name}}</h1>\
-                        <p>{{description}}</p>\
-                        <img class='bg' style='display:none;' alt='' src='{{picture}}'>\
-                        <div class='likes'>{{#likes.data}}{{name}}, {{/likes.data}} aiment &ccedil;a</div>\
-                        <div class='action'>J\'aime * Commenter</div>\
+                        <a href={{link}} target='_blank' class='link'>{{caption}}</a>\
+                        {{#description}}<p>{{.}}</p>{{/description}}\
+                        {{#message}}<p>{{.}}</p>{{/message}}\
+                        {{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}\
                       </div>";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
