@@ -152,6 +152,7 @@ $(function(){
 
     // Add all items in the collection at once.
     addAllYears: function() {
+      years.reset();
       years.add(_.map(_.toArray(_.groupBy(sets.toJSON(),'year')), function(e){return {laureats:e}}));
       years.each(this.addOneYear);
     },
