@@ -601,27 +601,27 @@ p {
 #contest article p {
   margin: 0 0 1.2857142857142858em 0;
 }
-section#partenaires {
+section#creditsmentions {
   margin: 2.5714285714285716em 0 0 0;
 }
-section#partenaires ul {
+section ul#partenaires {
   list-style: none;
   list-style-image: none;
   margin: 0;
   padding: 0;
 }
-section#partenaires ul li {
+section ul#partenaires li {
   margin: 0 0 0.6428571428571429em 0;
 }
-section#partenaires ul li a {
+section ul#partenaires li a {
   display: block;
   text-decoration: none;
   padding: 0 0 0 2.5714285714285716em;
 }
-section#partenaires ul li a:hover {
+section ul#partenaires li a:hover {
   text-decoration: underline;
 }
-section#partenaires ul li img {
+section ul#partenaires li img {
   clear: both;
   float: left;
 }
