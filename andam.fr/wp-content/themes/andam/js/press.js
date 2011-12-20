@@ -4,7 +4,7 @@
 $(function(){
 
   // Setup
-    
+  window.username = 'ANDAMaward';  
   moment.lang('fr');
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
@@ -70,7 +70,7 @@ $(function(){
 
     model: Tweet,
 
-    url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=ANDAMaward&count=20",
+    url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + window.username + "&count=20",
     
     sync: function(method, model, options){  
         options.timeout = 10000;  
@@ -121,6 +121,16 @@ $(function(){
     // Add a single tweet item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function(tweet) {
+      if (window.firsttime == undefined){
+        if (tweet.get('entities').media){
+          if (tweet.get('entities').media.length> 0){
+            if (tweet.get('entities').media[0].type == 'photo'){
+              window.firsttime = true;
+              $.backstretch(tweet.get('entities').media[0].media_url, {speed: 350});
+            }
+          }
+        }  
+      }
       var view = new TweetView({model: tweet});
       this.$(".main").append(view.render().el);
     },
@@ -136,28 +146,3 @@ $(function(){
   window.App = new AppView;
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

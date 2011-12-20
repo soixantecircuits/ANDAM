@@ -5,10 +5,10 @@ $(function(){
 
   // Setup
     
-  moment.lang(my_vars.mylang.toString());
+  //moment.lang(my_vars.mylang.toString());
   Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
-              return moment(moment(date)).format("dddd D MMMM, HH:mm");
+              return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
             return "";
   });
@@ -104,8 +104,10 @@ $(function(){
 
     addOne: function(post) {
       if (window.firsttime == undefined){
-        window.firsttime = true;
-        $.backstretch(post.get('picture'), {speed: 350});
+        if (post.get('picture')){
+          window.firsttime = true;
+          $.backstretch(post.get('picture'), {speed: 350});
+        }
       }
       var view = new PostView({model: post});
       this.$(".main").append(view.render().el);
