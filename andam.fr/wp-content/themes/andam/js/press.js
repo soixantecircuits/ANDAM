@@ -13,19 +13,45 @@ $(function(){
             return "";
   });
 
+  Handlebars.registerHelper('dolinksin', function(text) {
+        if (text){
+          text = text.replace(/((www|http:\/\/)[^ ]+)/g,"<a href='$1' target='_blank'>$1</a>");
+          text = text.replace(/((@)[^ :]+)/g,function(match, user){
+            user = user.replace(/@/g,"");
+            return "@<a href='http://twitter.com/"+ user+ "' target='_blank'>"+ user + "</a>";}
+          );
+          text = text.replace(/((#)[^ ]+)/g,function(match, user){
+            user = user.replace(/#/g,"");
+            return "#<a href='http://twitter.com/search?q=%23"+ user+ "' target='_blank'>"+ user + "</a>";}
+          );
+          return text;
+        }
+        return ""; 
+  });
   // Template
   // --------
   var srctmpl =  "<time datetime='2010-01-20' pubdate>\
                           {{prettydate created_at}}\
                   </time>\
                   <span id='author' rel='author'>\
+                    <a href='http://twitter.com/"
+                       + "{{retweeted_status.user.screen_name}}"
+                       + "{{^retweeted_status.user.screen_name}}"
+                      + "{{user.screen_name}}"
+                      + "{{/retweeted_status.user.screen_name}}"
+                      + "' target='_blank'>\
                        {{retweeted_status.user.screen_name}}\
                        {{^retweeted_status.user.screen_name}}\
                        {{user.screen_name}}\
                        {{/retweeted_status.user.screen_name}}\
+                    </a>\
                   </span>\
-                  <h1>{{text}}</h1>\
-                  <a href='#'>{{#entities.urls}}{{url}}{{/entities.urls}}</a>";
+                  <h1>\
+                       {{{dolinksin retweeted_status.text}}}\
+                       {{^retweeted_status.text}}\
+                       {{{dolinksin text}}}\
+                       {{/retweeted_status.text}}</h1>";
+                  //<a href='#'>{{#entities.urls}}{{url}}{{/entities.urls}}</a>";
 
   window.tmplTwitter = Handlebars.compile(srctmpl);
  
