@@ -4,11 +4,11 @@
 $(function(){
 
   // Setup
-    
-  moment.lang(my_vars.mylang.toString());
+  window.access_token = 'AAAEPx4ZBt6T4BAPVb4u61KVfDoLuiIX5oSCeTaEeama22clBLxZBA2gHyHwPI1KeaZBTedDf8Il7g15huwbl01DF2CMOvAV4ZC0lUfLvSwZDZD';
+  //moment.lang(my_vars.mylang.toString());
   Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
-              return moment(moment(date)).format("dddd D MMMM, HH:mm");
+              return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
             return "";
   });
@@ -27,18 +27,18 @@ $(function(){
   // Template
   // --------
   
-  var srctmpl =  "<time datetime='2010-01-20' pubdate>\
-                          {{prettydatefb created_time}}\
-                        </time>\
-                        <div class='story'>\
-                             {{story}}\
-                        </div>\
-                        <h1>{{name}}</h1>\
-                        <a href={{link}} target='_blank' class='link'>{{caption}}</a>\
-                        {{#description}}<p>{{.}}</p>{{/description}}\
-                        {{#message}}<p>{{.}}</p>{{/message}}\
-                        {{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}\
-                      </div>";
+  var srctmpl =  "<time datetime='2010-01-20' pubdate>" +
+                     "{{prettydatefb created_time}}" +
+                 "</time>" +
+                 "{{#story}}" +
+                   "<div class='story'>{{.}}</div>" +
+                 "{{/story}}" +
+                 "{{#name}}<h1>{{.}}</h1>{{/name}}" +
+                 "{{#caption}}<a href={{../link}} target='_blank' class='link'>{{.}}</a>{{/caption}}" +
+                 "{{#description}}<p>{{.}}</p>{{/description}}" +
+                 "{{#message}}<p>{{.}}</p>{{/message}}" +
+                 "{{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}"+
+                 "{{#actions}}<a href={{link}} target='_blank'>{{name}}</a> {{/actions}}";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
   //  Model
@@ -54,7 +54,7 @@ $(function(){
 
     model: Post,
 
-    url: "https://graph.facebook.com/ANDAMFashionAwards/feed?access_token=AAAEPx4ZBt6T4BAPVb4u61KVfDoLuiIX5oSCeTaEeama22clBLxZBA2gHyHwPI1KeaZBTedDf8Il7g15huwbl01DF2CMOvAV4ZC0lUfLvSwZDZD",
+    url: "https://graph.facebook.com/ANDAMFashionAwards/feed?access_token=" + window.access_token,
     
     sync: function(method, model, options){  
         options.timeout = 10000;  
@@ -104,8 +104,19 @@ $(function(){
 
     addOne: function(post) {
       if (window.firsttime == undefined){
-        window.firsttime = true;
-        $.backstretch(post.get('picture'), {speed: 350});
+        if (post.get('type') == 'photo'){
+           window.firsttime = true;
+           $.ajax({
+            url:"https://graph.facebook.com/" + post.get('object_id') + "?access_token=" + window.access_token,
+            dataType:'JSONP',
+            success:function(picture){
+              $.backstretch(picture.images[0].source, {speed: 1000});
+            },
+            error:function(){
+              console.log('couldnt retrieve background image from facebook');
+            }
+          }); 
+        }
       }
       var view = new PostView({model: post});
       this.$(".main").append(view.render().el);
