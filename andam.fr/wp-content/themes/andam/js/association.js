@@ -3,9 +3,19 @@
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
 
+  // Setup
+  // -------
+    Handlebars.registerHelper('wikilink', function(text) {
+        if (text){
+          text = text.replace(/((\/w\/|\/wiki\/)[^"]+)/g,"http:\/\/fr.wikipedia.org$1");
+          return text;
+        }
+        return ""; 
+  });
+ 
   // Template
   // --------
-  var srctmpl =  "{{{content}}}";
+  var srctmpl =  "{{{wikilink content}}}";
   window.tmplWiki = Handlebars.compile(srctmpl);
  
  
