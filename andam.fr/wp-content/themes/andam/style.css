@@ -464,15 +464,6 @@ td {
 * html body {
   overflow: hidden;
 }
-#opacite {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: url('images/alpha.png');
-}
 h1 {
   font-size: 2em;
 }
@@ -489,7 +480,9 @@ article {
   margin-top: 3.8571428571428577em;
 }
 #backstretch {
-  opacity: 1;
+  opacity: .3;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
 }
 /*------ HEADER & SIDEBAR-------*/
 body {
@@ -700,7 +693,7 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   
 }
 @media only screen and (max-width: 481px) {
-  #opacite, #backstretch {
+  #backstretch {
     display: none;
   }
   body {
@@ -743,4 +736,69 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
     width: 100%;
     padding: 3.8571428571428577em 0 0 0;
   }
+}
+/*
+
+	Supersized - Fullscreen Slideshow jQuery Plugin
+	Version : Core 3.2.1
+	
+	Site	: www.buildinternet.com/project/supersized
+	Author	: Sam Dunn
+	Company : One Mighty Roar (www.onemightyroar.com)
+	License : MIT License / GPL License
+	
+*/
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #fff;
+  height: 100%;
+}
+img {
+  border: none;
+}
+#supersized-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  text-indent: -999em;
+  background: url(../img/progress.gif) no-repeat center center;
+}
+#supersized {
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  z-index: -999;
+  height: 100%;
+  width: 100%;
+}
+#supersized img {
+  width: auto;
+  height: auto;
+  position: relative;
+  outline: none;
+  border: none;
+}
+#supersized a {
+  z-index: -30;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  display: block;
+}
+#supersized a.image-loading {
+  background: #111111 url(../img/progress.gif) no-repeat center center;
+  width: 100%;
+  height: 100%;
 }

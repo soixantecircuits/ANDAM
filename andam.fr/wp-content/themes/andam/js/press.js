@@ -4,7 +4,7 @@
 $(function(){
 
   // Setup
-  window.username = 'ANDAMaward';  
+  window.username = 'egeoffray';  
   moment.lang('fr');
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
