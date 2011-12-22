@@ -5,7 +5,18 @@ $(function(){
 
   // Setup
   window.access_token = 'AAAEPx4ZBt6T4BAPVb4u61KVfDoLuiIX5oSCeTaEeama22clBLxZBA2gHyHwPI1KeaZBTedDf8Il7g15huwbl01DF2CMOvAV4ZC0lUfLvSwZDZD';
-  //moment.lang(my_vars.mylang.toString());
+  moment.lang(wp_var.lang);
+  window.en = { locale: 'en_US',
+                likesthis: 'likes this',
+                likethis: 'like this',
+                others: 'others',
+                and: 'and'};
+  window.fr = { locale: 'fr_FR',
+                likesthis: 'aime &ccedil;a',
+                likethis: 'aiment &ccedil;a',
+                others: 'autres personnes',
+                and: 'et'};
+  window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
   Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
               return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
@@ -14,13 +25,13 @@ $(function(){
   });
   Handlebars.registerHelper('likers', function(likers) {
     if (likers.length == 1){
-      return likers[0].name + ' aime &ccedil;a';
+      return likers[0].name + ' ' +lang.likesthis + '.';
     } else if (likers.length == 2){
-      return likers[0].name +' et ' + likers[1].name + ' aiment &ccedil;a';
+      return likers[0].name + ' ' + lang.and + ' ' + likers[1].name + ' ' + lang.likethis + '.';
     } else if (likers.length == 3){
-      return likers[0].name + ', ' + likers[1].name + ' et ' + likers[2].name + ' aiment &ccedil;a';
+      return likers[0].name + ', ' + likers[1].name + ' ' + lang.and + ' ' + likers[2].name + ' ' + lang.likethis + '.';
     } else if (likers.length > 3){
-      return likers[0].name + ', ' + likers[1].name + ' et ' + (likers.length - 2) + ' aiment &ccedila;a';
+      return likers[0].name + ', ' + likers[1].name + ' ' + lang.and + ' ' + (likers.length - 2) + ' ' + lang.others + ' ' + lang.likethis + '.';
     }
     return '';
   });
@@ -54,7 +65,7 @@ $(function(){
 
     model: Post,
 
-    url: "https://graph.facebook.com/ANDAMFashionAwards/feed?access_token=" + window.access_token,
+    url: "https://graph.facebook.com/ANDAMFashionAwards/feed?access_token=" + window.access_token + "&locale=" + lang.locale,
     
     sync: function(method, model, options){  
         options.timeout = 10000;  

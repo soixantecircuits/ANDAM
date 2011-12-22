@@ -4,8 +4,13 @@
 $(function(){
 
   // Setup
+'<<<<<<< HEAD'
   window.username = 'egeoffray';  
   moment.lang('fr');
+'======='
+  window.username = 'ANDAMaward';  
+  moment.lang(wp_var.lang);
+'>>>>>>> effe0860dfbb21dea810a03395fdeda7ac1d7e22'
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
               return moment(moment(date)).format("D MMM");
