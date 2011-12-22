@@ -4,8 +4,17 @@
 $(function(){
 
   // Setup
-  window.flickruser = '71927167@N03';
+  window.en = { list:'Winners since 1989',
+                chrono:'sort by date',
+                alpha: 'sort by name'};
+  window.fr = { list:'Liste des laur&eacute;ats depuis 1989 par ann&eacute;e',
+                chrono:'ordre chronologique',
+                alpha: 'ordre alphab&eacute;tique'};
+  window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
+
+  window.flickruser = '72610704@N08';//'71927167@N03';
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
+
   Handlebars.registerHelper('onetime', function(year) {
             if (year!= window.year) {
               window.year = year;
@@ -21,7 +30,7 @@ $(function(){
               "<h2>{{year}}</h2>" +
               "{{#laureats}}" +
                   "<li><a href='http://www.flickr.com/photos/" + window.flickruser +
-                  "/sets/{{id}}/' target='_blank'><span class='alphac'>{{artist}}</span></a></li>" +
+                  "/sets/{{id}}/' target='_blank'>{{artist}}</a></li>" +
               "{{/laureats}}" +
              "</ul>" + 
             "{{/chronolaureats}}";
@@ -89,7 +98,7 @@ $(function(){
     //el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<p>Liste des laur&eacute;ats depuis 1989 par ann&eacute;e<br />(voir par <a href='#' id='sortToggle'>ordre alphab&eacute;tique</a>)</p><div id='laureats'></div>");
+      $(".main").append("<p>" + lang.list + "<br />(<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
       sets.bind('all',   this.viewChrono, this);
       sets.fetch();
     },
@@ -115,11 +124,11 @@ $(function(){
     sortToggle: function(){
       $("#laureats").empty();
       if (window.alphabetical){
-        $("#sortToggle").html('ordre alphab&eacute;tique');
+        $("#sortToggle").html(lang.alpha);
         window.alphabetical = false;
         this.viewChrono();
       }else{
-        $("#sortToggle").html('ordre chronologique');
+        $("#sortToggle").html(lang.chrono);
         window.alphabetical = true;
         this.viewAlpha();
       }

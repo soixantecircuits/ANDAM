@@ -13,8 +13,8 @@
 
 <? 
 $malangue = qtrans_getLanguage();
-$tab_vars = array("mylang" => $malangue);																			
-wp_localize_script (  "$post->post_name" , 'my_vars' , $tab_vars);
+$tab_vars = array("lang" => $malangue);																			
+wp_localize_script (  "$post->post_name" , 'wp_var' , $tab_vars);
 ?>
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
 <script src="http://www.google.com/jsapi?key=ABQIAAAAMZtLdEEp8B9FKLJ2F8KdCxS4Hg7y3Ifan2q66sLq2B03Ev_aTRR7sCCsXgqNdVAEf0Jos8tmw-1Gmg"></script>
@@ -34,6 +34,7 @@ wp_localize_script (  "$post->post_name" , 'my_vars' , $tab_vars);
 <script src="<?= get_template_directory_uri(); ?>/js/libs/underscore-1.2.2.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/libs/backbone.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/libs/moment.min.js"></script>
+<script src="<?= get_template_directory_uri(); ?>/js/mylibs/fr.js" charset=UTF-8></script>
 <!-- scripts concatenated and minified via ant build script-->
 <script src="<?= get_template_directory_uri(); ?>/js/plugins.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/script.js"></script>

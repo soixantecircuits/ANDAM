@@ -5,9 +5,15 @@ $(function(){
 
   // Setup
   // -------
-    Handlebars.registerHelper('wikilink', function(text) {
+  window.en = { wiki:'en',
+                page:'Reverse_engineering'};
+  window.fr = { wiki:'fr',
+                page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode'};
+  window.lang = (wp_var.lang == 'fr')? window.fr : window.en; 
+  
+  Handlebars.registerHelper('wikilink', function(text) {
         if (text){
-          text = text.replace(/((\/w\/|\/wiki\/)[^"]+)/g,"http:\/\/fr.wikipedia.org$1");
+          text = text.replace(/((\/w\/|\/wiki\/)[^"]+)/g,"http:\/\/" + lang.wiki + ".wikipedia.org$1");
           return text;
         }
         return ""; 
@@ -28,13 +34,12 @@ $(function(){
 
   //  Collection
   // ---------------
-  var my_lang = my_vars.mylang;
   window.Timeline = Backbone.Collection.extend({
 
     model: Tweet,
 
     //url:"http://fr.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=xml&pageids=3051354&format=json",
-    url:"http://fr.wikipedia.org/w/api.php?action=parse&page=Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode&format=json",    
+    url:"http://" + lang.wiki + ".wikipedia.org/w/api.php?action=parse&page=" + lang.page + "&format=json",    
 
     sync: function(method, model, options){  
         options.timeout = 10000;  

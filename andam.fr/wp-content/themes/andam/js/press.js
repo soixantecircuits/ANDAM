@@ -5,7 +5,7 @@ $(function(){
 
   // Setup
   window.username = 'ANDAMaward';  
-  moment.lang('fr');
+  moment.lang(wp_var.lang);
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
               return moment(moment(date)).format("D MMM");
