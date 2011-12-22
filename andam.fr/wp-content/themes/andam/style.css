@@ -483,8 +483,11 @@ article {
   opacity: .3;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
   filter: alpha(opacity=30);
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-optimize-contrast;
+  /*
+image-rendering: -moz-crisp-edges;
+image-rendering: -webkit-optimize-contrast;
+*/
+
 }
 /*------ HEADER & SIDEBAR-------*/
 body {
