@@ -319,15 +319,13 @@ margin: 0 0 @unit*3 0;
 margin-top: @unit*3;
 }
  
-#backstretch {
-opacity: .3;
--ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; // for IE8 first!
-filter: alpha(opacity=30); // for IE5-7 second!
+#backstretch img {
+opacity: .2;
+-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; // for IE8 first!
+filter: alpha(opacity=20); // for IE5-7 second!
 // disable antialiasing //
-/*
 image-rendering: -moz-crisp-edges;
-image-rendering: -webkit-optimize-contrast;
-*/
+image-rendering: -webkit-optimize-contrast; 
 }
 
 /*------ HEADER & SIDEBAR-------*/
