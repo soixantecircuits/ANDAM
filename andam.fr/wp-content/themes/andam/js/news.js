@@ -121,7 +121,9 @@ $(function(){
             url:"https://graph.facebook.com/" + post.get('object_id') + "?access_token=" + window.access_token,
             dataType:'JSONP',
             success:function(picture){
-              $.backstretch(picture.images[0].source, {speed: 1000});
+              var image = _.find(picture.images, function(image){
+                    return image.width * image.height < 800*600;});
+              $.backstretch(image.source, {speed: 1000});
             },
             error:function(){
               console.log('couldnt retrieve background image from facebook');

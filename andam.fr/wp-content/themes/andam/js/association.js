@@ -6,9 +6,11 @@ $(function(){
   // Setup
   // -------
   window.en = { wiki:'en',
-                page:'Reverse_engineering'};
+                page:'Reverse_engineering',
+                from:'From <a href="http://en.wikipedia.org">Wikipedia</a>, the free encyclopedia'};
   window.fr = { wiki:'fr',
-                page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode'};
+                page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode',
+                from:'De <a href="http://fr.wikipedia.org">Wikip&eacute;dia</a>, l\'encyclop&eacute;die libre'};
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en; 
   
   Handlebars.registerHelper('wikilink', function(text) {
@@ -87,6 +89,7 @@ $(function(){
     el: $(".main"),
 
     initialize: function() {
+      $(".main").append("<div>Loading...</div>");
       timeline.bind('add',   this.addOne, this);
       timeline.bind('all',   this.addAll, this);
       timeline.fetch();
@@ -101,6 +104,8 @@ $(function(){
 
     // Add all items in the collection at once.
     addAll: function() {
+      $(".main").empty();      
+      $(".main").append("<div class='intro'>"+lang.from+"</div><br/>");
       timeline.each(this.addOne);
     }
 
