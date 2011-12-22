@@ -6,7 +6,8 @@ $(function(){
   // Setup
   // -------
   window.en = { wiki:'en',
-                page:'Reverse_engineering',
+                page:'Pierre_Bergé',
+                //page:'Fashion',
                 from:'From <a href="http://en.wikipedia.org">Wikipedia</a>, the free encyclopedia'};
   window.fr = { wiki:'fr',
                 page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode',
@@ -15,7 +16,9 @@ $(function(){
   
   Handlebars.registerHelper('wikilink', function(text) {
         if (text){
-          text = text.replace(/((\/w\/|\/wiki\/)[^"]+)/g,"http:\/\/" + lang.wiki + ".wikipedia.org$1");
+          text = text.replace(/"((\/w\/|\/wiki\/)[^"]+)"/g, function(match, link){
+            link = link.replace(/\"/g,"");    
+            return "\"http:\/\/" + lang.wiki + ".wikipedia.org" + link + "\" target='_blank'"});
           return text;
         }
         return ""; 
@@ -107,6 +110,9 @@ $(function(){
       $(".main").empty();      
       $(".main").append("<div class='intro'>"+lang.from+"</div><br/>");
       timeline.each(this.addOne);
+      
+      $.backstretch($(".thumb img").attr('src'), {speed: 1000});
+      $(".thumb").empty();
     }
 
   });
