@@ -1,3 +1,11 @@
+SetEnv PHP_VER 5
+# protection wp-config.php
+<files wp-config.php>
+Order deny,allow
+deny from all
+</files>
+# interdit l'acces aux indexes de dossiers
+Options All -Indexes
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
