@@ -19,11 +19,6 @@ $(function(){
           text = text.replace(/"((\/w\/|\/wiki\/)[^"]+)"/g, function(match, link){
             link = link.replace(/\"/g,"");    
             return "\"http:\/\/" + lang.wiki + ".wikipedia.org" + link + "\" target='_blank'"});
-          //text = text.replace(/<div\s+class="thumb +">[^<>]*(<div[^>]*>(?:[^<>]*|(?1))*<\/div>)[^<>]*<\/div>/g, function(match, link){
-            //link = link.replace(/\"/g,"");    
-            //return "<div>OÏ</div>";});
-          
-
           return text;
         }
         return ""; 

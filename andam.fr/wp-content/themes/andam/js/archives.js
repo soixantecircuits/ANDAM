@@ -99,11 +99,42 @@ $(function(){
 
     initialize: function() {
       $(".main").append("<p>" + lang.list + "<br />(<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
-      sets.bind('all',   this.viewChrono, this);
+      sets.bind('all', this.render, this);
       sets.fetch();
     },
-
-    viewAlpha:function(){
+    render: function(){
+      this.viewChrono();
+      this.randomBackgroundImage();
+    },
+    randomBackgroundImage: function(){
+      var set = sets.at(Math.floor(Math.random() * sets.length));
+      $.ajax({
+        url:"http://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&format=json&api_key="
+            +window.flickrapikey + "&user_id=" + window.flickruser + "&photoset_id=" + set.get('id'),
+            dataType: 'JSONP',
+            jsonp:  "jsoncallback", 
+            success: function(pictures){
+              var picture = pictures.photoset.photo[Math.floor(Math.random() * pictures.photoset.photo.length)];
+              $.ajax({
+                url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
+                    +window.flickrapikey + "&user_id=" + window.flickruser + "&photo_id=" + picture.id,
+                    dataType: 'JSONP',
+                    jsonp:  "jsoncallback", 
+                    success: function(sizes){
+                      var image = _.find(sizes.sizes.size, function(size){return size.label == 'Original';});
+                      $.backstretch(image.source, {speed: 1000});
+                    },
+                    error: function(){
+                      console.log('couldnt retrieve background image from flickr');
+                    }
+               });
+            },
+            error: function(){
+              console.log('couldnt retrieve background image from flickr');
+            }
+       });
+    },
+    viewAlpha: function(){
       var alphajs = _.map(_.toArray(_.groupBy(_.sortBy(sets.toJSON(),function(laureat){
          return laureat.artist}), function(laureat){
              return laureat.artist.substring(0,1);})),
@@ -112,7 +143,7 @@ $(function(){
       $("#laureats").append(window.tmplAlpha(alphajs));
     },
     
-    viewChrono:function(){
+    viewChrono: function(){
       var chronojs = _.sortBy(_.map(_.toArray(_.groupBy(sets.toJSON(), function(laureat){
                                                 return laureat.year;})), function(e){
                                return {year:e[0].year,laureats:e}}), function(laureats){
