@@ -273,4 +273,3 @@ function remove_row_actions( $actions )
 	}
 }
 ?>
-
