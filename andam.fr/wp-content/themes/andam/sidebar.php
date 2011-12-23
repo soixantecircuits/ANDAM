@@ -25,8 +25,12 @@
 		</li>
 	</ul>
 	<? if($post->post_name == "association" || $post->post_name == "press") {?>
+	<?php if(have_posts()) : ?>
+	<?php while(have_posts()) : the_post(); ?>  
 	<aside id="contact">
-		<? echo wpautop($post->post_content);?>
+		<? the_content(); ?>
 	</aside>
+<?php endwhile; // end of the loop. ?>
+<?php endif; ?>
 	<? } ?>
 </nav>

@@ -25,7 +25,7 @@ function fb_like( $atts, $content=null ){
             'font' => '',
             'colorscheme' => 'light',
             'ref' => 'andamfr',
-            'locale' => 'fr_FR',
+            'locale' => __('[:fr]fr_FR[:en]en_US'),
             'appId' => '' // Put your AppId here 
     ), $atts));
  

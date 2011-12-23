@@ -5,9 +5,9 @@
 * @since ANDAM 1.0
 */
 get_header(); ?>
-
+<?php if(have_posts()) : ?>
+	<?php while(have_posts()) : the_post(); ?>  
 <article>
-	<?php $my_fblb = do_shortcode("[fb Locale=".__('[:fr]fr_FR[:en]en_US')."]"); ?>
 	<section id="infos">
 	<?
 	$postid = get_the_ID();
@@ -17,12 +17,11 @@ get_header(); ?>
 	$textsupp = $textarea_mb->the_meta();
 	$inscript = simple_fields_get_post_group_values($postid, "inscription", true, 2);
 	$inscriptfile = wp_get_attachment_url($inscript[0]['fichier']);
-	// inserer fb button //
-	$lecontenu = str_replace("[fb]", $my_fblb, $post->post_content);
+	if (!empty($inscriptfile)) {
 	?>
 		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? _e('[:fr]Télécharger le dossier d\'inscription[:en]Download registration file'); ?></a></p>
-	<? echo wpautop($lecontenu); ?>
-	<? print_r(get_the_content()); ?>
+	<? } ?>
+	<? the_content(); ?>
 		<ul id="partenaires">
 			<? 			
 				$tabinfos = simple_fields_get_post_group_values($postid, "partenaires", true, 2);				
@@ -45,6 +44,7 @@ get_header(); ?>
 	 // text supp //
 	 $my_textsupp =  trad_customfield2( $textsupp, "extra_content", $my_lang ); 
 	 echo wpautop($my_textsupp);
+	 
 ?>		
 
 	</section>
@@ -57,5 +57,7 @@ get_header(); ?>
 	?>
 	<img src="<? echo $mybgdurl; ?>"/>
 </div>
+<?php endwhile; // end of the loop. ?>
+<?php endif; ?>
 			
 <?php get_footer(); ?>
