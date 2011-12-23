@@ -11,16 +11,15 @@ $my_lang = qtrans_getLanguage();
 global $textarea_mb;
 $article = $textarea_mb->the_meta();
 ?>
+<?php if(have_posts()) : ?>
+	<?php while(have_posts()) : the_post(); ?> 
 <article>
-<? 
-// facebook //
-$my_fblb = do_shortcode("[fb Locale=".__('[:fr]fr_FR[:en]en_US')."]");
-$lecontenu = str_replace("[fb]", $my_fblb, $post->post_content);
-?>
-<section>
-<? echo wpautop($lecontenu); ?>
-</section>
+	<section>
+	<? the_content(); ?>
+	</section>
 </article>
+<?php endwhile; // end of the loop. ?>
+<?php endif; ?>
 <div id="localbgdurl" style="display:none">
 	<?
 	$mybgd = simple_fields_get_post_group_values($post->ID, "image de fond", true, 2);
