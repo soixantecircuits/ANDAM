@@ -117,6 +117,9 @@ $(function(){
       $(".main").empty();      
       $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
       $(".main").append("<p>" + lang.list + "<br />(<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $("#sortToggle").bind('click', function(){
+        App.sortToggle();
+      });
       this.viewChrono();
       this.randomBackgroundImage();
     },
@@ -183,7 +186,4 @@ $(function(){
   // Finally, we kick things off by creating the **App**.
   window.App = new AppView;
 
-  $("#sortToggle").bind('click', function(){
-    App.sortToggle();
-  });
 });

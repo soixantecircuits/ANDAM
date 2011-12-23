@@ -17,7 +17,8 @@ $(function(){
   moment.lang(wp_var.lang);
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
-              return moment(moment(date)).format("D MMM");
+              return moment(date,'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              //return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
             return "";
   });
