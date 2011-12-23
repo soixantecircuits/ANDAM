@@ -5,10 +5,20 @@ $(function(){
 
   // Setup
   window.username = 'egeoffray';  
+  window.en = { 
+                from:'From <a href="http://www.twitter.com/' + username + '" target="_blank">Twitter</a>',
+                loading:'Loading'
+              };
+  window.fr = { 
+                from:'De <a href="http://www.twitter.com/' + username + '" target="_blank">Twitter</a>',
+                loading:'Chargement'
+                };
+  window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
   moment.lang(wp_var.lang);
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
-              return moment(moment(date)).format("D MMM");
+              return moment(date,'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              //return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
             return "";
   });
@@ -113,6 +123,10 @@ $(function(){
     el: $(".main"),
 
     initialize: function() {
+      $(".main").append("<div class='loading'>" + lang.loading + "...</div>");
+      window.loadingtimer = setInterval(function() { 
+       $('.loading').append('.');
+      }, 400);
       timeline.bind('add',   this.addOne, this);
       timeline.bind('all',   this.addAll, this);
       timeline.fetch();
@@ -137,6 +151,9 @@ $(function(){
 
     // Add all items in the collection at once.
     addAll: function() {
+      clearInterval(window.loadingtimer);
+      $(".main").empty();      
+      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
       timeline.each(this.addOne);
     }
 

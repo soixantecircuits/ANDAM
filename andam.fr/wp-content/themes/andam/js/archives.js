@@ -4,16 +4,23 @@
 $(function(){
 
   // Setup
-  window.en = { list:'Winners since 1989',
-                chrono:'sort by date',
-                alpha: 'sort by name'};
-  window.fr = { list:'Liste des laur&eacute;ats depuis 1989 par ann&eacute;e',
-                chrono:'ordre chronologique',
-                alpha: 'ordre alphab&eacute;tique'};
-  window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
-
   window.flickruser = '72610704@N08';//'71927167@N03';
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
+  
+  window.en = { list:'Winners since 1989',
+                chrono:'sort by date',
+                alpha: 'sort by name',
+                from:'From <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
+                loading:'Loading'
+              };
+  window.fr = { list:'Liste des laur&eacute;ats depuis 1989 par ann&eacute;e',
+                chrono:'ordre chronologique',
+                alpha: 'ordre alphab&eacute;tique',
+                from:'De <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
+                loading:'Chargement'
+                };
+  window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
+
 
   Handlebars.registerHelper('onetime', function(year) {
             if (year!= window.year) {
@@ -98,11 +105,21 @@ $(function(){
     //el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<p>" + lang.list + "<br />(<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $(".main").append("<div class='loading'>"+ lang.loading + "...</div>");
+      window.loadingtimer = setInterval(function() { 
+       $('.loading').append('.');
+      }, 400);
       sets.bind('all', this.render, this);
       sets.fetch();
     },
     render: function(){
+      clearInterval(window.loadingtimer);
+      $(".main").empty();      
+      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
+      $(".main").append("<p>" + lang.list + "<br />(<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $("#sortToggle").bind('click', function(){
+        App.sortToggle();
+      });
       this.viewChrono();
       this.randomBackgroundImage();
     },
@@ -169,7 +186,4 @@ $(function(){
   // Finally, we kick things off by creating the **App**.
   window.App = new AppView;
 
-  $("#sortToggle").bind('click', function(){
-    App.sortToggle();
-  });
 });

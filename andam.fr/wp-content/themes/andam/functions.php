@@ -24,9 +24,9 @@ function fb_like( $atts, $content=null ){
             'action' => 'like',
             'font' => '',
             'colorscheme' => 'light',
-            'ref' => '',
+            'ref' => 'andamfr',
             'locale' => 'fr_FR',
-            'appId' => '168284213234217' // Put your AppId here is you have one
+            'appId' => '' // Put your AppId here 
     ), $atts));
  
     $fb_like_code = <<<HTML
@@ -273,3 +273,4 @@ function remove_row_actions( $actions )
 	}
 }
 ?>
+
