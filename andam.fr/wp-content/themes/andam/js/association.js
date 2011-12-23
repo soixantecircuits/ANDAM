@@ -8,10 +8,12 @@ $(function(){
   window.en = { wiki:'en',
                 page:'Pierre_Bergé',
                 //page:'Fashion',
-                from:'From <a href="http://en.wikipedia.org">Wikipedia</a>, the free encyclopedia'};
+                from:'From <a href="http://en.wikipedia.org">Wikipedia</a>, the free encyclopedia',
+                loading:'Loading'};
   window.fr = { wiki:'fr',
                 page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode',
-                from:'De <a href="http://fr.wikipedia.org">Wikip&eacute;dia</a>, l\'encyclop&eacute;die libre'};
+                from:'De <a href="http://fr.wikipedia.org">Wikip&eacute;dia</a>, l\'encyclop&eacute;die libre',
+                loading:'Chargement'};
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en; 
   
   Handlebars.registerHelper('wikilink', function(text) {
@@ -92,7 +94,11 @@ $(function(){
     el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<div>Loading...</div>");
+      $(".main").append("<div class='loading'>"+ lang.loading + "...</div>");
+      window.loadingtimer = setInterval(function() { 
+       $('.loading').append('.');
+      }, 400);
+
       timeline.bind('add',   this.addOne, this);
       timeline.bind('all',   this.addAll, this);
       timeline.fetch();
@@ -107,8 +113,9 @@ $(function(){
 
     // Add all items in the collection at once.
     addAll: function() {
+      clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>"+lang.from+"</div><br/>");
+      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
       timeline.each(this.addOne);
       
       $.backstretch($(".thumb img").attr('src'), {speed: 1000});
