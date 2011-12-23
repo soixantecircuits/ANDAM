@@ -191,20 +191,7 @@ function remove_row_actions( $actions )
         unset( $actions['trash'] );
         }
     return $actions;
-}
-
-	// exclu des pages de l'admin //
-	//add_filter( 'parse_query', 'exclude_pages_from_admin' );
-	/*
-	function exclude_pages_from_admin($query) {
-    	global $pagenow,$post_type;
-		    if (is_admin() && $pagenow=='edit.php' && $post_type =='products') {
-		        $query->query_vars['post__not_in'] = array('995','996','999','997');
-		    }
-	}
-    */
-	
-	
+}	
 	// supprime le bouton ajouter dans Accueil //	
 		function hide_buttons()
 		{

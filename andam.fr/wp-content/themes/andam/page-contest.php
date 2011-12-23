@@ -22,6 +22,7 @@ get_header(); ?>
 	?>
 		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? _e('[:fr]Télécharger le dossier d\'inscription[:en]Download registration file'); ?></a></p>
 	<? echo wpautop($lecontenu); ?>
+	<? print_r(get_the_content()); ?>
 		<ul id="partenaires">
 			<? 			
 				$tabinfos = simple_fields_get_post_group_values($postid, "partenaires", true, 2);				
@@ -41,7 +42,7 @@ get_header(); ?>
 	
 	<section id="creditsmentions">
 <?
-	// text supp //
+	 // text supp //
 	 $my_textsupp =  trad_customfield2( $textsupp, "extra_content", $my_lang ); 
 	 echo wpautop($my_textsupp);
 ?>		
