@@ -21,4 +21,11 @@ $lecontenu = str_replace("[fb]", $my_fblb, $post->post_content);
 <? echo wpautop($lecontenu); ?>
 </section>
 </article>
+<div id="localbgdurl" style="display:none">
+	<?
+	$mybgd = simple_fields_get_post_group_values($post->ID, "image de fond", true, 2);
+	$mybgdurl = urldecode(wp_get_attachment_url($mybgd[0]['fichier']));
+	?>
+	<img src="<? echo $mybgdurl; ?>"/>
+</div>
 <?php get_footer(); ?>

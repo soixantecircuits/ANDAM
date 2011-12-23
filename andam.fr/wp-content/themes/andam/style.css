@@ -479,15 +479,12 @@ article {
 #contact {
   margin-top: 3.8571428571428577em;
 }
-#backstretch {
-  opacity: .3;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-  filter: alpha(opacity=30);
-  /*
-image-rendering: -moz-crisp-edges;
-image-rendering: -webkit-optimize-contrast;
-*/
-
+#backstretch img {
+  opacity: .2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
 }
 /*------ HEADER & SIDEBAR-------*/
 body {

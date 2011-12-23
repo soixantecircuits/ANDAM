@@ -30,7 +30,7 @@
     <?php 
     if ($mycat != "contest" && $mycat != "twenty-years-of-fashion") {
     	wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true );
-	}   
+	} 
     ?> 
 	<?php wp_head(); ?>
 </head>
