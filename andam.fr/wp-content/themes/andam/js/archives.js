@@ -138,7 +138,10 @@ $(function(){
                     dataType: 'JSONP',
                     jsonp:  "jsoncallback", 
                     success: function(sizes){
-                      var image = _.find(sizes.sizes.size, function(size){return size.label == 'Original';});
+                      var sortedSizes = _.sortBy(sizes.sizes.size, function(size){return -size.width*size.height;});
+                      var image = _.find(sortedSizes, function(image){
+                          return image.width * image.height < 800*600;});
+                      //var image = _.find(sizes.sizes.size, function(size){return size.label == 'Original';});
                       $.backstretch(image.source, {speed: 1000});
                     },
                     error: function(){

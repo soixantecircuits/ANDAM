@@ -17,8 +17,10 @@ $(function(){
   moment.lang(wp_var.lang);
   Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
-              return moment(date,'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              //return moment(date,'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              //return moment(date.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/, "$1 $2 $4 $3 UTC"), 'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
               //return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
+              return moment(date.replace(/\+/,'')).format("D MMM");
             }
             return "";
   });

@@ -96,7 +96,9 @@ $(function(){
     },
 
     render: function() {
-      $(this.el).html(window.tmplFacebook(this.model.toJSON()));
+      if (this.model.get('type') != 'status'){
+        $(this.el).html(window.tmplFacebook(this.model.toJSON()));
+      }      
       return this;
     }
 
