@@ -30,12 +30,12 @@ $(function(){
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
   moment.lang(wp_var.lang);
-  Handlebars.registerHelper('prettydate', function(date) {
+  Handlebars.registerHelper('prettydatetw', function(date) {
             if (date) {
-              //return moment(date,'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("D MMM, HH:mm");
               //return moment(date.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/, "$1 $2 $4 $3 UTC"), 'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
               //return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
-              return moment(date.replace(/\+/,'')).format("D MMM");
+              //return moment(date.replace(/\+/,'')).format("D MMM");
             }
             return "";
   });
@@ -56,7 +56,7 @@ $(function(){
         return ""; 
   });
   
-  Handlebars.registerHelper('prettydatefb', function(date) {
+  Handlebars.registerHelper('prettydate', function(date) {
             if (date) {
               return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
@@ -77,7 +77,7 @@ $(function(){
   // Template
   // --------
   var srctmpl =  "<time datetime='2010-01-20' pubdate>\
-                          {{prettydate created_at}}\
+                          {{prettydatetw created_at}}\
                   </time>\
                   <span id='author' rel='author'>\
                     <a href='http://twitter.com/"
@@ -101,7 +101,7 @@ $(function(){
 
   window.tmplTwitter = Handlebars.compile(srctmpl);
   srctmpl =  "<time datetime='2010-01-20' pubdate>" +
-                     "{{prettydatefb created_time}}" +
+                     "{{prettydate created_time}}" +
                  "</time>" +
                  //"{{#story}}" +
                  //  "<div class='story'>{{.}}</div>" +
@@ -117,7 +117,25 @@ $(function(){
   //  Model
   // ----------
 
-  window.Tweet = Backbone.Model.extend({  });
+  window.Tweet = Backbone.Model.extend({  
+    validate: function(attrs){
+              //2011-12-30T11:19:15+0000 Fri Dec 30 11:31:35 +0000 2011
+              //return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
+              attrs.created_at = attrs.created_at.replace(/^\w+ (\w+) (\d+) ([\d:]+) (\+\d+) (\d+)$/, "$5-$1-$2T$3$4");
+              attrs.created_at = attrs.created_at.replace(/Dec/, "12");
+              attrs.created_at = attrs.created_at.replace(/Nov/, "11");
+              attrs.created_at = attrs.created_at.replace(/Oct/, "10");
+              attrs.created_at = attrs.created_at.replace(/Sep/, "9");
+              attrs.created_at = attrs.created_at.replace(/Aug/, "8");
+              attrs.created_at = attrs.created_at.replace(/Jul/, "7");
+              attrs.created_at = attrs.created_at.replace(/Jun/, "6");
+              attrs.created_at = attrs.created_at.replace(/May/, "5");
+              attrs.created_at = attrs.created_at.replace(/Apr/, "4");
+              attrs.created_at = attrs.created_at.replace(/Mar/, "3");
+              attrs.created_at = attrs.created_at.replace(/Feb/, "2");
+              attrs.created_at = attrs.created_at.replace(/Jan/, "1");
+    }
+  });
   window.Post = Backbone.Model.extend({
     validate: function(attrs){
       if (attrs.type == 'photo'){
@@ -171,7 +189,7 @@ $(function(){
   window.BothFeed = Backbone.Collection.extend({
 
     comparator: function(post){
-        return -(post.get('created_at') ? moment(post.get('created_at')) :  moment(post.get('created_time')));
+        return -(post.get('created_at') ? moment(post.get('created_at'),'YYYY-MM-DDTHH:mm:ssZ') : moment(post.get('created_time'),'YYYY-MM-DDTHH:mm:ssZ'));
     }
   });
   // View
