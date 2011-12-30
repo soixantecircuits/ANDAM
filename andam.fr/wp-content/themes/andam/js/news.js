@@ -5,6 +5,7 @@ $(function(){
 
   // Setup
   window.fbpage = 'ANDAMFashionAwards';
+  window.twuser = 'ANDAMaward';
   window.access_token = 'AAAEPx4ZBt6T4BAPVb4u61KVfDoLuiIX5oSCeTaEeama22clBLxZBA2gHyHwPI1KeaZBTedDf8Il7g15huwbl01DF2CMOvAV4ZC0lUfLvSwZDZD';
   moment.lang(wp_var.lang);
   window.en = { locale: 'en_US',
@@ -14,7 +15,7 @@ $(function(){
                 likethis: 'like this',
                 others: 'others',
                 and: 'and',
-                from:'from <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a>',
+                from:'from <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> and <a href ="htpp://www.twitter.com/' + twuser + ' target="_blank">Twitter</a>',
                 loading:'Loading'
               };
   window.fr = { locale: 'fr_FR',
@@ -24,10 +25,37 @@ $(function(){
                 likethis: 'aiment &ccedil;a',
                 others: 'autres personnes',
                 and: 'et',
-                from:'de <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a>',
+                from:'de <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> et <a href ="htpp://www.twitter.com/' + twuser + ' target="_blank">Twitter</a>',
                 loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
+  moment.lang(wp_var.lang);
+  Handlebars.registerHelper('prettydate', function(date) {
+            if (date) {
+              //return moment(date,'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              //return moment(date.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/, "$1 $2 $4 $3 UTC"), 'ddd MMM DD HH:mm:ss ZZ YYYY').format("D MMM");
+              //return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
+              return moment(date.replace(/\+/,'')).format("D MMM");
+            }
+            return "";
+  });
+
+  Handlebars.registerHelper('dolinksin', function(text) {
+        if (text){
+          text = text.replace(/((www|http:\/\/)[^ ]+)/g,"<a href='$1' target='_blank'>$1</a>");
+          text = text.replace(/((@)[^ :]+)/g,function(match, user){
+            user = user.replace(/@/g,"");
+            return "@<a href='http://twitter.com/"+ user+ "' target='_blank'>"+ user + "</a>";}
+          );
+          text = text.replace(/((#)[^ ]+)/g,function(match, user){
+            user = user.replace(/#/g,"");
+            return "#<a href='http://twitter.com/search?q=%23"+ user+ "' target='_blank'>"+ user + "</a>";}
+          );
+          return text;
+        }
+        return ""; 
+  });
+  
   Handlebars.registerHelper('prettydatefb', function(date) {
             if (date) {
               return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
@@ -48,8 +76,31 @@ $(function(){
   });
   // Template
   // --------
-  
-  var srctmpl =  "<time datetime='2010-01-20' pubdate>" +
+  var srctmpl =  "<time datetime='2010-01-20' pubdate>\
+                          {{prettydate created_at}}\
+                  </time>\
+                  <span id='author' rel='author'>\
+                    <a href='http://twitter.com/"
+                       + "{{retweeted_status.user.screen_name}}"
+                       + "{{^retweeted_status.user.screen_name}}"
+                      + "{{user.screen_name}}"
+                      + "{{/retweeted_status.user.screen_name}}"
+                      + "' target='_blank'>\
+                       {{retweeted_status.user.screen_name}}\
+                       {{^retweeted_status.user.screen_name}}\
+                       {{user.screen_name}}\
+                       {{/retweeted_status.user.screen_name}}\
+                    </a>\
+                  </span>\
+                  <h1>\
+                       {{{dolinksin retweeted_status.text}}}\
+                       {{^retweeted_status.text}}\
+                       {{{dolinksin text}}}\
+                       {{/retweeted_status.text}}</h1>";
+                  //<a href='#'>{{#entities.urls}}{{url}}{{/entities.urls}}</a>";
+
+  window.tmplTwitter = Handlebars.compile(srctmpl);
+  srctmpl =  "<time datetime='2010-01-20' pubdate>" +
                      "{{prettydatefb created_time}}" +
                  "</time>" +
                  //"{{#story}}" +
@@ -66,6 +117,7 @@ $(function(){
   //  Model
   // ----------
 
+  window.Tweet = Backbone.Model.extend({  });
   window.Post = Backbone.Model.extend({
     validate: function(attrs){
       if (attrs.type == 'photo'){
@@ -85,6 +137,20 @@ $(function(){
 
   //  Collection
   // ---------------
+  window.Timeline = Backbone.Collection.extend({
+
+    model: Tweet,
+
+    url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + window.twuser + "&count=20",
+    
+    sync: function(method, model, options){  
+        options.timeout = 10000;  
+        options.dataType = "jsonp";  
+        return Backbone.sync(method, model, options);  
+    }
+
+  });
+
 
   window.Feed = Backbone.Collection.extend({
 
@@ -102,8 +168,29 @@ $(function(){
     }
   });
 
+  window.BothFeed = Backbone.Collection.extend({
+
+    comparator: function(post){
+        return -(post.get('created_at') ? moment(post.get('created_at')) :  moment(post.get('created_time')));
+    }
+  });
   // View
   // --------------
+  
+  window.TweetView = Backbone.View.extend({
+
+	tagName:  "article",
+	
+    initialize: function() {
+      this.model.bind('change', this.render, this);
+    },
+
+    render: function() {
+      $(this.el).html(window.tmplTwitter(this.model.toJSON()));
+      return this;
+    }
+
+  });
 
   // The DOM element for a todo item...
   window.PostView = Backbone.View.extend({
@@ -114,9 +201,9 @@ $(function(){
     },
 
     render: function() {
-      if (this.model.get('type') != 'status'){
+      //if (this.model.get('type') != 'status'){
         $(this.el).html(window.tmplFacebook(this.model.toJSON()));
-      }      
+      //}      
       return this;
     }
 
@@ -126,7 +213,9 @@ $(function(){
   // ---------------
 
   // Create our global collection.
+  window.timeline = new Timeline;
   window.feed = new Feed;
+  window.bothfeed = new BothFeed; 
   
   // Our overall **AppView** is the top-level piece of UI.
   window.AppView = Backbone.View.extend({
@@ -147,13 +236,26 @@ $(function(){
           $('.loading').append('.');
         }
       }, 400);
+      //timeline.bind('add',   this.addOne, this);
+      timeline.bind('all',   this.addAllTweets, this);
+      timeline.fetch();
       feed.bind('add',   this.addOne, this);
-      feed.bind('all',   this.addAll, this);
+      feed.bind('all',   this.addAllPosts, this);
       feed.fetch();
     },
 
     addOne: function(post) {
       if (window.firsttime == undefined){
+        if (post.get('entities')){
+          if (post.get('entities').media){
+            if (post.get('entities').media.length> 0){
+              if (post.get('entities').media[0].type == 'photo'){
+                window.firsttime = true;
+                $.backstretch(post.get('entities').media[0].media_url, {speed: 350});
+              }
+            }
+          }  
+        }        
         if (post.get('type') == 'photo'){
            window.firsttime = true;
            $.ajax({
@@ -171,7 +273,19 @@ $(function(){
         }
       }
       var view = new PostView({model: post});
+      if (post.get('entities')){
+        view = new TweetView({model: post});
+      }
       this.$(".main").append(view.render().el);
+    },
+
+    addAllPosts: function(){
+      bothfeed.add(feed.models);
+      this.addAll();
+    },
+    addAllTweets: function(){
+      bothfeed.add(timeline.models);
+      this.addAll();
     },
 
     // Add all items in the collection at once.
@@ -179,7 +293,7 @@ $(function(){
       clearInterval(window.loadingtimer);
       $(".main").empty();      
       $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
-      feed.each(this.addOne);
+      bothfeed.each(this.addOne);
     }
 
   });
