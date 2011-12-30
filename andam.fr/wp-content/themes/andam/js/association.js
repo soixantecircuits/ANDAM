@@ -5,14 +5,14 @@ $(function(){
 
   // Setup
   // -------
-  window.en = { wiki:'en',
-                page:'Pierre_Bergé',
+  window.en = { wiki:'fr',
+                page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode',
                 //page:'Fashion',
-                from:'From <a href="http://en.wikipedia.org">Wikipedia</a>, the free encyclopedia',
+                from:'from <a href="http://fr.wikipedia.org/wiki/ANDAM" target="_blank">Wikipedia</a>, the free encyclopedia',
                 loading:'Loading'};
   window.fr = { wiki:'fr',
                 page:'Association_nationale_pour_le_d%C3%A9veloppement_des_arts_de_la_mode',
-                from:'De <a href="http://fr.wikipedia.org">Wikip&eacute;dia</a>, l\'encyclop&eacute;die libre',
+                from:'De <a href="http://fr.wikipedia.org/wiki/ANDAM" target = "_blank">Wikip&eacute;dia</a>, l\'encyclop&eacute;die libre',
                 loading:'Chargement'};
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en; 
   
@@ -94,11 +94,18 @@ $(function(){
     el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<div class='loading'>"+ lang.loading + "...</div>");
-      window.loadingtimer = setInterval(function() { 
-       $('.loading').append('.');
+      $(".main").append("<div class='loading'>" + lang.loading + "</div>");
+      window.timecounter = 0;
+      window.loadingtimer = setInterval(function() {
+        window.timecounter++;
+        if (window.timecounter > 3){
+          window.timecounter = 0;
+          $('.loading').html(lang.loading);
+        } 
+        else{
+          $('.loading').append('.');
+        }
       }, 400);
-
       timeline.bind('add',   this.addOne, this);
       timeline.bind('all',   this.addAll, this);
       timeline.fetch();
@@ -115,7 +122,7 @@ $(function(){
     addAll: function() {
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
+      $(".main").append("<div class='intro'>("+lang.from.replace(/ANDAM/, lang.page) +")</div><br/><br/>");
       timeline.each(this.addOne);
       
       $.backstretch($(".thumb img").attr('src'), {speed: 1000});

@@ -10,13 +10,13 @@ $(function(){
   window.en = { list:'Winners since 1989',
                 chrono:'sort by date',
                 alpha: 'sort by name',
-                from:'From <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
+                from:'from <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
                 loading:'Loading'
               };
   window.fr = { list:'Liste des laur&eacute;ats depuis 1989 par ann&eacute;e',
                 chrono:'ordre chronologique',
                 alpha: 'ordre alphab&eacute;tique',
-                from:'De <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
+                from:'de <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
                 loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
@@ -105,9 +105,17 @@ $(function(){
     //el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<div class='loading'>"+ lang.loading + "...</div>");
-      window.loadingtimer = setInterval(function() { 
-       $('.loading').append('.');
+      $(".main").append("<div class='loading'>" + lang.loading + "</div>");
+      window.timecounter = 0;
+      window.loadingtimer = setInterval(function() {
+        window.timecounter++;
+        if (window.timecounter > 3){
+          window.timecounter = 0;
+          $('.loading').html(lang.loading);
+        } 
+        else{
+          $('.loading').append('.');
+        }
       }, 400);
       sets.bind('all', this.render, this);
       sets.fetch();
@@ -115,8 +123,8 @@ $(function(){
     render: function(){
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
-      $(".main").append("<p>" + lang.list + "<br />(<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
+      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div><div class='air'><br/><br/><br/><br/></div>");
       $("#sortToggle").bind('click', function(){
         App.sortToggle();
       });

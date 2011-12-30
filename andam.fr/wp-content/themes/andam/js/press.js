@@ -4,13 +4,13 @@
 $(function(){
 
   // Setup
-  window.username = 'egeoffray';  
+  window.username = 'ANDAMaward';  
   window.en = { 
-                from:'From <a href="http://www.twitter.com/' + username + '" target="_blank">Twitter</a>',
+                from:'from <a href="http://www.twitter.com/' + username + '" target="_blank">Twitter</a>',
                 loading:'Loading'
               };
   window.fr = { 
-                from:'De <a href="http://www.twitter.com/' + username + '" target="_blank">Twitter</a>',
+                from:'de <a href="http://www.twitter.com/' + username + '" target="_blank">Twitter</a>',
                 loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
@@ -125,9 +125,17 @@ $(function(){
     el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<div class='loading'>" + lang.loading + "...</div>");
-      window.loadingtimer = setInterval(function() { 
-       $('.loading').append('.');
+      $(".main").append("<div class='loading'>" + lang.loading + "</div>");
+      window.timecounter = 0;
+      window.loadingtimer = setInterval(function() {
+        window.timecounter++;
+        if (window.timecounter > 3){
+          window.timecounter = 0;
+          $('.loading').html(lang.loading);
+        } 
+        else{
+          $('.loading').append('.');
+        }
       }, 400);
       timeline.bind('add',   this.addOne, this);
       timeline.bind('all',   this.addAll, this);
@@ -155,7 +163,7 @@ $(function(){
     addAll: function() {
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
+      $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
       timeline.each(this.addOne);
     }
 

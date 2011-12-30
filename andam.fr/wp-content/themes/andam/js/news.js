@@ -8,19 +8,23 @@ $(function(){
   window.access_token = 'AAAEPx4ZBt6T4BAPVb4u61KVfDoLuiIX5oSCeTaEeama22clBLxZBA2gHyHwPI1KeaZBTedDf8Il7g15huwbl01DF2CMOvAV4ZC0lUfLvSwZDZD';
   moment.lang(wp_var.lang);
   window.en = { locale: 'en_US',
+                newphoto: 'New picture',
+                newvideo: 'New video',
                 likesthis: 'likes this',
                 likethis: 'like this',
                 others: 'others',
                 and: 'and',
-                from:'From <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a>',
+                from:'from <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a>',
                 loading:'Loading'
               };
   window.fr = { locale: 'fr_FR',
+                newphoto: 'Nouvelle photo',
+                newvideo: 'Nouvelle video',
                 likesthis: 'aime &ccedil;a',
                 likethis: 'aiment &ccedil;a',
                 others: 'autres personnes',
                 and: 'et',
-                from:'De <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a>',
+                from:'de <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a>',
                 loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
@@ -48,14 +52,14 @@ $(function(){
   var srctmpl =  "<time datetime='2010-01-20' pubdate>" +
                      "{{prettydatefb created_time}}" +
                  "</time>" +
-                 "{{#story}}" +
-                   "<div class='story'>{{.}}</div>" +
-                 "{{/story}}" +
-                 "{{#name}}<h1>{{.}}</h1>{{/name}}" +
-                 "{{#caption}}<a href={{../link}} target='_blank' class='link'>{{.}}</a>{{/caption}}" +
+                 //"{{#story}}" +
+                 //  "<div class='story'>{{.}}</div>" +
+                 //"{{/story}}" +
+                 "{{#name}}<h1><a href={{../link}} target='_blank' class='link'>{{.}}</h1></a>{{/name}}" +
+                 //"{{#caption}}{{.}}{{/caption}}" +
                  "{{#description}}<p>{{.}}</p>{{/description}}" +
                  "{{#message}}<p>{{.}}</p>{{/message}}" +
-                 "{{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}"+
+                 //"{{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}"+
                  "{{#actions}}<a href={{link}} target='_blank'>{{name}}</a> {{/actions}}";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
@@ -63,6 +67,20 @@ $(function(){
   // ----------
 
   window.Post = Backbone.Model.extend({
+    validate: function(attrs){
+      if (attrs.type == 'photo'){
+        attrs.name = lang.newphoto;
+      }
+      if (attrs.type == 'video'){
+        attrs.name = lang.newvideo;
+      }
+      if (attrs.name == attrs.description){
+        attrs.description = undefined;
+      }
+      if (attrs.actions){
+        attrs.actions=_.find(attrs.actions, function(action){return (action.name == 'Like');});       
+      }
+    }
   });
 
   //  Collection
@@ -117,9 +135,17 @@ $(function(){
     el: $(".main"),
 
     initialize: function() {
-      $(".main").append("<div class='loading'>" + lang.loading + "...</div>");
-      window.loadingtimer = setInterval(function() { 
-       $('.loading').append('.');
+      $(".main").append("<div class='loading'>" + lang.loading + "</div>");
+      window.timecounter = 0;
+      window.loadingtimer = setInterval(function() {
+        window.timecounter++;
+        if (window.timecounter > 3){
+          window.timecounter = 0;
+          $('.loading').html(lang.loading);
+        } 
+        else{
+          $('.loading').append('.');
+        }
       }, 400);
       feed.bind('add',   this.addOne, this);
       feed.bind('all',   this.addAll, this);
@@ -152,7 +178,7 @@ $(function(){
     addAll: function() {
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/>");
+      $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
       feed.each(this.addOne);
     }
 
