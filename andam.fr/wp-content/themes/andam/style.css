@@ -76,8 +76,23 @@ button,
 input,
 select,
 textarea {
-  font-family: "AndFRegular", "Helvetica", Arial, sans-serif;
-  color: #222;
+  font-family: "AndRegular", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
+}
+b, strong {
+  font-family: "AndBold", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
+}
+i, em {
+  font-family: "AndItalic", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
+}
+i b,
+b i,
+em b,
+b em {
+  font-family: "AndBoldItalic", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
 }
 /* 
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -471,7 +486,8 @@ h1, h2, h3 {
   margin: 0 0 0.4285714285714286em 0;
 }
 article {
-  letter-spacing: 0.1em;
+  /*letter-spacing: 0.1em;*/
+
 }
 article {
   margin: 0 0 3.8571428571428577em 0;
@@ -524,7 +540,8 @@ nav#main_menu ul#langues li a {
   word-wrap: break-word;
 }
 nav#main_menu ul li a {
-  letter-spacing: 0.1em;
+  /*letter-spacing: 0.1em;*/
+
   line-height: 0.6428571428571429em;
   text-transform: uppercase;
   text-decoration: none;
@@ -554,7 +571,8 @@ nav#main_menu ul li.current_page_item a {
   text-transform: uppercase;
   font-weight: normal;
   text-align: center;
-  letter-spacing: 0.1em;
+  /*letter-spacing: 0.1em;*/
+
 }
 #logo h1 a {
   display: block;
@@ -622,7 +640,8 @@ section ul#partenaires li img {
 }
 /*-------------- ASSOCIATION -------------*/
 #association {
-  letter-spacing: 0.1em;
+  /*letter-spacing: 0.1em;*/
+
 }
 #association b {
   font-weight: normal;

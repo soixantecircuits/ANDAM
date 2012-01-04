@@ -58,7 +58,10 @@ html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-
 /*body { margin: 0; font-size: 14px; line-height: 1.231; }*/
 body { margin: 0; font-size:@font-size/16*1em; line-height: @unit;}
 
-body, button, input, select, textarea { font-family: "AndFRegular", "Helvetica", Arial, sans-serif;  color: #222; }
+body, button, input, select, textarea { font-family: "AndRegular", "Helvetica", Arial, sans-serif;  color: @main; }
+b, strong { font-family: "AndBold", "Helvetica", Arial, sans-serif;  color: @main; }
+i, em { font-family: "AndItalic", "Helvetica", Arial, sans-serif;  color: @main; }
+i b, b i, em b, b em { font-family: "AndBoldItalic", "Helvetica", Arial, sans-serif;  color: @main; }
 
 /* 
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -308,7 +311,7 @@ margin: 0 0 @unit/3 0;
 }
 
 article {
-letter-spacing: 0.1em;
+/*letter-spacing: 0.1em;*/
 }
 
 article {
@@ -377,7 +380,7 @@ word-wrap: break-word;
 }
 
 nav#main_menu ul li a { 
-letter-spacing: 0.1em;
+/*letter-spacing: 0.1em;*/
 line-height: @unit/2;
 text-transform: uppercase;
 text-decoration: none;
@@ -413,7 +416,7 @@ text-decoration: underline;
 text-transform: uppercase;
 font-weight: normal;
 text-align:center;
-letter-spacing: 0.1em;
+/*letter-spacing: 0.1em;*/
 }
 
 #logo h1 a{
@@ -493,7 +496,7 @@ float: left;
 
 /*-------------- ASSOCIATION -------------*/
 #association {
-letter-spacing: 0.1em;
+/*letter-spacing: 0.1em;*/
 }
 
 #association b{

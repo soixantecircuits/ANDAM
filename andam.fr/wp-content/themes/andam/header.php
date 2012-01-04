@@ -21,7 +21,8 @@
 	<meta name="author" content="soixantecircuits / vacuumRandom">	
 	<link type="text/plain" rel="author" href="/humans.txt" />
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/webfont/stylesheet.css" />
+	<? $malangue = qtrans_getLanguage(); ?>
+	<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/webfont/stylesheet<? echo "_".$malangue; ?>.css" />
 	<link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/style.css" />
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
 
