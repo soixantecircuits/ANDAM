@@ -56,7 +56,7 @@ $(function(){
         return ""; 
   });
   
-  Handlebars.registerHelper('readabledate', function(date) {
+  Handlebars.registerHelper('printdate', function(date) {
             if (date) {
               return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
@@ -77,7 +77,7 @@ $(function(){
   // Template
   // --------
   var srctmpl =   "<time datetime='2010-01-20' pubdate>" +
-                    + "{{prettydatetw created_at}}" +
+                      "{{printdate created_at}}" +
                   "</time>" +
                   "<div class='username'>(" +
                     "<a href='http://twitter.com/" +
@@ -97,12 +97,12 @@ $(function(){
                     "{{^retweeted_status.text}}" +
                        "{{{dolinksin text}}}" +
                     "{{/retweeted_status.text}}" +
-                  "</h1>" +
+                 
                   "<div class='action'><a href='#'>Retweet</a></div>";
   window.tmplTwitter = Handlebars.compile(srctmpl);
   
   srctmpl =       "<time datetime='2010-01-20' pubdate>" +
-                     "{{readabledate created_time}}" +
+                     "{{printdate created_time}}" +
                   "</time>" +
                   "<div class='username'>(" +
                     "<a href='http://www.facebook.com/{{from.id}}' target='_blank'>{{from.name}}</a>" +  
