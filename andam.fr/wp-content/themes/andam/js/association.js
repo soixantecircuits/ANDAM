@@ -115,14 +115,14 @@ $(function(){
     // appending its element to the `<ul>`.
     addOne: function(tweet) {
       var view = new TweetView({model: tweet});
-      this.$(".main").append(view.render().el);
+      this.$(".content").append(view.render().el);
     },
 
     // Add all items in the collection at once.
     addAll: function() {
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from.replace(/ANDAM/, lang.page) +")</div><br/><br/>");
+      $(".main").append("<div class='content'></div><div class='from'>("+lang.from.replace(/ANDAM/, lang.page) +")</div>");
       timeline.each(this.addOne);
       
       $.backstretch($(".thumb img").attr('src'), {speed: 1000});

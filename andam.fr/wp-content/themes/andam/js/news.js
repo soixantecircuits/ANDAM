@@ -15,7 +15,7 @@ $(function(){
                 likethis: 'like this',
                 others: 'others',
                 and: 'and',
-                from:'from <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> and <a href ="htpp://www.twitter.com/' + twuser + ' target="_blank">Twitter</a>',
+                from:'via <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> and <a href ="http://www.twitter.com/' + twuser + '" target="_blank">Twitter</a>',
                 loading:'Loading'
               };
   window.fr = { locale: 'fr_FR',
@@ -25,7 +25,7 @@ $(function(){
                 likethis: 'aiment &ccedil;a',
                 others: 'autres personnes',
                 and: 'et',
-                from:'de <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> et <a href ="htpp://www.twitter.com/' + twuser + ' target="_blank">Twitter</a>',
+                from:'via <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> et <a href ="http://www.twitter.com/' + twuser + '" target="_blank">Twitter</a>',
                 loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
@@ -294,7 +294,7 @@ $(function(){
       if (post.get('entities')){
         view = new TweetView({model: post});
       }
-      this.$(".main").append(view.render().el);
+      this.$(".content").append(view.render().el);
     },
 
     addAllPosts: function(){
@@ -310,7 +310,7 @@ $(function(){
     addAll: function() {
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
+      $(".main").append("<div class='content'></div><div class='from'>("+lang.from+")</div>");
       bothfeed.each(this.addOne);
     }
 
