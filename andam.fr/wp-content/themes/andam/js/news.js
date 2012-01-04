@@ -79,7 +79,7 @@ $(function(){
   var srctmpl =   "<time datetime='2010-01-20' pubdate>" +
                       "{{printdate created_at}}" +
                   "</time>" +
-                  "<div class='username'>(" +
+                  " <span class='username'>(" +
                     "<a href='http://twitter.com/" +
                         "{{retweeted_status.user.screen_name}}" +
                         "{{^retweeted_status.user.screen_name}}" +
@@ -91,23 +91,23 @@ $(function(){
                           "{{user.screen_name}}" +
                         "{{/retweeted_status.user.screen_name}}" +
                     "</a>" +
-                  ")</div>" +
-                  "<h1>" +
+                  ")</span>" +
+                  "<h1 class='tweeter'><strong>" +
                     "{{{dolinksin retweeted_status.text}}}" +
                     "{{^retweeted_status.text}}" +
                        "{{{dolinksin text}}}" +
-                    "{{/retweeted_status.text}}" +
-                  "</h1>" + 
+                    "{{/retweeted_status.text}}" +                    
+                  "</strong></h1>" + 
                   "<div class='action'><a href='http://www.twitter.com/{{user.screen_name}}/status/{{id_str}}' target='_blank'>Retweet</a></div>";
   window.tmplTwitter = Handlebars.compile(srctmpl);
   
   srctmpl =       "<time datetime='2010-01-20' pubdate>" +
                      "{{printdate created_time}}" +
                   "</time>" +
-                  "<div class='username'>(" +
+                  " <span class='username'>(" +
                     "<a href='http://www.facebook.com/{{from.id}}' target='_blank'>{{from.name}}</a>" +  
-                  ")</div>" +
-                  "{{#name}}<h1><a href={{../link}} target='_blank' class='link'>{{.}}</h1></a>{{/name}}" +
+                  ")</span>" +
+                  "{{#name}}<h1><strong><a href={{../link}} target='_blank' class='link'>{{.}}</strong></h1></a>{{/name}}" +
                   "{{#description}}<p>{{.}}</p>{{/description}}" +
                   "{{#message}}<p>{{.}}</p>{{/message}}" +
                   "{{#actions}}<div class='action'><a href={{link}} target='_blank'>{{name}}</a></div>{{/actions}}";

@@ -105,8 +105,8 @@ b em {
   text-shadow: none;
 }
 ::selection {
-  background: #fe57a1;
-  color: #fff;
+  background: #fff;
+  color: #1A1A1A;
   text-shadow: none;
 }
 /* =============================================================================
@@ -114,14 +114,14 @@ b em {
    ========================================================================== */
 a {
   color: #1a1a1a;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:visited {
   color: #1a1a1a;
 }
 a:hover {
   color: #1a1a1a;
-  text-decoration: none;
+  text-decoration: underline;
 }
 a:focus {
   outline: thin dotted;
@@ -486,10 +486,6 @@ h1, h2, h3 {
   margin: 0 0 0.4285714285714286em 0;
 }
 article {
-  /*letter-spacing: 0.1em;*/
-
-}
-article {
   margin: 0 0 3.8571428571428577em 0;
 }
 #contact {
@@ -523,13 +519,13 @@ header {
 #logo {
   position: absolute;
   right: 1.2857142857142858em;
-  top: 1.2857142857142858em;
+  top: 1.9285714285714288em;
 }
 #main_menu {
   position: absolute;
   right: 0px;
   width: 50%;
-  top: 11.571428571428573em;
+  top: 10.928571428571429em;
 }
 ul#langues {
   margin: 3.8571428571428577em 0 0 0;
@@ -571,6 +567,9 @@ nav#main_menu ul li.current_page_item a {
   text-transform: uppercase;
   font-weight: normal;
   text-align: center;
+  font-family: "AndBold", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
+  line-height: 1.4142857142857144em;
   /*letter-spacing: 0.1em;*/
 
 }
@@ -584,11 +583,11 @@ nav#main_menu ul li.current_page_item a {
 }
 #logo h1 #mot2 {
   word-break: keep-all;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.3em;
 }
 #logo h1 #mot3 {
   word-wrap: normal;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.4em;
   margin: 0;
 }
 /*-------MAIN CONTAINER------*/
@@ -603,12 +602,21 @@ p {
   padding: 0;
 }
 /* ------------- PRESS ------------- */
-#press span#author {
-  margin: 0 0 0 0;
-}
 /*-------------- NEWS -------------- */
+#news article {
+  margin: 0 0 1.2857142857142858em 0;
+}
 #news article h1 {
-  margin: 0.6428571428571429em 0 0.6428571428571429em 0;
+  margin: 0;
+  font-size: 1em;
+}
+#news article h1.tweeter strong a {
+  font-family: "AndRegular", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
+  font-weight: normal;
+}
+#news span#author {
+  margin: 0 0 0 0;
 }
 /*-------------- CONTEST -------------- */
 #contest article p {
@@ -730,7 +738,7 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
   nav#main_menu {
     font-size: 0.9em;
     position: relative;
-    padding-top: 2.5714285714285716em;
+    padding-top: 1.2857142857142858em;
     margin: 0;
     top: 0;
     width: auto;
