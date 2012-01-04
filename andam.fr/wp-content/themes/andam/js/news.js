@@ -56,7 +56,7 @@ $(function(){
         return ""; 
   });
   
-  Handlebars.registerHelper('prettydate', function(date) {
+  Handlebars.registerHelper('readabledate', function(date) {
             if (date) {
               return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
@@ -76,42 +76,41 @@ $(function(){
   });
   // Template
   // --------
-  var srctmpl =  "<time datetime='2010-01-20' pubdate>\
-                          {{prettydatetw created_at}}\
-                  </time>\
-                  <span id='author' rel='author'>\
-                    <a href='http://twitter.com/"
-                       + "{{retweeted_status.user.screen_name}}"
-                       + "{{^retweeted_status.user.screen_name}}"
-                      + "{{user.screen_name}}"
-                      + "{{/retweeted_status.user.screen_name}}"
-                      + "' target='_blank'>\
-                       {{retweeted_status.user.screen_name}}\
-                       {{^retweeted_status.user.screen_name}}\
-                       {{user.screen_name}}\
-                       {{/retweeted_status.user.screen_name}}\
-                    </a>\
-                  </span>\
-                  <h1>\
-                       {{{dolinksin retweeted_status.text}}}\
-                       {{^retweeted_status.text}}\
-                       {{{dolinksin text}}}\
-                       {{/retweeted_status.text}}</h1>";
-                  //<a href='#'>{{#entities.urls}}{{url}}{{/entities.urls}}</a>";
-
+  var srctmpl =   "<time datetime='2010-01-20' pubdate>" +
+                    + "{{prettydatetw created_at}}" +
+                  "</time>" +
+                  "<div class='username'>(" +
+                    "<a href='http://twitter.com/" +
+                        "{{retweeted_status.user.screen_name}}" +
+                        "{{^retweeted_status.user.screen_name}}" +
+                          "{{user.screen_name}}" +
+                        "{{/retweeted_status.user.screen_name}}" +
+                      "' target='_blank'>" +
+                        "{{retweeted_status.user.screen_name}}" +
+                        "{{^retweeted_status.user.screen_name}}" +
+                          "{{user.screen_name}}" +
+                        "{{/retweeted_status.user.screen_name}}" +
+                    "</a>" +
+                  ")</div>" +
+                  "<h1>" +
+                    "{{{dolinksin retweeted_status.text}}}" +
+                    "{{^retweeted_status.text}}" +
+                       "{{{dolinksin text}}}" +
+                    "{{/retweeted_status.text}}" +
+                  "</h1>" +
+                  "<div class='action'><a href='#'>Retweet</a></div>";
   window.tmplTwitter = Handlebars.compile(srctmpl);
-  srctmpl =  "<time datetime='2010-01-20' pubdate>" +
-                     "{{prettydate created_time}}" +
-                 "</time>" +
-                 //"{{#story}}" +
-                 //  "<div class='story'>{{.}}</div>" +
-                 //"{{/story}}" +
-                 "{{#name}}<h1><a href={{../link}} target='_blank' class='link'>{{.}}</h1></a>{{/name}}" +
-                 //"{{#caption}}{{.}}{{/caption}}" +
-                 "{{#description}}<p>{{.}}</p>{{/description}}" +
-                 "{{#message}}<p>{{.}}</p>{{/message}}" +
-                 //"{{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}"+
-                 "{{#actions}}<a href={{link}} target='_blank'>{{name}}</a> {{/actions}}";
+  
+  srctmpl =       "<time datetime='2010-01-20' pubdate>" +
+                     "{{readabledate created_time}}" +
+                  "</time>" +
+                  "<div class='username'>(" +
+                    "<a href='http://www.facebook.com/{{from.id}}' target='_blank'>{{from.name}}</a>" +  
+                  ")</div>" +
+                  "{{#name}}<h1><a href={{../link}} target='_blank' class='link'>{{.}}</h1></a>{{/name}}" +
+                  "{{#description}}<p>{{.}}</p>{{/description}}" +
+                  "{{#message}}<p>{{.}}</p>{{/message}}" +
+                  "{{#actions}}<div class='action'><a href={{link}} target='_blank'>{{name}}</a></div>{{/actions}}";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
   //  Model
