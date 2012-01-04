@@ -97,8 +97,8 @@ $(function(){
                     "{{^retweeted_status.text}}" +
                        "{{{dolinksin text}}}" +
                     "{{/retweeted_status.text}}" +
-                 
-                  "<div class='action'><a href='#'>Retweet</a></div>";
+                  "</h1>" + 
+                  "<div class='action'><a href='http://www.twitter.com/{{user.screen_name}}/status/{{id_str}}' target='_blank'>Retweet</a></div>";
   window.tmplTwitter = Handlebars.compile(srctmpl);
   
   srctmpl =       "<time datetime='2010-01-20' pubdate>" +
@@ -133,6 +133,7 @@ $(function(){
               attrs.created_at = attrs.created_at.replace(/Mar/, "3");
               attrs.created_at = attrs.created_at.replace(/Feb/, "2");
               attrs.created_at = attrs.created_at.replace(/Jan/, "1");
+ 
     }
   });
   window.Post = Backbone.Model.extend({
