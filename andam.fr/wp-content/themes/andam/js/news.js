@@ -15,7 +15,7 @@ $(function(){
                 likethis: 'like this',
                 others: 'others',
                 and: 'and',
-                from:'from <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> and <a href ="htpp://www.twitter.com/' + twuser + ' target="_blank">Twitter</a>',
+                from:'via <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> and <a href ="http://www.twitter.com/' + twuser + '" target="_blank">Twitter</a>',
                 loading:'Loading'
               };
   window.fr = { locale: 'fr_FR',
@@ -25,7 +25,7 @@ $(function(){
                 likethis: 'aiment &ccedil;a',
                 others: 'autres personnes',
                 and: 'et',
-                from:'de <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> et <a href ="htpp://www.twitter.com/' + twuser + ' target="_blank">Twitter</a>',
+                from:'via <a href="http://www.facebook.com/' + fbpage + '" target="_blank">Facebook</a> et <a href ="http://www.twitter.com/' + twuser + '" target="_blank">Twitter</a>',
                 loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
@@ -56,7 +56,7 @@ $(function(){
         return ""; 
   });
   
-  Handlebars.registerHelper('prettydate', function(date) {
+  Handlebars.registerHelper('printdate', function(date) {
             if (date) {
               return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("dddd D MMMM, HH:mm");
             }
@@ -76,42 +76,41 @@ $(function(){
   });
   // Template
   // --------
-  var srctmpl =  "<time datetime='2010-01-20' pubdate>\
-                          {{prettydatetw created_at}}\
-                  </time>\
-                  <span id='author' rel='author'>\
-                    <a href='http://twitter.com/"
-                       + "{{retweeted_status.user.screen_name}}"
-                       + "{{^retweeted_status.user.screen_name}}"
-                      + "{{user.screen_name}}"
-                      + "{{/retweeted_status.user.screen_name}}"
-                      + "' target='_blank'>\
-                       {{retweeted_status.user.screen_name}}\
-                       {{^retweeted_status.user.screen_name}}\
-                       {{user.screen_name}}\
-                       {{/retweeted_status.user.screen_name}}\
-                    </a>\
-                  </span>\
-                  <h1>\
-                       {{{dolinksin retweeted_status.text}}}\
-                       {{^retweeted_status.text}}\
-                       {{{dolinksin text}}}\
-                       {{/retweeted_status.text}}</h1>";
-                  //<a href='#'>{{#entities.urls}}{{url}}{{/entities.urls}}</a>";
-
+  var srctmpl =   "<time datetime='2010-01-20' pubdate>" +
+                      "{{printdate created_at}}" +
+                  "</time>" +
+                  "<div class='username'>(" +
+                    "<a href='http://twitter.com/" +
+                        "{{retweeted_status.user.screen_name}}" +
+                        "{{^retweeted_status.user.screen_name}}" +
+                          "{{user.screen_name}}" +
+                        "{{/retweeted_status.user.screen_name}}" +
+                      "' target='_blank'>" +
+                        "{{retweeted_status.user.screen_name}}" +
+                        "{{^retweeted_status.user.screen_name}}" +
+                          "{{user.screen_name}}" +
+                        "{{/retweeted_status.user.screen_name}}" +
+                    "</a>" +
+                  ")</div>" +
+                  "<h1>" +
+                    "{{{dolinksin retweeted_status.text}}}" +
+                    "{{^retweeted_status.text}}" +
+                       "{{{dolinksin text}}}" +
+                    "{{/retweeted_status.text}}" +
+                  "</h1>" + 
+                  "<div class='action'><a href='http://www.twitter.com/{{user.screen_name}}/status/{{id_str}}' target='_blank'>Retweet</a></div>";
   window.tmplTwitter = Handlebars.compile(srctmpl);
-  srctmpl =  "<time datetime='2010-01-20' pubdate>" +
-                     "{{prettydate created_time}}" +
-                 "</time>" +
-                 //"{{#story}}" +
-                 //  "<div class='story'>{{.}}</div>" +
-                 //"{{/story}}" +
-                 "{{#name}}<h1><a href={{../link}} target='_blank' class='link'>{{.}}</h1></a>{{/name}}" +
-                 //"{{#caption}}{{.}}{{/caption}}" +
-                 "{{#description}}<p>{{.}}</p>{{/description}}" +
-                 "{{#message}}<p>{{.}}</p>{{/message}}" +
-                 //"{{#likes}}<div class='likes'>{{likers data}}</div>{{/likes}}"+
-                 "{{#actions}}<a href={{link}} target='_blank'>{{name}}</a> {{/actions}}";
+  
+  srctmpl =       "<time datetime='2010-01-20' pubdate>" +
+                     "{{printdate created_time}}" +
+                  "</time>" +
+                  "<div class='username'>(" +
+                    "<a href='http://www.facebook.com/{{from.id}}' target='_blank'>{{from.name}}</a>" +  
+                  ")</div>" +
+                  "{{#name}}<h1><a href={{../link}} target='_blank' class='link'>{{.}}</h1></a>{{/name}}" +
+                  "{{#description}}<p>{{.}}</p>{{/description}}" +
+                  "{{#message}}<p>{{.}}</p>{{/message}}" +
+                  "{{#actions}}<div class='action'><a href={{link}} target='_blank'>{{name}}</a></div>{{/actions}}";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
   //  Model
@@ -134,6 +133,7 @@ $(function(){
               attrs.created_at = attrs.created_at.replace(/Mar/, "3");
               attrs.created_at = attrs.created_at.replace(/Feb/, "2");
               attrs.created_at = attrs.created_at.replace(/Jan/, "1");
+ 
     }
   });
   window.Post = Backbone.Model.extend({
@@ -294,7 +294,7 @@ $(function(){
       if (post.get('entities')){
         view = new TweetView({model: post});
       }
-      this.$(".main").append(view.render().el);
+      this.$(".content").append(view.render().el);
     },
 
     addAllPosts: function(){
@@ -310,7 +310,7 @@ $(function(){
     addAll: function() {
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
+      $(".main").append("<div class='content'></div><div class='from'>("+lang.from+")</div>");
       bothfeed.each(this.addOne);
     }
 

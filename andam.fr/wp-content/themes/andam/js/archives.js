@@ -7,15 +7,15 @@ $(function(){
   window.flickruser = '72610704@N08';//'71927167@N03';
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
-  window.en = { list:'Winners since 1989',
+  window.en = { list:'Winners',
                 chrono:'sort by date',
                 alpha: 'sort by name',
                 from:'from <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
                 loading:'Loading'
               };
-  window.fr = { list:'Liste des laur&eacute;ats depuis 1989 par ann&eacute;e',
-                chrono:'ordre chronologique',
-                alpha: 'ordre alphab&eacute;tique',
+  window.fr = { list:'Laur&eacute;ats',
+                chrono:'voir la liste chronologique',
+                alpha: 'voir la liste alphab&eacute;tique',
                 from:'de <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
                 loading:'Chargement'
                 };
@@ -123,8 +123,8 @@ $(function(){
     render: function(){
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<div class='intro'>("+lang.from+")</div><br/><br/>");
-      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div><div class='air'><br/><br/><br/><br/></div>");
+      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $(".main").append("<div class='from'>("+lang.from+")</div>");
       $("#sortToggle").bind('click', function(){
         App.sortToggle();
       });
