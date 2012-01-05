@@ -107,9 +107,16 @@ $(function(){
                   " <span class='username'>(" +
                     "<a href='http://www.facebook.com/{{from.id}}' target='_blank'>{{from.name}}</a>" +  
                   ")</span>" +
-                  "{{#name}}<h1><strong><a href={{../link}} target='_blank' class='link'>{{.}}</strong></h1></a>{{/name}}" +
+                  "<h1><strong>" +
+                    "{{#link}}<a href={{.}} target='_blank' class='link'>{{/link}}" +
+                    "{{#source}}<a href={{.}} target='_blank' class='link'>{{/source}}" +
+                    "{{name}}" +
+                    "{{#unless name}}{{story}}{{#unless story}}{{message}}{{/unless}}{{/unless}}" +
+                    "{{#link}}</a>{{/link}}" +
+                    "{{#source}}</a>{{/source}}" +
+                  "</strong></h1>" +
                   "{{#description}}<p>{{.}}</p>{{/description}}" +
-                  "{{#message}}<p>{{.}}</p>{{/message}}" +
+                  "{{#if name}}{{#message}}<p>{{.}}</p>{{/message}}{{/if}}" +
                   "{{#actions}}<div class='action'><a href={{link}} target='_blank'>{{name}}</a></div>{{/actions}}";
   window.tmplFacebook = Handlebars.compile(srctmpl);
      
@@ -138,12 +145,6 @@ $(function(){
   });
   window.Post = Backbone.Model.extend({
     validate: function(attrs){
-      if (attrs.type == 'photo'){
-        attrs.name = lang.newphoto;
-      }
-      if (attrs.type == 'video'){
-        attrs.name = lang.newvideo;
-      }
       if (attrs.name == attrs.description){
         attrs.description = undefined;
       }
