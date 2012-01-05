@@ -9,6 +9,7 @@
 * @since ANDAM 1.0
 */
 ?>
+</div><!-- enveloppe -->
 </div><!-- main container -->
 
 <? 

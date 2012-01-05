@@ -34,7 +34,7 @@ $(function(){
   // --------
 	var	srctmpl = "{{#chronolaureats}}" +
              "<ul>"+
-              "<h2>{{year}}</h2>" +
+              "<h2><strong>{{year}}</strong></h2>" +
               "{{#laureats}}" +
                   "<li><a href='http://www.flickr.com/photos/" + window.flickruser +
                   "/sets/{{id}}/' target='_blank'>{{artist}}</a></li>" +
@@ -123,7 +123,7 @@ $(function(){
     render: function(){
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><p id='laureats'></p>");
       $(".main").append("<div class='from'>("+lang.from+")</div>");
       $("#sortToggle").bind('click', function(){
         App.sortToggle();

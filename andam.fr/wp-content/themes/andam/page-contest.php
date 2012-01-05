@@ -37,11 +37,26 @@ get_header(); ?>
 			?>
 		</ul>
 
+		<ul id="partenaires_particuliers">
+			<? 			
+				$tabinfos = simple_fields_get_post_group_values($postid, "partenaires particuliers", true, 2);				
+				foreach ($tabinfos as $cle=>$value) {
+					if(!empty($value['image logo'])) {
+					 	$imageurl = wp_get_attachment_url($value['image logo']);
+					} else {
+						$imageurl = $value['logo'];
+					}
+				?>
+				<li><img src="<? echo $imageurl; ?>" width="16"/><a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a></li>				
+				<? };
+			?>
+		</ul>
+		
 	</section>
 	
 	<section id="creditsmentions">
 <?
-	 // text supp //
+	 // text supp (crédits & mentions légales) //
 	 $my_textsupp =  trad_customfield2( $textsupp, "extra_content", $my_lang ); 
 	 echo wpautop($my_textsupp);
 	 

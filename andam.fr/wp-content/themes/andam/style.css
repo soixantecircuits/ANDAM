@@ -514,12 +514,12 @@ header {
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  max-width: 960px;
+  max-width: 820px;
   z-index: 99;
 }
 #logo {
   position: absolute;
-  right: 1.2857142857142858em;
+  right: 0;
   top: 1.9285714285714288em;
 }
 #main_menu {
@@ -553,7 +553,8 @@ nav#main_menu ul li {
   margin: 0 0 1.2857142857142858em 0;
 }
 nav#main_menu ul li.current_page_item a {
-  text-decoration: underline;
+  font-family: "AndBold", "Helvetica", Arial, sans-serif;
+  color: #1a1a1a;
 }
 @media screen {
   body > header {
@@ -595,11 +596,13 @@ nav#main_menu ul li.current_page_item a {
   margin: 0;
 }
 /*-------MAIN CONTAINER------*/
-.main {
-  display: none;
+#enveloppe {
   max-width: 820px;
   margin: 0 auto;
-  padding: 12.857142857142858em 30% 0 20%;
+  padding: 12.857142857142858em 0px 0 0;
+}
+.main {
+  padding: 0 345px 0 20px;
 }
 p {
   margin: 0;
@@ -629,24 +632,30 @@ p {
 section#creditsmentions {
   margin: 2.5714285714285716em 0 0 0;
 }
-section ul#partenaires {
+#contest section ul {
   list-style: none;
   list-style-image: none;
   margin: 0;
   padding: 0;
 }
-section ul#partenaires li {
+#contest section ul#partenaires_particuliers {
+  list-style: none;
+  list-style-image: none;
+  margin: 2.5714285714285716em 0 0 0;
+  padding: 0;
+}
+#contest section ul li {
   margin: 0 0 0.6428571428571429em 0;
 }
-section ul#partenaires li a {
+#contest section ul li a {
   display: block;
   text-decoration: none;
   padding: 0 0 0 2.5714285714285716em;
 }
-section ul#partenaires li a:hover {
+#contest section ul li a:hover {
   text-decoration: underline;
 }
-section ul#partenaires li img {
+#contest section ul li img {
   clear: both;
   float: left;
 }
@@ -697,7 +706,7 @@ section ul#partenaires li img {
   margin: 0;
 }
 #archives .main h2 {
-  font-size: 2em;
+  font-size: 1em;
 }
 #archives .main ul {
   list-style: none;
