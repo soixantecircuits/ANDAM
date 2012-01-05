@@ -316,6 +316,7 @@ margin: 0 0 @unit*3 0;
 
 #contact {
 margin-top: @unit*3;
+text-align:center;
 }
  
 #backstretch img {
@@ -361,12 +362,16 @@ top: @unit*1.5;
 #main_menu {
 position: absolute;
 right:0px;
-width:50%;
+width:100%;
 top: @unit*8.5;
 }
 
+#main_menu ul{
+padding-left: 50%;
+}
+
 ul#langues {
-margin: @unit*3 0 0 0;
+margin: @unit*2 0 0 0;
 }
 
 nav#main_menu ul#langues li a{
@@ -448,6 +453,7 @@ padding: @unit*10 30% 0 20%;
 }
 p { margin:0; padding:0; }
 
+
 /* ------------- PRESS ------------- */
 
 
@@ -471,7 +477,7 @@ margin: 0 0 0 0;
 }
 
 /*-------------- CONTEST -------------- */
-#contest article p {
+#contest article p, #contest article .fb_edge_widget_with_comment {
 margin: 0 0 @unit 0;
 }
 section#creditsmentions {
@@ -632,7 +638,6 @@ padding:0 @unit/2;
 nav#main_menu ul#langues {
 margin-top: @unit;
 }
-
 
 body > header {
 position: relative;

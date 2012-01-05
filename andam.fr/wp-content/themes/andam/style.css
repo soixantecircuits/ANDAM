@@ -490,6 +490,7 @@ article {
 }
 #contact {
   margin-top: 3.8571428571428577em;
+  text-align: center;
 }
 #backstretch img {
   opacity: .15;
@@ -524,11 +525,14 @@ header {
 #main_menu {
   position: absolute;
   right: 0px;
-  width: 50%;
+  width: 100%;
   top: 10.928571428571429em;
 }
+#main_menu ul {
+  padding-left: 50%;
+}
 ul#langues {
-  margin: 3.8571428571428577em 0 0 0;
+  margin: 2.5714285714285716em 0 0 0;
 }
 nav#main_menu ul#langues li a {
   text-transform: lowercase;
@@ -619,7 +623,7 @@ p {
   margin: 0 0 0 0;
 }
 /*-------------- CONTEST -------------- */
-#contest article p {
+#contest article p, #contest article .fb_edge_widget_with_comment {
   margin: 0 0 1.2857142857142858em 0;
 }
 section#creditsmentions {

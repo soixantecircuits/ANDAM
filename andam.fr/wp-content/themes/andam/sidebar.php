@@ -24,7 +24,7 @@
 		}} ?>
 		</li>
 	</ul>
-	<? if($post->post_name == "association" || $post->post_name == "press") {?>
+	<? if($post->post_name == "association" || $post->post_name == "news") {?>
 	<?php if(have_posts()) : ?>
 	<?php while(have_posts()) : the_post(); ?>  
 	<aside id="contact">
