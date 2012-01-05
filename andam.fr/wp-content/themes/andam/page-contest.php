@@ -15,11 +15,11 @@ get_header(); ?>
 	// texte article //
 	global $textarea_mb;
 	$textsupp = $textarea_mb->the_meta();
-	$inscript = simple_fields_get_post_group_values($postid, "inscription", true, 2);
-	$inscriptfile = wp_get_attachment_url($inscript[0]['fichier']);
+	$inscript = simple_fields_get_post_group_values($postid, "téléchargement", true, 2);
+	$inscriptfile = wp_get_attachment_url(trad_customfield2( $inscript[0], "fichier", $my_lang ));
 	if (!empty($inscriptfile)) {
 	?>
-		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? _e('[:fr]Télécharger le dossier d\'inscription[:en]Download registration file'); ?></a></p>
+		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? echo trad_customfield2( $inscript[0], "intitulé", $my_lang ); ?></a></p>
 	<? } ?>
 	<? the_content(); ?>
 		<ul id="partenaires">
