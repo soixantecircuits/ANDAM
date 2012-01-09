@@ -69,7 +69,7 @@ i b, b i, em b, b em { font-family: "AndBoldItalic", "Helvetica", Arial, sans-se
  * Also: hot pink! (or customize the background color to match your design)
  */
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #fff; color: #1A1A1A; text-shadow: none; }
 ::selection { background: #fff; color: #1A1A1A; text-shadow: none; }
 
 
@@ -321,10 +321,10 @@ text-align:center;
  
 #backstretch img {
 opacity: .15;
--ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=15)"; // for IE8 first!
 filter: alpha(opacity=15); // for IE5-7 second!
-// disable antialiasing //
+-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=15)"; // for IE8 first!
 
+// disable antialiasing //
 image-rendering: -moz-crisp-edges;
 image-rendering: -webkit-optimize-contrast; 
 
