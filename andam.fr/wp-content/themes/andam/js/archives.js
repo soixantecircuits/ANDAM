@@ -123,7 +123,7 @@ $(function(){
     render: function(){
       clearInterval(window.loadingtimer);
       $(".main").empty();      
-      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><p id='laureats'></p>");
+      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
       $(".main").append("<div class='from'>("+lang.from+")</div>");
       $("#sortToggle").bind('click', function(){
         App.sortToggle();

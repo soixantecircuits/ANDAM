@@ -486,10 +486,10 @@ h1, h2, h3 {
   margin: 0 0 0.4285714285714286em 0;
 }
 article {
-  margin: 0 0 3.8571428571428577em 0;
+  margin: 0 0 2.5714285714285716em 0;
 }
 #contact {
-  margin-top: 3.8571428571428577em;
+  margin-top: 2.5714285714285716em;
   text-align: center;
 }
 #backstretch img {
@@ -595,6 +595,9 @@ nav#main_menu ul li.current_page_item a {
   letter-spacing: 0.4em;
   margin: 0;
 }
+.from {
+  padding: 0 0 2.5714285714285716em 0;
+}
 /*-------MAIN CONTAINER------*/
 #enveloppe {
   max-width: 820px;
@@ -602,7 +605,7 @@ nav#main_menu ul li.current_page_item a {
   padding: 12.857142857142858em 0px 0 0;
 }
 .main {
-  padding: 0 345px 0 20px;
+  padding: 0 345px 0 2.5714285714285716em;
 }
 p {
   margin: 0;
@@ -684,6 +687,9 @@ section#creditsmentions {
 #association .main table ul {
   margin: 0;
 }
+#association .main table ul ul {
+  margin-left: 1.2857142857142858em;
+}
 #association .main h2 {
   margin-top: 1.2857142857142858em;
   font-size: 2em;
@@ -701,7 +707,10 @@ section#creditsmentions {
 #twenty-years-of-fashion p {
   margin: 0 0 1.2857142857142858em 0;
 }
-/*-------------- Archives -------------*/
+/*-------------- ARCHIVES -------------*/
+div#laureats {
+  margin-top: 1.2857142857142858em;
+}
 #archives .main h2 {
   margin: 0;
 }
@@ -710,7 +719,7 @@ section#creditsmentions {
 }
 #archives .main ul {
   list-style: none;
-  margin: 1.2857142857142858em 0 0 0;
+  margin: 0 0 1.2857142857142858em 0;
   padding: 0;
 }
 #archives .main ul a {
@@ -733,7 +742,7 @@ section#creditsmentions {
 @media only screen and (min-width: 479px), only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   
 }
-@media only screen and (max-width: 481px) {
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
   #backstretch {
     display: none;
   }
@@ -747,16 +756,20 @@ section#creditsmentions {
     right: 0;
     float: none;
   }
+  #logo h1 {
+    font-size: 1.8em;
+  }
   nav#main_menu {
-    font-size: 0.9em;
+    font-size: 1em;
     position: relative;
-    padding-top: 1.2857142857142858em;
+    padding: 1.2857142857142858em 2.5714285714285716em;
     margin: 0;
     top: 0;
     width: auto;
   }
   nav#main_menu ul {
     text-align: center;
+    padding: 0;
   }
   nav#main_menu ul li {
     display: inline-block;
@@ -771,7 +784,13 @@ section#creditsmentions {
   body > header {
     position: relative;
   }
-  /* Style adjustments for viewports 480px and over go here */
+  #enveloppe {
+    padding: 0 2.5714285714285716em;
+  }
+  #contact {
+    margin-top: 1.2857142857142858em;
+    text-align: center;
+  }
   .main {
     margin: 0;
     width: 100%;
