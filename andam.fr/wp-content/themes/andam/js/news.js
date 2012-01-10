@@ -240,10 +240,10 @@ $(function(){
   window.AppView = Backbone.View.extend({
     // Instead of generating a new element, bind to the existing skeleton of
     // the App already present in the HTML.
-    el: $(".main"),
+    el: $("#main"),
 
     initialize: function() {
-      $(".main").append("<div class='loading'>" + lang.loading + "</div>");
+      $("#main").append("<div class='loading'>" + lang.loading + "</div>");
       window.timecounter = 0;
       window.loadingtimer = setInterval(function() {
         window.timecounter++;
@@ -310,8 +310,8 @@ $(function(){
     // Add all items in the collection at once.
     addAll: function() {
       clearInterval(window.loadingtimer);
-      $(".main").empty();      
-      $(".main").append("<div class='content'></div><div class='from'>("+lang.from+")</div>");
+      $("#main").empty();      
+      $("#main").append("<div class='content'></div><div class='from'>("+lang.from+")</div>");
       bothfeed.each(this.addOne);
     }
 

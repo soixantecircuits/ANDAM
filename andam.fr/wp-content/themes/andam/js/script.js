@@ -5,5 +5,5 @@ $(document).ready(function() {
 		$.backstretch(bgdurl, {speed: 1000});
 	}
 	
-	$(".main").fadeIn('slow');	
+	$("#main").fadeIn('slow');	
 });

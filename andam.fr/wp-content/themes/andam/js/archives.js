@@ -102,10 +102,10 @@ $(function(){
 
     // Instead of generating a new element, bind to the existing skeleton of
     // the App already present in the HTML.
-    //el: $(".main"),
+    //el: $("#main"),
 
     initialize: function() {
-      $(".main").append("<div class='loading'>" + lang.loading + "</div>");
+      $("#main").append("<div class='loading'>" + lang.loading + "</div>");
       window.timecounter = 0;
       window.loadingtimer = setInterval(function() {
         window.timecounter++;
@@ -122,9 +122,9 @@ $(function(){
     },
     render: function(){
       clearInterval(window.loadingtimer);
-      $(".main").empty();      
-      $(".main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
-      $(".main").append("<div class='from'>("+lang.from+")</div>");
+      $("#main").empty();      
+      $("#main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
+      $("#main").append("<div class='from'>("+lang.from+")</div>");
       $("#sortToggle").bind('click', function(){
         App.sortToggle();
       });

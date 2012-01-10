@@ -42,5 +42,5 @@
 		</div>			
 	</header>
 <div id="enveloppe">	
-<div class="<? echo $post->post_name; ?> main">
+<div id="main">
 	
