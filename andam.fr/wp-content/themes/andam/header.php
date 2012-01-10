@@ -14,7 +14,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<meta name="description" content="<?php bloginfo( 'description' ); ?>">
-	<meta name="author" content="soixantecircuits / vacuumRandom">	
+	<meta name="author" content="Pierre-François Letué / soixantecircuits / vacuumRandom">	
 	<link type="text/plain" rel="author" href="/humans.txt" />
 	<meta name="viewport" content="width=device-width">
 	<? $malangue = qtrans_getLanguage(); ?>
