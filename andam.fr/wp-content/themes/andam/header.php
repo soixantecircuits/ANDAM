@@ -23,8 +23,8 @@
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
 
 	<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>!-->
-	<?php $mycat = $post->post_name;?>
     <?php 
+    $mycat = $post->post_name;
     if ($mycat != "contest" && $mycat != "twenty-years-of-fashion") {
     	wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true );
 	} 

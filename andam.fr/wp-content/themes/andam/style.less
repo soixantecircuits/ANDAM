@@ -319,7 +319,7 @@ margin-top: @unit*2;
 text-align:center;
 }
  
-#backstretch img {
+#backstretch {
 opacity: .15;
 filter: alpha(opacity=15); // for IE5-7 second!
 -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=15)"; // for IE8 first!
@@ -489,25 +489,33 @@ margin: 0 0 0 0;
 margin: 0 0 @unit 0;
 }
 section#creditsmentions {
-margin: @unit*2 0 0 0;
+clear:both;
+padding: @unit 0 0 0;
+margin:0;
 }
 
 #contest section ul {
+float: left;
 list-style: none; list-style-image: none; margin: 0; padding: 0;
 }
 
 #contest section ul#partenaires_particuliers {
-list-style: none; list-style-image: none; margin: @unit*2 0 0 0; padding: 0;
+clear: both;
+float: left;
+display: block;
+list-style: none; list-style-image: none; padding: @unit*2 0 0 0; margin:0;
 }
 
 #contest section ul li {
-margin: 0 0 @unit/2 0;
+display: block;
+width:100%;
 }
 
 #contest section ul li a {
+float:left;
 display: block;
 text-decoration: none;
-padding: 0 0 0 @unit*2;
+padding: 0 0 @unit/2 @unit;
 }
 
 #contest section ul li a:hover {
@@ -618,8 +626,7 @@ only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (
 }
 
 @media
-only screen and (max-width: 480px),
-only screen and (max-device-width: 480px) {
+only screen and (max-width: 480px) {
 #backstretch {
 display:none;
 }
