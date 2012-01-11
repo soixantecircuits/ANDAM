@@ -1,0 +1,21 @@
+/* TEAM */
+	
+	Conceptor/Designer: Pierre-François Letué
+	From: Paris, France
+	
+	Developper: Soixante circuits
+	Site: http://www.soixantecircuits.fr
+	From: Paris, France
+	
+	HTML/CSS integrator - Wordpress developper : vacuumRandom
+	Site: http://www.vacuumrandom.com
+	From: Brussels, Belgium
+		
+
+/* SITE */
+
+	Language: French, English
+	Standards: HTML5, CSS3
+	Techno: Html5Boilerplate, Modernizer, Jquery, backbone.js, facebook API, twitter API, flickr API, wikipedia API, Wordpress
+    Last update: most content come from third-party ANDAM social networks stream ( twitter, facebook, wikipedia, flickr )
+	Description: L’Association Nationale pour le Développement des Arts de la Mode (ANDAM) est une association à but non lucratif loi 1901, qui organise chaque année un grand concours destinée à repérer et à lancer de jeunes stylistes sur la scène de la mode française et internationale.
