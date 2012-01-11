@@ -136,6 +136,14 @@ add_action('do_feed_rss', 'disable_feed', 1);
 add_action('do_feed_rss2', 'disable_feed', 1);
 add_action('do_feed_atom', 'disable_feed', 1);
 
+
+// desactive rel=EditURI and rel=wlwmanifest links //
+add_action('init', 'remheadlink');
+function remheadlink() {
+remove_action('wp_head', 'rsd_link');
+remove_action('wp_head', 'wlwmanifest_link');
+}
+
 // filtre les pages par menu_order ASC //
 add_action( 'pre_get_posts', 'meta_filter_page' );
 function meta_filter_page( $query ) {
