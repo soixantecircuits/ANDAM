@@ -32,13 +32,6 @@ wp_localize_script (  "$post->post_name" , 'wp_var' , $tab_vars);
 <script src="<?= get_template_directory_uri(); ?>/js/script.js"></script>
 <!-- end scripts-->
 
-<!--<script>
-	var _gaq=[['_setAccount','UA-25530657-1'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
-	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-	s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>-->
-
 <!--[if lt IE 7 ]>
 	<script>google.load("chrome-frame", "1.0.2");</script>
 	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
