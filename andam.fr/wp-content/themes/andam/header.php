@@ -12,7 +12,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
+	<title><?php is_front_page() ? bloginfo('description') : wp_title(''); ?> | <?php bloginfo('name'); ?></title>
 	<meta name="description" content="<?php bloginfo( 'description' ); ?>">
 	<meta name="author" content="Pierre-François Letué / soixantecircuits / vacuumRandom">	
 	<link type="text/plain" rel="author" href="/humans.txt" />
