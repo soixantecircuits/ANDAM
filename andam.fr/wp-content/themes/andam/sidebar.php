@@ -9,7 +9,7 @@
 ?>
 <nav id="main_menu">
 	<ul>
-<?php wp_list_pages('sort_column=menu_order&exclude=6,8&&title_li='); ?>
+<?php wp_list_pages('sort_column=menu_order&exclude=198,8&&title_li='); ?>
 	</ul>	
 	<ul id="langues">
 		<li>
