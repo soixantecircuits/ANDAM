@@ -23,6 +23,7 @@
 	<script src="<?= get_template_directory_uri(); ?>/js/libs/modernizr-2.0.6.min.js"></script>
 
 	<!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>!-->
+
     <?php 
     $mycat = $post->post_name;
     if ($mycat != "contest" && $mycat != "twenty-years-of-fashion") {
@@ -32,6 +33,11 @@
 	<?php wp_head(); ?>
 </head>
 <body id="<? echo $post->post_name; ?>" <?php body_class(); ?>>
+<? if ($malangue == "en") { ?>
+<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
+<? } else { ?>
+<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0024_french.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
+<? } ?>
 	<header id="header" role="banner">
 		<div id="head_content">
 				<div id="logo">	
