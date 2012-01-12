@@ -16,6 +16,7 @@
 	<meta name="description" content="<?php bloginfo( 'description' ); ?>">
 	<meta name="author" content="Pierre-François Letué / soixantecircuits / vacuumRandom">	
 	<link type="text/plain" rel="author" href="/humans.txt" />
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 	<meta name="viewport" content="width=device-width">
 	<? $malangue = qtrans_getLanguage(); ?>
 	<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/webfont/stylesheet<? echo "_".$malangue; ?>.css" />

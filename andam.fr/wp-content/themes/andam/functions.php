@@ -186,10 +186,10 @@ if ( is_admin()) {
 	//add_filter('page_row_actions','my_action_row', 10, 2);
 	
 	// set html editor by default //
-add_filter( 'wp_default_editor', 'rw_default_editor' );
-function rw_default_editor( $type ) {
-        return 'html';
-}
+	add_filter( 'wp_default_editor', 'rw_default_editor' );
+	function rw_default_editor( $type ) {
+	        return 'html';
+	}
 
 // désactive les boutons afficher dans les tables de posts //
 add_filter( 'page_row_actions', 'remove_row_actions', 10, 1 );
