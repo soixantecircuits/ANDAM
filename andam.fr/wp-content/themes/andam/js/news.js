@@ -62,6 +62,12 @@ $(function(){
             }
             return "";
   });
+  Handlebars.registerHelper('datetime', function(date) {
+            if (date) {
+              return moment(moment(date,'YYYY-MM-DDTHH:mm:ssZ')).format("YYYY-MM-DD");
+            }
+            return "";
+  });
   Handlebars.registerHelper('likers', function(likers) {
     if (likers.length == 1){
       return likers[0].name + ' ' +lang.likesthis + '.';
@@ -76,7 +82,7 @@ $(function(){
   });
   // Template
   // --------
-  var srctmpl =   "<time datetime='2010-01-20' pubdate>" +
+  var srctmpl =   "<time datetime='{{datetime created_at}}' pubdate='pubdate'>" +
                       "{{printdate created_at}}" +
                   "</time>" +
                   " <span class='username'>(" +
@@ -101,7 +107,7 @@ $(function(){
                   "<div class='action'><a href='http://www.twitter.com/{{user.screen_name}}/status/{{id_str}}' target='_blank'>Retweet</a></div>";
   window.tmplTwitter = Handlebars.compile(srctmpl);
   
-  srctmpl =       "<time datetime='2010-01-20' pubdate>" +
+  srctmpl =       "<time datetime='{{datetime created_time}}' pubdate='pubdate'>" +
                      "{{printdate created_time}}" +
                   "</time>" +
                   " <span class='username'>(" +
