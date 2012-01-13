@@ -15,12 +15,28 @@ get_header(); ?>
 	<? the_content(); 
 	$postid = get_the_ID();
 	$my_lang = qtrans_getLanguage();	
-	$inscript = simple_fields_get_post_group_values($postid, "téléchargement", true, 2);
-	$inscriptfile = wp_get_attachment_url(trad_customfield2( $inscript[0], "fichier", $my_lang ));
-	if (!empty($inscriptfile)) {
+	$pub = simple_fields_get_post_group_values($postid, "téléchargement de la publication", true, 2);
+	$nb_pub = count($pub);
+	$mois = date("n");
+	$annee = date("Y");
 	?>
-		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? echo trad_customfield2( $inscript[0], "intitulé", $my_lang ); ?></a></p>
-	<? } ?>
+	<ul id="chapitres">
+<?	
+// si l'année en cours est supérieure ou égale à 2013 //
+	if ($annee >= 2013) {
+		$mois += 12;
+	}
+
+	for($i=0; $i<$nb_pub; $i++) {		
+		if (($i >= $mois-1) && ($i <= $mois-1)){		
+	?>
+		<li class="current_pub"><a target="_blank" href="<? echo wp_get_attachment_url($pub[$i]["fichier"]); ?>"><? echo $pub[$i]["intitulé"]; ?></a></li>
+		<? } else if ($i >= $mois-1) { ?>
+		<li class="futur_pub"><? echo $pub[$i]["intitulé"]; ?></li>
+		<? } else { ?>
+		<li class="passed_pub"><? echo $pub[$i]["intitulé"]; ?></li>
+	<? } } ?>
+	</ul>
 </article>
 <?php endwhile; // end of the loop. ?>
 <?php endif; ?>
