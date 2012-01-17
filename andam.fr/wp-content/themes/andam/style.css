@@ -754,7 +754,7 @@ div#laureats {
   padding: 0;
 }
 #publication ul#chapitres li {
-  margin: 0 0 1.2857142857142858em 0;
+  margin: 0 0 0 0;
 }
 #publication ul#chapitres li.futur_pub {
   color: #999;

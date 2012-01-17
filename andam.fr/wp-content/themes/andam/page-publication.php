@@ -51,4 +51,7 @@ get_header(); ?>
 </article>
 <?php endwhile; // end of the loop. ?>
 <?php endif; ?>
-<?php get_footer(); ?>
+</div><!-- enveloppe -->
+</div><!-- main container -->
+</body>
+</html>
