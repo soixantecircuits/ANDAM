@@ -9,6 +9,7 @@ get_header(); ?>
 	<?php while(have_posts()) : the_post(); ?>  
 <article>
 	<style type="text/css" media="screen">
+	 html { overflow-y: hidden }
 		#header { display:none; }
 		#enveloppe, #main { margin: 0; padding: 0;}
 	</style>
@@ -24,7 +25,7 @@ get_header(); ?>
 <?	
 // si l'année en cours est supérieure ou égale à 2013 //
 	if ($annee >= 2013) {
-		$mois += 12;
+		$mois += 11+($annee-2012);
 	}
 
 	for($i=0; $i<$nb_pub; $i++) {		
