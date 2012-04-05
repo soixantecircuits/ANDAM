@@ -4,7 +4,7 @@
 $(function(){
 
   // Setup
-  window.flickruser = '72610704@N08';//'71927167@N03';
+  window.flickruser = '71927167@N03';//'78720565@N03';//'72610704@N08';//'71927167@N03';
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
   window.en = { list:'Winners',
@@ -57,6 +57,7 @@ $(function(){
   //  Model
   // ----------
 
+  window.Photo = Backbone.Model.extend({});
   window.Set = Backbone.Model.extend({
     set: function(attributes,options) {
         attributes.artist = attributes.title._content.replace(/[,.;:] ?(19|20)\d\d/g,""); 
@@ -67,7 +68,6 @@ $(function(){
 
   //  Collection
   // ---------------
-
   window.Sets = Backbone.Collection.extend({
 
     model: Set,
@@ -84,6 +84,28 @@ $(function(){
 
     parse: function(response) {
         return response.photosets.photoset;
+    },
+
+  });
+
+  window.Photos = Backbone.Collection.extend({
+
+    model: Photo,
+
+    setId: 0,
+
+ 
+    sync: function(method, model, options){  
+        this.url = "http://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&format=json&api_key="
+            +window.flickrapikey + "&user_id=" + window.flickruser + "&photoset_id=" + this.setId,
+        options.timeout = 10000;  
+        options.dataType = "jsonp";
+        options.jsonp = "jsoncallback"; 
+        return Backbone.sync(method, model, options);  
+    },
+
+    parse: function(response) {
+        return response.photoset.photo;
     },
 
   });
@@ -105,7 +127,7 @@ $(function(){
     //el: $("#main"),
 
     initialize: function() {
-      $("#main").append("<div class='loading'>" + lang.loading + "</div>");
+      $("#main").prepend("<div class='loading'>" + lang.loading + "</div>");
       window.timecounter = 0;
       window.loadingtimer = setInterval(function() {
         window.timecounter++;
@@ -122,14 +144,87 @@ $(function(){
     },
     render: function(){
       clearInterval(window.loadingtimer);
-      $("#main").empty();      
-      $("#main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
-      $("#main").append("<div class='from'>("+lang.from+")</div>");
-      $("#sortToggle").bind('click', function(){
-        App.sortToggle();
+      $(".loading").empty();      
+      $("#main").prepend("<p>" + 
+        "<a href='#' id='photolink'><img id='photo' src=''></img></a></p>" +
+        "<p><a href='#' id='precedent'>&lsaquo;</a>" + 
+        "<a href='#' id='albumlink'><div id='legende'>nothing</div></a>" +
+        "<a href='#' id='suivant'>&rsaquo;</a>" +
+        "</p>");
+      $("#precedent").bind('click', function(){
+        App.previous();
       });
-      this.viewChrono();
-      this.randomBackgroundImage();
+      $("#suivant").bind('click', function(){
+        App.next();
+      });
+      i_set = 0;
+      myset = sets.at(i_set);
+      photos = new Photos;
+      photos.setId = myset.get('id');
+      photos.bind('all', this.renderSet, this);
+      photos.fetch();
+    },
+    renderSet: function(){
+      $("#legende").empty();
+      $("#legende").append(myset.get('title')._content);
+      i_photo = 0;
+      var photo = photos.at(i_photo);
+      this.fetchPhoto(photo);
+    },
+    fetchPhoto:function(picture){
+              $.ajax({
+                url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
+                    +window.flickrapikey + "&user_id=" + window.flickruser + "&photo_id=" + picture.get('id'),
+                    dataType: 'JSONP',
+                    jsonp:  "jsoncallback", 
+                    success: this.showPhoto,
+                    error: function(){
+                      console.log('couldnt retrieve background image from flickr');
+                    }
+               });
+    },
+    showPhoto: function(response){
+      var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
+      var image = _.find(sortedSizes, function(image){
+          return image.width * image.height < 800*600;});
+      $("#photo").attr("src", image.source);
+    },
+
+    next:function(){
+      //check if it's the last photo
+      if (i_photo == photos.length - 1){
+        if (i_set == sets.length - 1){
+          return;
+        }
+        i_set++;
+        myset = sets.at(i_set);
+        photos.setId = myset.get('id');
+        photos.fetch();
+        return;
+      }
+      else {
+        i_photo++;
+        var photo = photos.at(i_photo);
+        this.fetchPhoto(photo);
+      }
+    },
+    previous:function(){
+      //check if it's the first photo
+      if (i_photo == 0){
+        if (i_set == 0){
+          return;
+        }
+        i_set--;
+        myset = sets.at(i_set);
+        photos.setId = myset.get('id');
+        photos.fetch();
+        return;
+      }
+      else {
+        i_photo--;
+        var photo = photos.at(i_photo);
+        this.fetchPhoto(photo);
+      }
     },
     randomBackgroundImage: function(){
       var set = sets.at(Math.floor(Math.random() * sets.length));
@@ -149,8 +244,10 @@ $(function(){
                       var sortedSizes = _.sortBy(sizes.sizes.size, function(size){return -size.width*size.height;});
                       var image = _.find(sortedSizes, function(image){
                           return image.width * image.height < 800*600;});
-                      //var image = _.find(sizes.sizes.size, function(size){return size.label == 'Original';});
-                      $.backstretch(image.source, {speed: 1000});
+                      //$.backstretch(image.source, {speed: 1000});
+                      //$("#img").append(image.source);
+                      var src = $("#photo").attr("src").match(/[^\.]+/) + image.source;
+                      $("#photo").attr("src", image.source);
                     },
                     error: function(){
                       console.log('couldnt retrieve background image from flickr');
