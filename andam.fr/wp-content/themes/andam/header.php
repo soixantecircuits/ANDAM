@@ -27,7 +27,7 @@
 
     <?php 
     $mycat = $post->post_name;
-    if ($mycat != "contest" && $mycat != "twenty-years-of-fashion") {
+    if ($mycat != "contest" /*&& $mycat != "twenty-years-of-fashion"*/) {
     	wp_enqueue_script( "$mycat", get_bloginfo('template_directory') .'/js/'.$mycat.'.js', array('jquery'), null, true );
 	} 
     ?> 
