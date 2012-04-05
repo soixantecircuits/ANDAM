@@ -225,7 +225,7 @@ function remove_row_actions( $actions )
 	function delete_menu_items() {
 			//remove_menu_page('index.php'); // Dashboard
 			remove_menu_page('edit.php'); // Posts
-			remove_menu_page('upload.php'); // Media
+			//remove_menu_page('upload.php'); // Media
 			remove_menu_page('link-manager.php'); // Links
 			remove_menu_page('edit.php?post_type=publications'); // Pages
 			remove_menu_page('profile.php'); // Pages

@@ -13,8 +13,18 @@ get_header(); ?>
 		#header { display:none; }
 		#enveloppe, #main { margin: 0; padding: 0;}
 	</style>
-	<? the_content(); 
+	<? 
 	$postid = get_the_ID();
+	$image = simple_fields_get_post_group_values($postid, "image", true, 2); 
+	if (!empty($image[0]["fichier"])) {
+		$my_pic = wp_get_attachment_image_src( $image[0]["fichier"], "full");
+	?>
+	<figure>
+		<img  src="<? echo $my_pic[0]; ?>" width="<? echo $my_pic[1]; ?>" height="<? echo $my_pic[2]; ?>" />
+	</figure>
+	<? } ?>
+	<? the_content(); 
+	
 	$my_lang = qtrans_getLanguage();	
 	$pub = simple_fields_get_post_group_values($postid, "téléchargement de la publication", true, 2);
 	$nb_pub = count($pub);
@@ -41,4 +51,7 @@ get_header(); ?>
 </article>
 <?php endwhile; // end of the loop. ?>
 <?php endif; ?>
-<?php get_footer(); ?>
+</div><!-- enveloppe -->
+</div><!-- main container -->
+</body>
+</html>
