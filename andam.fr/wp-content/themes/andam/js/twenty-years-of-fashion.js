@@ -4,67 +4,24 @@
 $(function(){
 
   // Setup
-  window.flickruser = '71927167@N03';//'78720565@N03';//'72610704@N08';//'71927167@N03';
+  //window.flickruser = '72610704@N08'; //ANDAM
+  //window.flickruser = '71927167@N03'; //john doe
+  window.flickruser = '78720565@N03'; //thomas arassette
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
-  window.en = { list:'Winners',
-                chrono:'sort by date',
-                alpha: 'sort by name',
-                from:'from <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
-                loading:'Loading'
+  window.en = { loading:'Loading'
               };
-  window.fr = { list:'Laur&eacute;ats',
-                chrono:'voir la liste chronologique',
-                alpha: 'voir la liste alphab&eacute;tique',
-                from:'de <a href="http://www.flickr.com/' + flickruser + '" target="_blank">Flickr</a>',
-                loading:'Chargement'
+  window.fr = { loading:'Chargement'
                 };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
 
 
-  Handlebars.registerHelper('onetime', function(year) {
-            if (year!= window.year) {
-              window.year = year;
-              return "<h2 class='year'>"+year+"</h2>";
-            }
-            return "";
-  });
-
-  // Template
-  // --------
-	var	srctmpl = "{{#chronolaureats}}" +
-             "<ul>"+
-              "<h2><strong>{{year}}</strong></h2>" +
-              "{{#laureats}}" +
-                  "<li><a href='http://www.flickr.com/photos/" + window.flickruser +
-                  "/sets/{{id}}/' target='_blank'>{{artist}}</a></li>" +
-              "{{/laureats}}" +
-             "</ul>" + 
-            "{{/chronolaureats}}";
-  window.tmplChrono = Handlebars.compile(srctmpl);
-  srctmpl = "{{#alphalaureats}}" +
-             "<ul>" +
-              "{{#laureats}}" +
-                  "<li><a href='http://www.flickr.com/photos/" + window.flickruser +
-                  "/sets/{{id}}/' target='_blank'><span class='alphac'>{{artist}}, {{year}}</span></a></li>" +
-              "{{/laureats}}" +
-             "</ul>" + 
-            "{{/alphalaureats}}";
-  window.tmplAlpha = Handlebars.compile(srctmpl);
- 
- 
-  
   //  Model
   // ----------
 
   window.Photo = Backbone.Model.extend({});
   window.Set = Backbone.Model.extend({
-    set: function(attributes,options) {
-        attributes.artist = attributes.title._content.replace(/[,.;:] ?(19|20)\d\d/g,""); 
-        attributes.year = attributes.title._content.match(/(19|20)\d\d/g)[0]; 
-        return Backbone.Model.prototype.set.call(this, attributes,options);
-    }
-  });
+    });
 
   //  Collection
   // ---------------
@@ -73,7 +30,7 @@ $(function(){
     model: Set,
 
     url:"http://www.flickr.com/services/rest/?method=flickr.photosets.getList&format=json&api_key="
-        +window.flickrapikey + "&user_id=" + window.flickruser,
+        + window.flickrapikey + "&user_id=" + window.flickruser,
     
     sync: function(method, model, options){  
         options.timeout = 10000;  
@@ -86,6 +43,16 @@ $(function(){
         return response.photosets.photoset;
     },
 
+    removeNotEvents: function(){
+        this.remove(this.reject(function(model){
+        var title = model.get('title')._content;
+        var match = title.match(/[,.;:] ?\d\d\/(19|20)\d\d/);
+        if (match){
+          return true;
+        }
+        return false;
+        }));
+    }
   });
 
   window.Photos = Backbone.Collection.extend({
@@ -93,7 +60,6 @@ $(function(){
     model: Photo,
 
     setId: 0,
-
  
     sync: function(method, model, options){  
         this.url = "http://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&format=json&api_key="
@@ -139,16 +105,17 @@ $(function(){
           $('.loading').append('.');
         }
       }, 400);
-      sets.bind('all', this.render, this);
+      sets.bind('reset', this.render, this);
       sets.fetch();
     },
     render: function(){
+      sets.removeNotEvents();
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
       $("#main").prepend("<p>" + 
         "<a href='#' id='photolink'><img id='photo' src=''></img></a></p>" +
         "<p><a href='#' id='precedent'>&lsaquo;</a>" + 
-        "<a href='#' id='albumlink'><div id='legende'>nothing</div></a>" +
+        "<a href='#' id='albumlink'><div id='legende'></div></a>" +
         "<a href='#' id='suivant'>&rsaquo;</a>" +
         "</p>");
       $("#precedent").bind('click', function(){

@@ -5,6 +5,7 @@ $(function(){
 
   // Setup
   window.flickruser = '72610704@N08';//'71927167@N03';
+  //window.flickruser = '78720565@N03'; //thomas arassette
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
   window.en = { list:'Winners',
@@ -85,6 +86,16 @@ $(function(){
     parse: function(response) {
         return response.photosets.photoset;
     },
+    removeNotLaureats: function(){
+        this.remove(this.reject(function(model){
+        var title = model.get('title')._content;
+        var match = title.match(/[,.;:] ?(19|20)\d\d/);
+        if (match){
+          return true;
+        }
+        return false;
+        }));
+    }
 
   });
 
@@ -121,6 +132,7 @@ $(function(){
       sets.fetch();
     },
     render: function(){
+      sets.removeNotLaureats();
       clearInterval(window.loadingtimer);
       $("#main").empty();      
       $("#main").append("<p>" + lang.list + " (<a href='#' id='sortToggle'>" + lang.alpha +"</a>)</p><div id='laureats'></div>");
