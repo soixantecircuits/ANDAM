@@ -113,7 +113,7 @@ $(function(){
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
       $("#main").prepend("<p>" + 
-        "<a href='#' id='photolink'><img id='photo' src=''></img></a></p>" +
+        "<a href='#' id='photolink' target='_blank'><img id='photo' src=''></img></a></p>" +
         "<p><a href='#' id='precedent'>&lsaquo;</a>" + 
         "<a href='#' id='albumlink'><div id='legende'></div></a>" +
         "<a href='#' id='suivant'>&rsaquo;</a>" +
@@ -155,6 +155,7 @@ $(function(){
       var image = _.find(sortedSizes, function(image){
           return image.width * image.height < 800*600;});
       $("#photo").attr("src", image.source);
+      $("#photolink").attr("href", "http://www.flickr.com/photos/" + window.flickruser + "/" + photos.at(i_photo).get('id'));
     },
 
     next:function(){
