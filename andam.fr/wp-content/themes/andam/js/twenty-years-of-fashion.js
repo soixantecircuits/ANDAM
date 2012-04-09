@@ -144,9 +144,14 @@ $(function(){
       i_photo = 0;
       /*var photo = photos.at(i_photo);
       this.fetchPhoto(photo);*/
+      $("#photolink").empty();
       photos.forEach(this.fetchPhoto, this);
     },
     fetchPhoto:function(picture){
+      var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
+      var photourl = "http://farm"+picture.get('farm')+".staticflickr.com/"+picture.get('server')+"/"+picture.get('id')+"_"+picture.get('secret')+"_z.jpg";
+      $("#photolink").append("<img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img>");
+      /*
               $.ajax({
                 url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
                     +window.flickrapikey + "&user_id=" + window.flickruser + "&photo_id=" + picture.get('id'),
@@ -157,12 +162,13 @@ $(function(){
                       console.log('couldnt retrieve image from flickr');
                     }
                });
+              */
     },
     showPhoto: function(response){
       var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
       var image = _.find(sortedSizes, function(image){
           return image.width * image.height < 800*600;});
-      $("#photolink").append("<img class='photo' src='" + image.source + "'></img>");
+      //$("
     },
 
     next:function(){
