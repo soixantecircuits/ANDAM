@@ -13,7 +13,7 @@ $(document).ready(function() {
 	});
 	
 	 
-	 $("ul#partenaires li a").click(function(){
+	 $("ul#partenaires li a.btn").click(function(){
 	 	var that = this;
 	 	
 	 	$('ul#partenaires li div.unfold').animate({
