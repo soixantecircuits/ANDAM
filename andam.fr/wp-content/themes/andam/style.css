@@ -683,11 +683,22 @@ section#creditsmentions {
   display: block;
   width: 100%;
 }
-#contest section ul li a {
+#contest section ul li > a {
   float: left;
   display: block;
   text-decoration: none;
   padding: 0 0 0.6428571428571429em 1.2857142857142858em;
+}
+#contest section ul li div {
+  overflow: hidden;
+  float: left;
+  height: 0;
+}
+#contest section ul li div p {
+  clear: both;
+  display: block;
+  margin: 0;
+  padding: 0 0 1.2857142857142858em 2.5714285714285716em;
 }
 #contest section ul li a:hover {
   text-decoration: underline;
@@ -769,7 +780,7 @@ section#creditsmentions {
 }
 #twenty-years-of-fashion #photos a img {
   max-width: 100%;
-  max-height: 480px;
+  max-height: 385px;
 }
 #twenty-years-of-fashion #facebook-text p {
   margin: 0 0 6.428571428571429em 0;
