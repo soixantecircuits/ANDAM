@@ -4,9 +4,9 @@
 $(function(){
 
   // Setup
-  window.flickruser = '72610704@N08'; //ANDAM
+  //window.flickruser = '72610704@N08'; //ANDAM
   //window.flickruser = '71927167@N03'; //john doe
-  //window.flickruser = '78720565@N03'; //thomas arassette
+  window.flickruser = '78720565@N03'; //thomas arassette
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
   window.en = { loading:'Loading'
@@ -113,13 +113,17 @@ $(function(){
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
       $("#main").prepend("<figure id='photos'>" + 
-        "<a href='#' id='photolink' target='_blank'><img id='photo' src=''></img></a>" +
+        "<a href='#' id='photolink'></a>" +
         "<nav><a href='#' id='precedent'>&lsaquo;</a>" + 
-        "<figcaption id='legende'><a href='#' id='albumlink'></a></figcaption>" +
+        "<figcaption id='legende'><a href='#' id='albumlink' target='_blank'></a></figcaption>" +
         "<a href='#' id='suivant'>&rsaquo;</a></nav>" +
         "</figure>");
       $("#precedent").bind('click', function(){
         App.previous();
+        return false;
+      });
+      $("#photolink").bind('click', function(){
+        App.next();
         return false;
       });
       $("#suivant").bind('click', function(){
@@ -134,11 +138,13 @@ $(function(){
       photos.fetch();
     },
     renderSet: function(){
-      $("#legende").empty();
-      $("#legende").append(myset.get('title')._content);
+      $("#albumlink").empty();
+      $("#albumlink").append(myset.get('title')._content);
+      $("#albumlink").attr("href", "http://www.flickr.com/photos/" + window.flickruser + "/sets/" + myset.get('id'));
       i_photo = 0;
-      var photo = photos.at(i_photo);
-      this.fetchPhoto(photo);
+      /*var photo = photos.at(i_photo);
+      this.fetchPhoto(photo);*/
+      photos.forEach(this.fetchPhoto, this);
     },
     fetchPhoto:function(picture){
               $.ajax({
@@ -148,7 +154,7 @@ $(function(){
                     jsonp:  "jsoncallback", 
                     success: this.showPhoto,
                     error: function(){
-                      console.log('couldnt retrieve background image from flickr');
+                      console.log('couldnt retrieve image from flickr');
                     }
                });
     },
@@ -156,8 +162,7 @@ $(function(){
       var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
       var image = _.find(sortedSizes, function(image){
           return image.width * image.height < 800*600;});
-      $("#photo").attr("src", image.source);
-      $("#photolink").attr("href", "http://www.flickr.com/photos/" + window.flickruser + "/" + photos.at(i_photo).get('id'));
+      $("#photolink").append("<img class='photo' src='" + image.source + "'></img>");
     },
 
     next:function(){
@@ -174,8 +179,8 @@ $(function(){
       }
       else {
         i_photo++;
-        var photo = photos.at(i_photo);
-        this.fetchPhoto(photo);
+        /*var photo = photos.at(i_photo);
+        this.fetchPhoto(photo);*/
       }
     },
     previous:function(){
@@ -196,69 +201,6 @@ $(function(){
         this.fetchPhoto(photo);
       }
     },
-    randomBackgroundImage: function(){
-      var set = sets.at(Math.floor(Math.random() * sets.length));
-      $.ajax({
-        url:"http://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&format=json&api_key="
-            +window.flickrapikey + "&user_id=" + window.flickruser + "&photoset_id=" + set.get('id'),
-            dataType: 'JSONP',
-            jsonp:  "jsoncallback", 
-            success: function(pictures){
-              var picture = pictures.photoset.photo[Math.floor(Math.random() * pictures.photoset.photo.length)];
-              $.ajax({
-                url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
-                    +window.flickrapikey + "&user_id=" + window.flickruser + "&photo_id=" + picture.id,
-                    dataType: 'JSONP',
-                    jsonp:  "jsoncallback", 
-                    success: function(sizes){
-                      var sortedSizes = _.sortBy(sizes.sizes.size, function(size){return -size.width*size.height;});
-                      var image = _.find(sortedSizes, function(image){
-                          return image.width * image.height < 800*600;});
-                      //$.backstretch(image.source, {speed: 1000});
-                      //$("#img").append(image.source);
-                      var src = $("#photo").attr("src").match(/[^\.]+/) + image.source;
-                      $("#photo").attr("src", image.source);
-                    },
-                    error: function(){
-                      console.log('couldnt retrieve background image from flickr');
-                    }
-               });
-            },
-            error: function(){
-              console.log('couldnt retrieve background image from flickr');
-            }
-       });
-    },
-    viewAlpha: function(){
-      var alphajs = _.map(_.toArray(_.groupBy(_.sortBy(sets.toJSON(),function(laureat){
-         return laureat.artist}), function(laureat){
-             return laureat.artist.substring(0,1);})),
-            function(e){return {laureats:e}});
-      alphajs = {alphalaureats:alphajs};
-      $("#laureats").append(window.tmplAlpha(alphajs));
-    },
-    
-    viewChrono: function(){
-      var chronojs = _.sortBy(_.map(_.toArray(_.groupBy(sets.toJSON(), function(laureat){
-                                                return laureat.year;})), function(e){
-                               return {year:e[0].year,laureats:e}}), function(laureats){
-                      return laureats.year});
-      chronojs = {chronolaureats:chronojs};
-      $("#laureats").append(window.tmplChrono(chronojs));
-    },
-    
-    sortToggle: function(){
-      $("#laureats").empty();
-      if (window.alphabetical){
-        $("#sortToggle").html(lang.alpha);
-        window.alphabetical = false;
-        this.viewChrono();
-      }else{
-        $("#sortToggle").html(lang.chrono);
-        window.alphabetical = true;
-        this.viewAlpha();
-      }
-    }
   });
 
   // Finally, we kick things off by creating the **App**.
