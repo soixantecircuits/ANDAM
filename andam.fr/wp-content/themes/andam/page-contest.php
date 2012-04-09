@@ -17,9 +17,13 @@ get_header(); ?>
 	$textsupp = $textarea_mb->the_meta();
 	$inscript = simple_fields_get_post_group_values($postid, "téléchargement", true, 2);
 	$inscriptfile = wp_get_attachment_url(trad_customfield2( $inscript[0], "fichier", $my_lang ));
-	if (!empty($inscriptfile)) {
+	$embeded = $inscript[0]['video'];
+	if (!empty($inscriptfile) && empty($embeded)) {
 	?>
 		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? echo trad_customfield2( $inscript[0], "intitulé", $my_lang ); ?></a></p>
+	<? } else { ?>
+		<p><? _e('[:en]registrations are closed[:fr]les inscriptions sont closes'); ?></p>
+		<div id="video"><? echo $embeded; ?></div>
 	<? } ?>
 	<? the_content(); ?>
 		<ul id="partenaires">
@@ -56,7 +60,7 @@ get_header(); ?>
 					} else {
 						$imageurl = $value['logo'];
 					}
-				?>
+			?>
 				<li><img src="<? echo $imageurl; ?>" width="16"/><a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a></li>				
 				<? };
 			?>

@@ -487,6 +487,23 @@ padding: @unit 0 0 0;
 margin:0;
 }
 
+#video {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+#video iframe,  
+#video object,  
+#video embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
 #contest section ul {
 float: left;
 list-style: none; list-style-image: none; margin: 0; padding: 0;
