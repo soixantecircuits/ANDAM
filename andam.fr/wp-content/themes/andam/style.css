@@ -40,7 +40,9 @@ nav,
 section {
   display: block;
 }
-audio, canvas, video {
+audio,
+canvas,
+video {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -79,11 +81,13 @@ textarea {
   font-family: "AndRegular", "Helvetica", Arial, sans-serif;
   color: #1a1a1a;
 }
-b, strong {
+b,
+strong {
   font-family: "AndBold", "Helvetica", Arial, sans-serif;
   color: #1a1a1a;
 }
-i, em {
+i,
+em {
   font-family: "AndItalic", "Helvetica", Arial, sans-serif;
   color: #1a1a1a;
 }
@@ -127,7 +131,8 @@ a:focus {
   outline: thin dotted;
 }
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
-a:hover, a:active {
+a:hover,
+a:active {
   outline: 0;
 }
 /* =============================================================================
@@ -146,7 +151,8 @@ h6 {
 abbr[title] {
   border-bottom: 1px dotted;
 }
-b, strong {
+b,
+strong {
   font-weight: bold;
 }
 blockquote {
@@ -192,7 +198,8 @@ pre {
 q {
   quotes: none;
 }
-q:before, q:after {
+q:before,
+q:after {
   content: "";
   content: none;
 }
@@ -200,7 +207,8 @@ small {
   font-size: 85%;
 }
 /* Position subscript and superscript content without affecting line-height: h5bp.com/k */
-sub, sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -215,14 +223,16 @@ sub {
 /* =============================================================================
    Lists
    ========================================================================== */
-ul, ol {
+ul,
+ol {
   margin: 1em 0;
   padding: 0 0 0 40px;
 }
 dd {
   margin: 0 0 0 40px;
 }
-nav ul, nav ol {
+nav ul,
+nav ol {
   list-style: none;
   list-style-image: none;
   margin: 0;
@@ -294,14 +304,16 @@ textarea {
  * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
  * 2. Correct inner spacing displayed oddly in IE6/7
  */
-button, input {
+button,
+input {
   line-height: normal;
   *overflow: visible;
 }
 /*
  * Reintroduce inner spacing in 'table' to avoid overlap and whitespace issues in IE6/7
  */
-table button, table input {
+table button,
+table input {
   *overflow: auto;
 }
 /*
@@ -318,7 +330,8 @@ input[type="submit"] {
 /*
  * Consistent box sizing and appearance
  */
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
 }
 input[type="search"] {
@@ -333,7 +346,8 @@ input[type="search"]::-webkit-search-decoration {
 /* 
  * Remove inner padding and border in FF3/4: h5bp.com/l 
  */
-button::-moz-focus-inner, input::-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
@@ -347,7 +361,8 @@ textarea {
   resize: vertical;
 }
 /* Colors for form validity */
-input:invalid, textarea:invalid {
+input:invalid,
+textarea:invalid {
   background-color: #f0dddd;
 }
 /* =============================================================================
@@ -394,7 +409,8 @@ td {
   width: 1px;
 }
 /* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
-.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
   clip: auto;
   height: auto;
   margin: 0;
@@ -406,7 +422,8 @@ td {
 .invisible {
   visibility: hidden;
 }
-/* Contain floats: h5bp.com/q */.clearfix:before, .clearfix:after {
+/* Contain floats: h5bp.com/q */.clearfix:before,
+.clearfix:after {
   content: "";
   display: table;
 }
@@ -437,7 +454,8 @@ td {
     -ms-filter: none !important;
   }
   /* Black prints faster: h5bp.com/s */
-  a, a:visited {
+  a,
+  a:visited {
     text-decoration: underline;
   }
   a[href]:after {
@@ -446,11 +464,14 @@ td {
   abbr[title]:after {
     content: " (" attr(title) ")";
   }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
     content: "";
   }
   /* Don't show links for images, or javascript/internal links */
-  pre, blockquote {
+  pre,
+  blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -458,7 +479,8 @@ td {
     display: table-header-group;
   }
   /* h5bp.com/t */
-  tr, img {
+  tr,
+  img {
     page-break-inside: avoid;
   }
   img {
@@ -467,11 +489,14 @@ td {
   @page  {
     margin: 0.5cm;
   }
-  p, h2, h3 {
+  p,
+  h2,
+  h3 {
     orphans: 3;
     widows: 3;
   }
-  h2, h3 {
+  h2,
+  h3 {
     page-break-after: avoid;
   }
 }
@@ -494,7 +519,9 @@ td {
 h1 {
   font-size: 2em;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0 0 0.4285714285714286em 0;
 }
 p {
@@ -561,7 +588,8 @@ nav#main_menu ul li a {
   text-transform: uppercase;
   text-decoration: none;
 }
-nav#main_menu ul li a:hover, nav#main_menu ul#langues li a:hover {
+nav#main_menu ul li a:hover,
+nav#main_menu ul#langues li a:hover {
   text-decoration: underline;
 }
 nav#main_menu ul li {
@@ -626,7 +654,8 @@ nav#main_menu ul li.current_page_item a {
   margin: 0 0 0 0;
 }
 /*-------------- CONTEST -------------- */
-#contest article p, #contest article .fb_edge_widget_with_comment {
+#contest article p,
+#contest article .fb_edge_widget_with_comment {
   margin: 0 0 1.2857142857142858em 0;
 }
 section#creditsmentions {
@@ -675,7 +704,8 @@ section#creditsmentions {
 #association b {
   font-weight: normal;
 }
-#association #main ul, #association #main ol {
+#association #main ul,
+#association #main ol {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -703,6 +733,13 @@ section#creditsmentions {
   font-size: 1.5em;
 }
 /*-------------- 20-years-of-fashion -------------*/
+#twenty-years-of-fashion #photos a {
+  display: block;
+}
+#twenty-years-of-fashion #photos a img {
+  max-width: 100%;
+  max-height: 300px;
+}
 #twenty-years-of-fashion #facebook-text p {
   margin: 0 0 6.428571428571429em 0;
 }
