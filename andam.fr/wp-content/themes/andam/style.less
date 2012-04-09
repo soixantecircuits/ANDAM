@@ -362,7 +362,7 @@ position: relative;
 width: 100%;
 margin: 0 auto;
 padding:0;
-max-width: 820px;
+max-width: 960px;
 z-index:99;
 //overflow:auto;
 }
@@ -448,7 +448,7 @@ padding : 0 0 @unit*2 0;
 }
 
 #enveloppe{
-max-width: 820px;
+max-width: 960px;
 margin:0 auto;
 padding: @unit*10 0px 0 0;
 }
@@ -559,14 +559,42 @@ font-size: 1.5em;
 }
 
 /*-------------- 20-years-of-fashion -------------*/
+#twenty-years-of-fashion article { clear:both;}
 
-#twenty-years-of-fashion #photos a {
+#twenty-years-of-fashion #photos{ padding-bottom: @unit*3; text-align:center;}
+
+#twenty-years-of-fashion #photos nav {
+	width: 100%;
+	text-align: center;
+	display: block;
+	padding:@unit 0 0 0;
+	/*white-space: nowrap;*/
+}
+
+#twenty-years-of-fashion #photos nav a#precedent, #twenty-years-of-fashion #photos nav a#suivant {
+	font-size: @unit*2;
+	line-height: @unit/2.5;
+	display:inline-block;
+}
+
+#twenty-years-of-fashion #photos nav a#precedent:hover, #twenty-years-of-fashion #photos nav a#suivant:hover {
+	font-size: @unit*2;
+	text-decoration: none;
+}  
+
+#twenty-years-of-fashion #photos nav figcaption {
+	float: none;
+	display: inline;
+	padding: 0 @unit;
+}
+
+#twenty-years-of-fashion #photos > a {
 	display:block;
 }
 
 #twenty-years-of-fashion #photos a img {
 	max-width:100%;
-	max-height: 300px;
+	max-height: 480px;
 }
 
 #twenty-years-of-fashion #facebook-text p{

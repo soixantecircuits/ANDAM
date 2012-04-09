@@ -112,17 +112,19 @@ $(function(){
       sets.removeNotEvents();
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
-      $("#main").prepend("<div id='photos'>" + 
-        "<a href='#' id='photolink' target='_blank'><img id='photo' src=''></img></a></p>" +
-        "<p><a href='#' id='precedent'>&lsaquo;</a>" + 
-        "<a href='#' id='albumlink'><div id='legende'></div></a>" +
-        "<a href='#' id='suivant'>&rsaquo;</a>" +
-        "</div>");
+      $("#main").prepend("<figure id='photos'>" + 
+        "<a href='#' id='photolink' target='_blank'><img id='photo' src=''></img></a>" +
+        "<nav><a href='#' id='precedent'>&lsaquo;</a>" + 
+        "<figcaption id='legende'><a href='#' id='albumlink'></a></figcaption>" +
+        "<a href='#' id='suivant'>&rsaquo;</a></nav>" +
+        "</figure>");
       $("#precedent").bind('click', function(){
         App.previous();
+        return false;
       });
       $("#suivant").bind('click', function(){
         App.next();
+        return false;
       });
       i_set = 0;
       myset = sets.at(i_set);
