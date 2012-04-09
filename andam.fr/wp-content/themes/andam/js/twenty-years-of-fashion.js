@@ -162,7 +162,7 @@ $(function(){
       var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
       var image = _.find(sortedSizes, function(image){
           return image.width * image.height < 800*600;});
-      $("#photolink").append("<img id='photo' src='" + image.source + "'></img>");
+      $("#photolink").append("<img class='photo' src='" + image.source + "'></img>");
     },
 
     next:function(){
