@@ -765,11 +765,13 @@ section#creditsmentions {
   clear: both;
 }
 #twenty-years-of-fashion #photos {
+  width: 100%;
   padding-bottom: 3.8571428571428577em;
   text-align: center;
 }
 #twenty-years-of-fashion #photos nav {
   width: 100%;
+  float: left;
   text-align: center;
   display: block;
   padding: 1.2857142857142858em 0 0 0;
@@ -796,8 +798,10 @@ section#creditsmentions {
   display: block;
 }
 #twenty-years-of-fashion #photos a img {
-  max-width: 100%;
-  max-height: 385px;
+  /*width:100%;*/
+
+  /*max-height: 385px;*/
+
 }
 #twenty-years-of-fashion #facebook-text p {
   margin: 0 0 6.428571428571429em 0;

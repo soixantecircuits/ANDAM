@@ -17,12 +17,15 @@ get_header(); ?>
 	$textsupp = $textarea_mb->the_meta();
 	$inscript = simple_fields_get_post_group_values($postid, "téléchargement", true, 2);
 	$inscriptfile = wp_get_attachment_url(trad_customfield2( $inscript[0], "fichier", $my_lang ));
+	$txt_video = trad_customfield2( $inscript[0], "texte", $my_lang );
 	$embeded = $inscript[0]['video'];
 	if (!empty($inscriptfile) && empty($embeded)) {
 	?>
 		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? echo trad_customfield2( $inscript[0], "intitulé", $my_lang ); ?></a></p>
 	<? } else { ?>
-		<p><? _e('[:en]registrations are closed.[:fr]les inscriptions sont closes.'); ?></p>
+		<? if (!empty($txt_video)) {?>
+		<p><? echo $txt_video; ?></p>
+	<? } ?>
 		<div id="video"><? echo $embeded; ?></div>
 	<? } ?>
 	<? the_content(); ?>

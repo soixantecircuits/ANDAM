@@ -112,12 +112,11 @@ $(function(){
       sets.removeNotEvents();
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
-      $("#main").prepend("<figure id='photos'>" + 
+      $("#main").prepend("<figure id='photos'></figure>" + 
         "<a href='#' id='photolink'></a>" +
         "<nav><a href='#' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' target='_blank'></a></figcaption>" +
-        "<a href='#' id='suivant'>&rsaquo;</a></nav>" +
-        "</figure>");
+        "<a href='#' id='suivant'>&rsaquo;</a></nav>");
       $("#precedent").bind('click', function(){
         App.previous();
         return false;
