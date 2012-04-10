@@ -157,17 +157,17 @@ $(function(){
       /*var photo = photos.at(i_photo);
       this.fetchPhoto(photo);*/
      $("#photos figure").remove();
-      photos.forEach(this.fetchPhoto, this);
+     photos.forEach(this.fetchPhoto, this);
      $("div#photos").cycle({
-     	slideExpr: 'figure',
+        slideExpr: 'figure',
         fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         next: '.suivant',
         prev: '#precedent',
         pause : 1,
-		fit : 1,
-		slideResize: 1,
-		width : '100%',
-		height: '100%',
+        fit : 1,
+        slideResize: 1,
+        width : '100%',
+        height: '100%',
         //before: this.next,
         //autostop: 1,
         //timeout: 0
