@@ -667,6 +667,7 @@ section#creditsmentions {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
+  margin-bottom: 1.2857142857142858em;
   height: 0;
   overflow: hidden;
 }
@@ -857,7 +858,12 @@ div#laureats {
 #publication ul#chapitres li.passed_pub {
   text-decoration: line-through;
 }
-@media only screen and (max-width: 640px) and (orientation: landscape), only screen and (max-width: 480px) and (orientation: portrait) {
+@media only screen and (max-width: 760px) {
+  #main {
+    padding: 0 245px 0 2.5714285714285716em;
+  }
+}
+@media only screen and (max-width: 620px) {
   #backstretch {
     display: none;
   }

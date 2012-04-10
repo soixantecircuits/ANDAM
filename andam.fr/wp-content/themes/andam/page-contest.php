@@ -22,7 +22,7 @@ get_header(); ?>
 	?>
 		<p><a target="_blank" href="<? echo $inscriptfile; ?>"><? echo trad_customfield2( $inscript[0], "intitulé", $my_lang ); ?></a></p>
 	<? } else { ?>
-		<p><? _e('[:en]registrations are closed[:fr]les inscriptions sont closes'); ?></p>
+		<p><? _e('[:en]registrations are closed.[:fr]les inscriptions sont closes.'); ?></p>
 		<div id="video"><? echo $embeded; ?></div>
 	<? } ?>
 	<? the_content(); ?>
@@ -44,7 +44,7 @@ get_header(); ?>
 					<a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a>	
 					<? } ?>
 					<div class="fold">
-						<p><?= trad_customfield2( $value, "texte", $my_lang );?><br><a target="_blank" href="<? echo $value['url']; ?>"><span>voir le site</span></a></p>
+						<p><? echo trad_customfield2( $value, "texte", $my_lang );?><br><a target="_blank" href="<? echo $value['url']; ?>"><span>voir le site</span></a></p>
 					</div>
 				</li>				
 				<? };
@@ -61,7 +61,10 @@ get_header(); ?>
 						$imageurl = $value['logo'];
 					}
 			?>
-				<li><img src="<? echo $imageurl; ?>" width="16"/><a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a></li>				
+				<li>
+					<img src="<? echo $imageurl; ?>" width="16"/>
+					<a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a>
+				</li>				
 				<? };
 			?>
 		</ul>
