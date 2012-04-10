@@ -112,12 +112,11 @@ $(function(){
       sets.removeNotEvents();
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
-      $("#main").prepend("<figure id='photos'>" + 
-        "<a href='#' class='suivant' id='photolink'></a>" +
+      $("#main").prepend("<figure id='photos' class ='suivant'></figure>" + 
         "<nav><a href='#' id='albumprecedent'>&lsaquo;&lsaquo;</a><a href='#' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' target='_blank'></a></figcaption>" +
-        "<a href='#' id='suivant' class='suivant'>&rsaquo;</a><a href='#' id='albumsuivant'>&rsaquo;&rsaquo;</a></nav>" +
-        "</figure>");/*
+        "<a href='#' id='suivant' class='suivant'>&rsaquo;</a><a href='#' id='albumsuivant'>&rsaquo;&rsaquo;</a></nav>");
+      /*
       $("#precedent").bind('click', function(){
         App.previous();
         return false;
@@ -153,9 +152,9 @@ $(function(){
       i_photo = 0;
       /*var photo = photos.at(i_photo);
       this.fetchPhoto(photo);*/
-      $("#photolink").empty();
+      $("#photos").empty();
       photos.forEach(this.fetchPhoto, this);
-      $("#photolink").cycle({
+      $("#photos").cycle({
         fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         next: '.suivant',
         prev: '#precedent',
@@ -168,7 +167,7 @@ $(function(){
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
       var photourl = "http://farm"+picture.get('farm')+".staticflickr.com/"+picture.get('server')+"/"+picture.get('id')+"_"+picture.get('secret')+"_z.jpg";
-      $("#photolink").append("<img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img>");
+      $("#photos").append("<img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img>");
       /*
               $.ajax({
                 url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
@@ -193,7 +192,7 @@ $(function(){
           return;
         }
 
-        $("#photolink").cycle('stop');
+        $("#photos").cycle('stop');
         i_set++;
         myset = sets.at(i_set);
         photos.setId = myset.get('id');
@@ -204,7 +203,7 @@ $(function(){
         if (i_set == 0){
           return;
         }
-        $("#photolink").cycle('stop');
+        $("#photos").cycle('stop');
         i_set--;
         myset = sets.at(i_set);
         photos.setId = myset.get('id');
