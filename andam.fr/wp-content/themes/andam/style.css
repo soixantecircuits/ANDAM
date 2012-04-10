@@ -810,7 +810,15 @@ section#creditsmentions {
 #twenty-years-of-fashion #photos figure {
   text-align: center;
 }
-#twenty-years-of-fashion #photos figure:before {
+#twenty-years-of-fashion #photos div#spinner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 11;
+}
+#twenty-years-of-fashion #photos figure:before,
+#twenty-years-of-fashion #photos #spinner:before {
   content: '';
   display: inline-block;
   height: 100%;
@@ -819,7 +827,8 @@ section#creditsmentions {
   /* Adjusts for spacing */
 
 }
-#twenty-years-of-fashion #photos figure img {
+#twenty-years-of-fashion #photos figure img,
+#twenty-years-of-fashion #photos #spinner img {
   display: inline-block;
   vertical-align: middle;
   position: relative;

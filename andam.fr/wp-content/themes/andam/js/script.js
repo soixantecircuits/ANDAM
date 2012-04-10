@@ -9,8 +9,7 @@ $(document).ready(function() {
 		
 	 
 	 $("ul#partenaires li a.btn").click(function(){
-	 	var that = this;
-	 	
+	 	var that = this; 	
 	 	$('ul#partenaires li div.unfold').animate({
 	 		height:0,
 	 		complete: function(){ }

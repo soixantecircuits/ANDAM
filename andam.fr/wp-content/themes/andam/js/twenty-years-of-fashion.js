@@ -4,9 +4,9 @@
 $(function(){
 
   // Setup
-  window.flickruser = '72610704@N08'; //ANDAM
+  //window.flickruser = '72610704@N08'; //ANDAM
   //window.flickruser = '71927167@N03'; //john doe
-  //window.flickruser = '78720565@N03'; //thomas arassette
+  window.flickruser = '78720565@N03'; //thomas arassette
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
   window.en = { loading:'Loading'
@@ -117,7 +117,7 @@ $(function(){
         "<nav><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' title='flickr' target='_blank'></a></figcaption>" +
         "<a href='#' id='suivant' title='next picture' class='suivant'>&rsaquo;</a><a href='#' title='next album' id='albumsuivant'>&raquo;</a></nav>");
-/*
+		/*
       $("#precedent").bind('click', function(){
         App.previous();
         return false;
@@ -156,21 +156,26 @@ $(function(){
       i_photo = 0;
       /*var photo = photos.at(i_photo);
       this.fetchPhoto(photo);*/
-     $("#photos figure").remove();
+    $("#photos figure#spinner").remove();
+    $("#photos").prepend("<figure id='spinner'><img src='"+wp_var.themeroot+"/images/loader.gif'/></figure>");
+    $("#photos figure.pic").remove();
+    
      photos.forEach(this.fetchPhoto, this);
      $("div#photos").cycle({
         slideExpr: 'figure',
         fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         next: '.suivant',
         prev: '#precedent',
-        pause : 1,
+        after: onAfter,
+        pause : 0,
         fit : 1,
         slideResize: 1,
         width : '100%',
         height: '100%',
-        //before: this.next,
+        speed: 1000,
+        timeoutFn: calculateTimout,
+		//before: this.next,
         //autostop: 1,
-        //timeout: 0
       }).touchwipe({
     wipeLeft: function() {
         $('#precedent').click();
@@ -179,23 +184,47 @@ $(function(){
 	     $('#suivant').click();
     }
 	});
+	function calculateTimout (currElement, nextElement, opts, isForward) { 
+		    // here we set even number slides to have a 2 second timeout; 
+		    // by returning false for odd number slides we let those slides 
+		    // inherit the default timeout value (4 sec) 
+		    var index = opts.currSlide;
+		    if (index > 0) { 
+		    	//$("#spinner").remove();	
+		    	//$.fn.cycle({startingSlide: 1});		
+		    	return 3000;
+		    } else {
+		    	//$.fn.cycle({startingSlide: 1});
+		    	return false;
+		    }
+	}
+
+	function onAfter(currSlideElement, nextSlideElement, options, forwardFlag) {
+	    //if we are on the second slide then remove the first one and restart slideshow
+	    if (currSlideElement == $('figure')[0] && nextSlideElement == $('figure')[1]) {
+   			$("#spinner").remove();
+   			//$("div#photos").cycle(1);
+   			$.fn.cycle.defaults = { startingSlide: 2};
+   			
+	    }
+	}
     },
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
       var photourl = "http://farm"+picture.get('farm')+".staticflickr.com/"+picture.get('server')+"/"+picture.get('id')+"_"+picture.get('secret')+"_z.jpg";
-      $("#photos").prepend("<figure><img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img></figure>");
+     $("<figure class='pic'><img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img></figure>").insertBefore("#photos #hack");
       /*
-              $.ajax({
-                url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
-                    +window.flickrapikey + "&user_id=" + window.flickruser + "&photo_id=" + picture.get('id'),
-                    dataType: 'JSONP',
-                    jsonp:  "jsoncallback", 
-                    success: this.showPhoto,
-                    error: function(){
-                      console.log('couldnt retrieve image from flickr');
-                    }
-               });
-              */
+      $.ajax({
+        url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
+            +window.flickrapikey + "&user_id=" + window.flickruser + "&photo_id=" + picture.get('id'),
+            dataType: 'JSONP',
+            jsonp:  "jsoncallback", 
+            success: this.showPhoto,
+            error: function(){
+              console.log('couldnt retrieve image from flickr');
+            }
+       });
+       */
     },
     showPhoto: function(response){
       var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
