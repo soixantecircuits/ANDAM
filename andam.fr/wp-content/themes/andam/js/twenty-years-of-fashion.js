@@ -117,6 +117,7 @@ $(function(){
         "<nav><a href='#' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' target='_blank'></a></figcaption>" +
         "<a href='#' id='suivant'>&rsaquo;</a></nav>");
+
       $("#precedent").bind('click', function(){
         App.previous();
         return false;
@@ -129,6 +130,15 @@ $(function(){
         App.next();
         return false;
       });
+      $("#albumprecedent").bind('click', function(){
+        App.previousAlbum();
+        return false;
+      });
+      $("#albumsuivant").bind('click', function(){
+        App.nextAlbum();
+        return false;
+      });
+
       i_set = 0;
       myset = sets.at(i_set);
       photos = new Photos;
@@ -147,12 +157,12 @@ $(function(){
       photos.forEach(this.fetchPhoto, this);
       $("#photolink").cycle({
         fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-        next: '#suivant',
+        next: '.suivant',
         prev: '#precedent',
         pause : 1,
         //before: this.next,
         //autostop: 1,
-        timeout: 0
+        //timeout: 0
       });
     },
     fetchPhoto:function(picture){
@@ -178,28 +188,19 @@ $(function(){
           return image.width * image.height < 800*600;});
     },
 
-    next:function(){
-      //check if it's the last photo
-      if (i_photo == photos.length - 1){
+    nextAlbum:function(){
         if (i_set == sets.length - 1){
           return;
         }
+
         $("#photolink").cycle('stop');
         i_set++;
         myset = sets.at(i_set);
         photos.setId = myset.get('id');
         photos.fetch();
         return;
-      }
-      else {
-        i_photo++;
-        /*var photo = photos.at(i_photo);
-        this.fetchPhoto(photo);*/
-      }
     },
-    previous:function(){
-      //check if it's the first photo
-      if (i_photo == 0){
+    previousAlbum:function(){
         if (i_set == 0){
           return;
         }
@@ -209,6 +210,24 @@ $(function(){
         photos.setId = myset.get('id');
         photos.fetch();
         return;
+
+    },
+    next:function(){
+      //check if it's the last photo
+      if (i_photo == photos.length - 1){
+         nextAlbum();   
+      }
+
+      else {
+        i_photo++;
+        /*var photo = photos.at(i_photo);
+        this.fetchPhoto(photo);*/
+      }
+    },
+    previous:function(){
+      //check if it's the first photo
+      if (i_photo == 0){
+        previousAlbum();  
       }
       else {
         i_photo--;
