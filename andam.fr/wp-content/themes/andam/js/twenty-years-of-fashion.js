@@ -171,7 +171,14 @@ $(function(){
         //before: this.next,
         //autostop: 1,
         //timeout: 0
-      });
+      }).touchwipe({
+    wipeLeft: function() {
+        $('#precedent').click();
+    },
+    wipeRight: function() {
+	     $('#suivant').click();
+    }
+	});
     },
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
