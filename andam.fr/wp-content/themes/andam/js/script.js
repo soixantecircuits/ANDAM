@@ -6,12 +6,7 @@ $(document).ready(function() {
 	}
 	
 	$("#main").fadeIn('slow');
-	
-	$("ul#partenaires li div p").each(function() {		
-		height = $(this).height();
-		$(this).css('height', height);
-	});
-	
+		
 	 
 	 $("ul#partenaires li a.btn").click(function(){
 	 	var that = this;

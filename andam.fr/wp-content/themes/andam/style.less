@@ -491,6 +491,7 @@ margin:0;
 	position: relative;
 	padding-bottom: 56.25%;
 	padding-top: 30px;
+	margin-bottom: @unit;
 	height: 0;
 	overflow: hidden;
 }
@@ -701,9 +702,17 @@ color: #999;
 text-decoration: line-through;
 }
 
+
 @media
-only screen and (max-width: 640px) and (orientation: landscape),
-only screen and (max-width: 480px) and (orientation: portrait) {
+only screen and (max-width: 760px){
+	#main {
+		padding: 0 245px 0 @unit*2;
+	}
+}
+
+@media
+only screen and (max-width: 620px){
+	
 	#backstretch {
 	display:none;
 	}
