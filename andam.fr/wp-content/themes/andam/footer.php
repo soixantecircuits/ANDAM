@@ -14,7 +14,7 @@
 
 <? 
 $malangue = qtrans_getLanguage();
-$tab_vars = array("lang" => $malangue);																			
+$tab_vars = array("lang" => $malangue, "themeroot" => get_template_directory_uri());																			
 wp_localize_script (  "$post->post_name" , 'wp_var' , $tab_vars);
 ?>
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->

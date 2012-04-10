@@ -591,39 +591,60 @@ font-size: 1.5em;
 /*-------------- 20-years-of-fashion -------------*/
 #twenty-years-of-fashion article { clear:both;}
 
-#twenty-years-of-fashion #photos{width:100%; padding-bottom: @unit*3; text-align:center;}
+#twenty-years-of-fashion #photos{ position:relative; float:left; width:100%; margin-bottom: @unit;}
 
-#twenty-years-of-fashion #photos nav {
+#twenty-years-of-fashion img#hack {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+#twenty-years-of-fashion nav {
 	width: 100%;
 	float:left;
 	text-align: center;
 	display: block;
-	padding:@unit 0 0 0;
+	padding:0 0 @unit 0;
 	/*white-space: nowrap;*/
 }
 
-#twenty-years-of-fashion #photos nav a#precedent, #twenty-years-of-fashion #photos nav a#suivant {
+#twenty-years-of-fashion a#precedent, #twenty-years-of-fashion a#suivant, #twenty-years-of-fashion nav a#albumprecedent, #twenty-years-of-fashion nav a#albumsuivant {
 	font-size: @unit*2;
 	line-height: @unit/2.5;
 	display:inline-block;
+	color: #ccc;
+	padding: 0 2%;
 }
 
-#twenty-years-of-fashion #photos nav a#precedent:hover, #twenty-years-of-fashion #photos nav a#suivant:hover {
+#twenty-years-of-fashion nav a#precedent:hover, #twenty-years-of-fashion nav a#suivant:hover, #twenty-years-of-fashion nav a#albumprecedent:hover, #twenty-years-of-fashion nav a#albumsuivant:hover {
 	font-size: @unit*2;
+	color: #1A1A1A;
 	text-decoration: none;
 }  
 
-#twenty-years-of-fashion #photos nav figcaption {
+#twenty-years-of-fashion nav figcaption {
 	float: none;
 	display: inline;
-	padding: 0 @unit;
 }
 
-#twenty-years-of-fashion #photos > a {
-	display:block;
+#twenty-years-of-fashion #photos figure {
+	text-align:center;
+}
+#twenty-years-of-fashion #photos figure:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	/*margin-right: -0.25em;*/ /* Adjusts for spacing */
 }
 
-#twenty-years-of-fashion #photos a img {
+#twenty-years-of-fashion #photos figure img {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	max-width: 100%;
+	max-height: 100%;
+	margin: 0 auto;
 	/*width:100%;*/
 	/*max-height: 385px;*/
 }

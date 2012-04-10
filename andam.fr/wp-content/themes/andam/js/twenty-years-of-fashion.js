@@ -113,23 +113,26 @@ $(function(){
       clearInterval(window.loadingtimer);
       $(".loading").empty();      
 
-      $("#main").prepend("<figure id='photos' class ='suivant'></figure>" + 
-        "<nav><a href='#' id='albumprecedent'>&lsaquo;&lsaquo;</a><a href='#' id='precedent'>&lsaquo;</a>" + 
-        "<figcaption id='legende'><a href='#' id='albumlink' target='_blank'></a></figcaption>" +
-        "<a href='#' id='suivant' class='suivant'>&rsaquo;</a><a href='#' id='albumsuivant'>&rsaquo;&rsaquo;</a></nav>");
-
+      $("#main").prepend("<div id='photos' class='suivant'><img id='hack' src='"+wp_var.themeroot+"/images/hack.gif'/></div>" + 
+        "<nav><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
+        "<figcaption id='legende'><a href='#' id='albumlink' title='flickr' target='_blank'></a></figcaption>" +
+        "<a href='#' id='suivant' title='next picture' class='suivant'>&rsaquo;</a><a href='#' title='next album' id='albumsuivant'>&raquo;</a></nav>");
+/*
       $("#precedent").bind('click', function(){
         App.previous();
         return false;
       });
+   
       $("#photolink").bind('click', function(){
         App.next();
         return false;
       });
+ 
       $("#suivant").bind('click', function(){
         App.next();
         return false;
       });
+      */
       $("#albumprecedent").bind('click', function(){
         App.previousAlbum();
         return false;
@@ -153,13 +156,18 @@ $(function(){
       i_photo = 0;
       /*var photo = photos.at(i_photo);
       this.fetchPhoto(photo);*/
-      $("#photos").empty();
+     $("#photos figure").remove();
       photos.forEach(this.fetchPhoto, this);
-      $("#photos").cycle({
+     $("div#photos").cycle({
+     	slideExpr: 'figure',
         fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         next: '.suivant',
         prev: '#precedent',
         pause : 1,
+		fit : 1,
+		slideResize: 1,
+		width : '100%',
+		height: '100%',
         //before: this.next,
         //autostop: 1,
         //timeout: 0
@@ -168,7 +176,7 @@ $(function(){
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
       var photourl = "http://farm"+picture.get('farm')+".staticflickr.com/"+picture.get('server')+"/"+picture.get('id')+"_"+picture.get('secret')+"_z.jpg";
-      $("#photos").append("<img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img>");
+      $("#photos").prepend("<figure><img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img></figure>");
       /*
               $.ajax({
                 url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
@@ -215,25 +223,26 @@ $(function(){
     next:function(){
       //check if it's the last photo
       if (i_photo == photos.length - 1){
-         nextAlbum();   
-      }
-
-      else {
+         //nextAlbum();  
+         //$('a#suivant').toggleClass('inactif');
+      } else {
         i_photo++;
-        /*var photo = photos.at(i_photo);
-        this.fetchPhoto(photo);*/
+        var photo = photos.at(i_photo);
+        this.fetchPhoto(photo);
       }
     },
     previous:function(){
       //check if it's the first photo
       if (i_photo == 0){
-        previousAlbum();  
-      }
+        //previousAlbum();
+        //$('a#suivant').toggleClass('inactif');  
+      }  
       else {
         i_photo--;
         var photo = photos.at(i_photo);
         this.fetchPhoto(photo);
       }
+      
     },
   });
 
