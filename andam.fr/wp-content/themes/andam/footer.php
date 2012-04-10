@@ -30,6 +30,7 @@ wp_localize_script (  "$post->post_name" , 'wp_var' , $tab_vars);
 <!-- scripts concatenated and minified via ant build script-->
 <script src="<?= get_template_directory_uri(); ?>/js/plugins.js"></script>
 <script src="<?= get_template_directory_uri(); ?>/js/script.js"></script>
+<script src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js" type="text/javascript"></script>
 <!-- end scripts-->
 
 <!--[if lt IE 7 ]>

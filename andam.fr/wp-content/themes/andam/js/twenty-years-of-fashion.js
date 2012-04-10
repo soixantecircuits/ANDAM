@@ -44,7 +44,7 @@ $(function(){
     },
 
     removeNotEvents: function(){
-        this.remove(this.reject(function(model){
+      this.remove(this.reject(function(model){
         var title = model.get('title')._content;
         var match = title.match(/[,.;:] ?\d\d\/(19|20)\d\d/);
         if (match){
@@ -146,6 +146,15 @@ $(function(){
       this.fetchPhoto(photo);*/
       $("#photolink").empty();
       photos.forEach(this.fetchPhoto, this);
+      $("#photolink").cycle({
+        fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+        next: '#suivant',
+        prev: '#precedent',
+        pause : 1,
+        //before: this.next,
+        //autostop: 1,
+        timeout: 0
+      });
     },
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
@@ -168,7 +177,6 @@ $(function(){
       var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
       var image = _.find(sortedSizes, function(image){
           return image.width * image.height < 800*600;});
-      //$("
     },
 
     next:function(){
@@ -177,6 +185,7 @@ $(function(){
         if (i_set == sets.length - 1){
           return;
         }
+        $("#photolink").cycle('stop');
         i_set++;
         myset = sets.at(i_set);
         photos.setId = myset.get('id');
@@ -195,6 +204,7 @@ $(function(){
         if (i_set == 0){
           return;
         }
+        $("#photolink").cycle('stop');
         i_set--;
         myset = sets.at(i_set);
         photos.setId = myset.get('id');
