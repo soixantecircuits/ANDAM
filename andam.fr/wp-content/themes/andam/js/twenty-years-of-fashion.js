@@ -114,7 +114,7 @@ $(function(){
       $(".loading").empty();      
 
       $("#main").prepend("<div id='photos' class='suivant'><img id='hack' src='"+wp_var.themeroot+"/images/hack.gif'/></div>" + 
-        "<nav><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
+        "<nav id='gallery'><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' title='flickr' target='_blank'></a></figcaption>" +
         "<a href='#' id='suivant' title='next picture' class='suivant'>&rsaquo;</a><a href='#' title='next album' id='albumsuivant'>&raquo;</a></nav>");
 		/*
