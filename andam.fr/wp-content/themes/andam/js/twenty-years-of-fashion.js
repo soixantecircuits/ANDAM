@@ -164,16 +164,14 @@ $(function(){
      $("div#photos").cycle({
         slideExpr: 'figure',
         fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-        next: '.suivant',
-        prev: '#precedent',
         after: onAfter,
         pause : 0,
         fit : 1,
         slideResize: 1,
         width : '100%',
         height: '100%',
-        speed: 1000,
-        timeoutFn: calculateTimout,
+        timeout: 350,
+        speed: 800
 		//before: this.next,
         //autostop: 1,
       }).touchwipe({
@@ -184,28 +182,25 @@ $(function(){
 	     $('#suivant').click();
     }
 	});
-	function calculateTimout (currElement, nextElement, opts, isForward) { 
-		    // here we set even number slides to have a 2 second timeout; 
-		    // by returning false for odd number slides we let those slides 
-		    // inherit the default timeout value (4 sec) 
-		    var index = opts.currSlide;
-		    if (index > 0) { 
-		    	//$("#spinner").remove();	
-		    	//$.fn.cycle({startingSlide: 1});		
-		    	return 3000;
-		    } else {
-		    	//$.fn.cycle({startingSlide: 1});
-		    	return false;
-		    }
-	}
-
 	function onAfter(currSlideElement, nextSlideElement, options, forwardFlag) {
 	    //if we are on the second slide then remove the first one and restart slideshow
-	    if (currSlideElement == $('figure')[0] && nextSlideElement == $('figure')[1]) {
+	    //alert($('figure').length);
+	    if (currSlideElement == $('figure#spinner')[0] && nextSlideElement == $('figure')[1]) {
    			$("#spinner").remove();
-   			//$("div#photos").cycle(1);
-   			$.fn.cycle.defaults = { startingSlide: 2};
-   			
+   			$("#photos").cycle('destroy');
+		      $("div#photos").cycle({
+		        slideExpr: 'figure',
+		        fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+		        next: '.suivant',
+		        prev: '#precedent',
+		        after: onAfter,
+		        pause : 1,
+		        fit : 1,
+		        slideResize: 0,
+		        width : '100%',
+		        height: '100%',
+		        speed: 800
+		      });   			
 	    }
 	}
     },
