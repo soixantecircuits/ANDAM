@@ -4,9 +4,9 @@
 $(function(){
 
   // Setup
-  //window.flickruser = '72610704@N08'; //ANDAM
+  window.flickruser = '72610704@N08'; //ANDAM
   //window.flickruser = '71927167@N03'; //john doe
-  window.flickruser = '78720565@N03'; //thomas arassette
+  //window.flickruser = '78720565@N03'; //thomas arassette
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
   window.en = { loading:'Loading'
