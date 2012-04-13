@@ -67,7 +67,14 @@ get_header(); ?>
 			?>
 				<li>
 					<img src="<? echo $imageurl; ?>" width="16"/>
-					<a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a>
+					<? if(!empty($value['texte_fr'])) { ?>
+					<a class='btn' target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a>
+					<? } else { ?>
+					<a target="_blank" href="<? echo $value['url']; ?>"><span><? echo $value['nom']; ?></span></a>	
+					<? } ?>
+					<div class="fold">
+						<p><? echo trad_customfield2( $value, "texte", $my_lang );?><br><a target="_blank" href="<? echo $value['url']; ?>"><span>voir le site</span></a></p>
+					</div>										
 				</li>				
 				<? };
 			?>

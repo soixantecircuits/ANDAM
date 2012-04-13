@@ -8,9 +8,9 @@ $(document).ready(function() {
 	$("#main").fadeIn('slow');
 		
 	 
-	 $("ul#partenaires li a.btn").click(function(){
+	 $("ul#partenaires li a.btn, ul#partenaires_particuliers li a.btn").click(function(){
 	 	var that = this; 	
-	 	$('ul#partenaires li div.unfold').animate({
+	 	$('div.unfold').animate({
 	 		height:0,
 	 		complete: function(){ }
 	 	});
@@ -23,7 +23,7 @@ $(document).ready(function() {
 	 	h = $(e).parent().find('div p').innerHeight();
 	 	ctn_height = $(e).parent().find('div').height();
 	 	//$("ul#partenaires li div.unfold").animate({ height: 0});
-	 	$('ul#partenaires li div.unfold').attr('class', 'fold');
+	 	$('div.unfold').attr('class', 'fold');
 	 	if ((ctn_height) == 0) {
 			$(e).parent().find("div").animate({
 	            height: h,
