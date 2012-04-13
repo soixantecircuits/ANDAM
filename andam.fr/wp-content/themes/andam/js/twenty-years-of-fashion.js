@@ -196,10 +196,10 @@ $(function(){
 		        after: onAfter,
 		        pause : 1,
 		        fit : 1,
-		        slideResize: 1,
+		        slideResize: 0,
 		        width : '100%',
-		        speed: 800,
-		        timeout: 0
+		        height: '100%',
+		        speed: 800
 		      });   			
 	    }
 	}
