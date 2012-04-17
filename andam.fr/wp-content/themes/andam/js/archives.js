@@ -187,7 +187,7 @@ $(function(){
       var chronojs = _.sortBy(_.map(_.toArray(_.groupBy(sets.toJSON(), function(laureat){
                                                 return laureat.year;})), function(e){
                                return {year:e[0].year,laureats:e}}), function(laureats){
-                      return laureats.year});
+                      return -laureats.year});
       chronojs = {chronolaureats:chronojs};
       $("#laureats").append(window.tmplChrono(chronojs));
     },
