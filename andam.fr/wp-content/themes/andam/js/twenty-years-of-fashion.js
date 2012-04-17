@@ -160,17 +160,42 @@ $(function(){
     $("#photos").prepend("<figure id='spinner'><img src='"+wp_var.themeroot+"/images/loader.gif'/></figure>");
     $("#photos figure.pic").remove();
     
-     photos.forEach(this.fetchPhoto, this);
+    photos.forEach(this.fetchPhoto, this);
+
+	$.fn.cycle.transitions.my_truc = function($cont, $slides, opts) {		
+	    opts.fxFn = function(curr, next, opts, after) {                 
+	        $(curr).fadeOut(opts.fadeSpeed, function() {
+	            $(next).fadeIn(opts.fadeSpeed, function() {
+	                after();              
+	            });
+	            // on centre l'image //
+	            elt = $(next).find('img');
+	            cntw = $(next).width();
+	            picw = $(next).find('img').width();
+	            cnth = $(next).height();
+	            pich = $(next).find('img').height();
+	            /*------------------------------------*/	
+	            marg_left = (((cntw-picw)/2)*100)/cntw;	
+	            marg_top = (((cnth-pich)/2)*100)/cnth;
+	            /*------------------------------------*/	        
+	            $(elt).css({marginLeft: marg_left+'%'});
+	            $(elt).css({marginTop: marg_top+'%'});
+	            /*------------------------------------*/		           
+	        });
+	        
+	    };
+	};
+
      $("div#photos").cycle({
         slideExpr: 'figure',
-        fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+        fx: 'my_truc', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         after: onAfter,
         pause : 0,
         fit : 1,
         slideResize: 1,
         width : '100%',
         height: '100%',
-        timeout: 350,
+        timeout: 800,
         speed: 800
 		//before: this.next,
         //autostop: 1,
@@ -182,27 +207,30 @@ $(function(){
 	     $('#suivant').click();
     }
 	});
+
+
 	function onAfter(currSlideElement, nextSlideElement, options, forwardFlag) {
 	    //if we are on the second slide then remove the first one and restart slideshow
-	    //alert($('figure').length);
 	    if (currSlideElement == $('figure#spinner')[0] && nextSlideElement == $('figure')[1]) {
    			$("#spinner").remove();
    			$("#photos").cycle('destroy');
 		      $("div#photos").cycle({
 		        slideExpr: 'figure',
-		        fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+		        fx: 'my_truc', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
 		        next: '.suivant',
 		        prev: '#precedent',
 		        after: onAfter,
 		        pause : 1,
 		        fit : 1,
 		        slideResize: 0,
-		        width : '100%',
-		        height: '100%',
+		        timeout: 0,
 		        speed: 800
-		      });   			
+		      });
+    			
 	    }
+  
 	}
+	
     },
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
