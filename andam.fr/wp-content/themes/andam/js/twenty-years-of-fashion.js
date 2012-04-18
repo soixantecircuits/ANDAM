@@ -141,6 +141,19 @@ $(function(){
         App.nextAlbum();
         return false;
       });
+   			
+   		    $("#photos").live('mouseover', function(){
+   		    	elt = $(this).find('figure').first().attr('class');
+   		    	//alert('over');
+		      	App.pauseRollover(elt);
+		      	return false;
+		    });
+		    
+   		    $("#photos").live('mouseout', function(){
+   		    	elt = $(this).find('figure').first().attr('class');
+		      	App.resumeRollout(elt);
+		      	return false;
+		    });	
 
       i_set = 0;
       myset = sets.at(i_set);
@@ -185,20 +198,19 @@ $(function(){
 	        
 	    };
 	};
-
-     $("div#photos").cycle({
+     $("#photos").cycle({
         slideExpr: 'figure',
         fx: 'my_truc', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         after: onAfter,
-        pause : 0,
+        next: '.suivant, #suivant',
+        prev: '#precedent',
+        pause : 0,       
         fit : 1,
         slideResize: 1,
         width : '100%',
         height: '100%',
-        timeout: 800,
-        speed: 800
-		//before: this.next,
-        //autostop: 1,
+        timeout: 1000,
+        speed: 1000
       }).touchwipe({
     wipeLeft: function() {
         $('#precedent').click();
@@ -207,28 +219,24 @@ $(function(){
 	     $('#suivant').click();
     }
 	});
-
-
-	function onAfter(currSlideElement, nextSlideElement, options, forwardFlag) {
-	    //if we are on the second slide then remove the first one and restart slideshow
+	/*------------------------*/
+	function nextFunction (elt) {
+		var myslide = elt;
+		if (myslide[0]['className'] == 'pic') {		
+			return '.suivant, #suivant';
+		} else {
+			return '';
+		}
+		
+	}
+	/*-----------*/
+	function onAfter (currSlideElement, nextSlideElement, options, forwardFlag) {
+	    //si le premier elt et le spinner alors on le supprime //
 	    if (currSlideElement == $('figure#spinner')[0] && nextSlideElement == $('figure')[1]) {
-   			$("#spinner").remove();
-   			$("#photos").cycle('destroy');
-		      $("div#photos").cycle({
-		        slideExpr: 'figure',
-		        fx: 'my_truc', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-		        next: '.suivant',
-		        prev: '#precedent',
-		        after: onAfter,
-		        pause : 1,
-		        fit : 1,
-		        slideResize: 0,
-		        timeout: 0,
-		        speed: 800
-		      });
-    			
-	    }
-  
+   			$("#spinner").remove();			
+	    } 
+	    
+	    
 	}
 	
     },
@@ -249,6 +257,21 @@ $(function(){
        });
        */
     },
+    
+    pauseRollover : function(elt) {
+    	if (elt == 'pic') {
+    		$('#photos').focus();  		
+    		$('#photos').cycle('pause');
+    	}
+    },
+    
+    resumeRollout : function(elt) {
+    	if (elt == 'pic') {
+    		$('#photos').cycle('resume');
+    	}
+    	
+    },
+    
     showPhoto: function(response){
       var sortedSizes = _.sortBy(response.sizes.size, function(size){return -size.width*size.height;});
       var image = _.find(sortedSizes, function(image){
@@ -271,7 +294,8 @@ $(function(){
         if (i_set == 0){
           return;
         }
-        $("#photos").cycle('stop');
+
+       $("#photos").cycle('stop');  
         i_set--;
         myset = sets.at(i_set);
         photos.setId = myset.get('id');
