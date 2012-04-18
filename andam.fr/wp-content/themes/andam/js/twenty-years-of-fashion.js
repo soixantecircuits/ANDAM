@@ -210,7 +210,7 @@ $(function(){
         width : '100%',
         height: '100%',
         timeout: 1000,
-        speed: 1000
+        speed: 1000,
       }).touchwipe({
     wipeLeft: function() {
         $('#precedent').click();
@@ -219,24 +219,12 @@ $(function(){
 	     $('#suivant').click();
     }
 	});
-	/*------------------------*/
-	function nextFunction (elt) {
-		var myslide = elt;
-		if (myslide[0]['className'] == 'pic') {		
-			return '.suivant, #suivant';
-		} else {
-			return '';
-		}
-		
-	}
-	/*-----------*/
+
 	function onAfter (currSlideElement, nextSlideElement, options, forwardFlag) {
 	    //si le premier elt et le spinner alors on le supprime //
 	    if (currSlideElement == $('figure#spinner')[0] && nextSlideElement == $('figure')[1]) {
    			$("#spinner").remove();			
-	    } 
-	    
-	    
+	    }	    
 	}
 	
     },
