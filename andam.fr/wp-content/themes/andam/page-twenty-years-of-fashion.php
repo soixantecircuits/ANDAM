@@ -11,6 +11,7 @@ $my_lang = qtrans_getLanguage();
 global $textarea_mb;
 $article = $textarea_mb->the_meta();
 ?>
+<div id='diaporama'><div id='photos' class='suivant'><img id='hack' src='<?= get_template_directory_uri(); ?>/images/hack.gif'/></div></div> 
 <?php if(have_posts()) : ?>
 	<?php while(have_posts()) : the_post(); ?> 
 <article>

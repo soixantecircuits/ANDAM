@@ -9,10 +9,6 @@ $(function(){
   //window.flickruser = '78720565@N03'; //thomas arassette
   window.flickrapikey= 'f6aee2b38c5a21562225b5d232205b95'; 
   
-  window.en = { loading:'Loading'
-              };
-  window.fr = { loading:'Chargement'
-                };
   window.lang = (wp_var.lang == 'fr')? window.fr : window.en;
 
 
@@ -21,7 +17,17 @@ $(function(){
 
   window.Photo = Backbone.Model.extend({});
   window.Set = Backbone.Model.extend({
-    });
+    set: function(attributes,options) {
+        attributes.date = 0;
+        var match = attributes.title._content.match(/[,.;:] ?(\d\d)\/((19|20)\d\d)/);
+        if (match){
+          var month = match[1]; 
+          var year = match[2];
+          attributes.date = year*12 + month;
+        }
+        return Backbone.Model.prototype.set.call(this, attributes,options);
+    }
+  });
 
   //  Collection
   // ---------------
@@ -52,6 +58,9 @@ $(function(){
         }
         return false;
         }));
+    },
+    comparator: function(set){
+      return -set.get('date');
     }
   });
 
@@ -93,28 +102,14 @@ $(function(){
     //el: $("#main"),
 
     initialize: function() {
-      $("#main").prepend("<div class='loading'>" + lang.loading + "</div>");
-      window.timecounter = 0;
-      window.loadingtimer = setInterval(function() {
-        window.timecounter++;
-        if (window.timecounter > 3){
-          window.timecounter = 0;
-          $('.loading').html(lang.loading);
-        } 
-        else{
-          $('.loading').append('.');
-        }
-      }, 400);
       sets.bind('reset', this.render, this);
       sets.fetch();
     },
     render: function(){
       sets.removeNotEvents();
       clearInterval(window.loadingtimer);
-      $(".loading").empty();      
 
-      $("#main").prepend("<div id='photos' class='suivant'><img id='hack' src='"+wp_var.themeroot+"/images/hack.gif'/></div>" + 
-        "<nav id='gallery'><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
+      $("#diaporama").append("<nav id='gallery'><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' title='flickr' target='_blank'></a></figcaption>" +
         "<a href='#' id='suivant' title='next picture' class='suivant'>&rsaquo;</a><a href='#' title='next album' id='albumsuivant'>&raquo;</a></nav>");
 		/*
