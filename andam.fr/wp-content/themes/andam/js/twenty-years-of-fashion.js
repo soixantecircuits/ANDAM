@@ -152,7 +152,7 @@ $(function(){
 
       i_set = 0;
       myset = sets.at(i_set);
-      photos = new Photos;
+      window.photos = new Photos;
       photos.setId = myset.get('id');
       photos.bind('all', this.renderSet, this);
       photos.fetch();
