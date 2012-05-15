@@ -25,7 +25,7 @@ define('DB_NAME', 'wp_andam');
 define('DB_USER', 'root');
 
 /** Mot de passe de la base de données MySQL. */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'michoco');
 
 /** Adresse de l'hébergement MySQL. */
 define('DB_HOST', 'localhost');
