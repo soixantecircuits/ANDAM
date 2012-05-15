@@ -109,9 +109,9 @@ $(function(){
       sets.removeNotEvents();
       clearInterval(window.loadingtimer);
 
-      $("#diaporama").append("<nav id='gallery'><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
+      $("#diaporama").append("<div id='gallery'><a href='#' id='albumprecedent' title='previous album'>&laquo;</a><a href='#' title='previous picture' id='precedent'>&lsaquo;</a>" + 
         "<figcaption id='legende'><a href='#' id='albumlink' title='flickr' target='_blank'></a></figcaption>" +
-        "<a href='#' id='suivant' title='next picture' class='suivant'>&rsaquo;</a><a href='#' title='next album' id='albumsuivant'>&raquo;</a></nav>");
+        "<a href='#' id='suivant' title='next picture' class='suivant'>&rsaquo;</a><a href='#' title='next album' id='albumsuivant'>&raquo;</a></div>");
 		/*
       $("#precedent").bind('click', function(){
         App.previous();
@@ -138,14 +138,14 @@ $(function(){
       });
    			
    		    $("#photos").live('mouseover', function(){
-   		    	elt = $(this).find('figure').first().attr('class');
+   		    	elt = $(this).find('div').first().attr('class');
    		    	//alert('over');
 		      	App.pauseRollover(elt);
 		      	return false;
 		    });
 		    
    		    $("#photos").live('mouseout', function(){
-   		    	elt = $(this).find('figure').first().attr('class');
+   		    	elt = $(this).find('div').first().attr('class');
 		      	App.resumeRollout(elt);
 		      	return false;
 		    });	
@@ -164,9 +164,9 @@ $(function(){
       i_photo = 0;
       /*var photo = photos.at(i_photo);
       this.fetchPhoto(photo);*/
-    $("#photos figure#spinner").remove();
-    $("#photos").prepend("<figure id='spinner'><img src='"+wp_var.themeroot+"/images/loader.gif'/></figure>");
-    $("#photos figure.pic").remove();
+    $("#photos div#spinner").remove();
+    $("#photos").prepend("<div id='spinner'><img src='"+wp_var.themeroot+"/images/loader.gif'/></div>");
+    $("#photos div.pic").remove();
     
     photos.forEach(this.fetchPhoto, this);
 
@@ -194,7 +194,7 @@ $(function(){
 	    };
 	};
      $("#photos").cycle({
-        slideExpr: 'figure',
+        slideExpr: 'div',
         fx: 'my_truc', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
         after: onAfter,
         next: '.suivant, #suivant',
@@ -217,7 +217,7 @@ $(function(){
 
 	function onAfter (currSlideElement, nextSlideElement, options, forwardFlag) {
 	    //si le premier elt et le spinner alors on le supprime //
-	    if (currSlideElement == $('figure#spinner')[0] && nextSlideElement == $('figure')[1]) {
+	    if (currSlideElement == $('div#spinner')[0] && nextSlideElement == $('div')[1]) {
    			$("#spinner").remove();			
 	    }	    
 	}
@@ -226,7 +226,7 @@ $(function(){
     fetchPhoto:function(picture){
       var dataurl = "http://www.flickr.com/photos/" + window.flickruser + "/" + picture.get('id');
       var photourl = "http://farm"+picture.get('farm')+".staticflickr.com/"+picture.get('server')+"/"+picture.get('id')+"_"+picture.get('secret')+"_z.jpg";
-     $("<figure class='pic'><img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img></figure>").insertBefore("#photos #hack");
+     $("<div class='pic'><img class='photo' src='" + photourl + "' data-caption='" + picture.get('title') + "' data-url='"+ dataurl + "'></img></div>").insertBefore("#photos #hack");
       /*
       $.ajax({
         url:"http://www.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key="
